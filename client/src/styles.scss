@@ -38,8 +38,35 @@ body{
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Martel', serif; }
 
 mat-card{
   margin: 1%;
+  padding: auto;
+
+}
+
+div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  justify-items: center;
+}
+
+.mat-card-title{
+  margin-top: 1%;
+  font-family: 'Sacramento', cursive;
+  font-size: 2rem;
+}
+
+#subtitle{
+  margin-top: 1%;
+  font-family: 'Bad Script', cursive;
+  font-size: 2rem;
+
+}
+
+.login{
+  background-color: #026f6e;
+  color: white;
 }
