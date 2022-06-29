@@ -54,6 +54,8 @@ div{
   align-items: center;
   justify-content: space-between;
   justify-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mat-card-title{
@@ -66,13 +68,24 @@ div{
   margin-top: 1%;
   font-family: 'Bad Script', cursive;
   font-size: 2rem;
+}
 
+#where{
+  margin-top: 1%;
+  font-family: 'Martel', serif;
+  font-size: 1rem;
+  color: #e72313;
 }
 
 
 .login{
   background-color: #026f6e;
   color: white;
+}
+
+a{
+  text-decoration: none;
+  color: #e72313;
 }
 
 html, body { height: 100%; }

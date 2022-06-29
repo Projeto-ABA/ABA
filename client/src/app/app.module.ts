@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeLogoutComponent } from './home/home-logout/home-logout.component';
+import { HomeLoginComponent } from './home/home-login/home-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeLogoutComponent
+    HomeLogoutComponent,
+    HomeLoginComponent
   ],
   imports: [
     BrowserModule,
