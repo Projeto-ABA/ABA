@@ -5,10 +5,15 @@ const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'home'
   },
-  
+
   {
     path: 'home',
-    loadChildren: () => import('./app.module').then(m => m.AppModule)
+    loadChildren: () => import('./home/home-logout/home-logout.module').then(m => m.HomeLogoutModule)
+  },
+  
+  {
+    path: 'menu',
+    loadChildren: () => import('./home/home-login/home-login.module').then(m => m.HomeLoginModule)
   },
 
   {path: 'turmas',
