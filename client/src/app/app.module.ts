@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeLogoutComponent } from './home/home-logout/home-logout.component';
 import { HomeLoginComponent } from './home/home-login/home-login.component';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { HomeLoginComponent } from './home/home-login/home-login.component';
     AppRoutingModule,
     MatCardModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
