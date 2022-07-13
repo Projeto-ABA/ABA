@@ -3,7 +3,6 @@ package com.aba.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,28 +25,28 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Aluno extends Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private int idade;
 
     //@ManyToOne
     private String turma; //Temporariamente criado como string enquanto n existe o crud de turma
 
-    @ManyToMany    
+    @ManyToMany
     private List<Atividade> atividades;
-    
-    //@ManyToMany
-    private String professor; //Temporariamente criado como string enquanto n existe o crud de professor
 
-    public Aluno(String nome, int idade, String turma, String professor) {
+    @ManyToOne
+    private Instrutor instrutor;
+
+    public Aluno(String nome, int idade, String turma, Instrutor instrutor) {
         super(nome);
-        
+
         this.idade = idade;
         this.turma = turma;
-        this.professor = professor;
+        this.instrutor = instrutor;
         this.atividades = new ArrayList<>();
     }
 
@@ -55,7 +54,7 @@ public class Aluno extends Usuario {
         super(alunoDTO.getNome());
         this.idade = alunoDTO.getIdade();
         this.turma = alunoDTO.getTurma();
-        this.professor = alunoDTO.getProfessor();
+        this.instrutor.editar(alunoDTO.getInstrutorDTO());
         this.atividades = new ArrayList<>();
     }
 
@@ -67,12 +66,12 @@ public class Aluno extends Usuario {
         String nome = alunoDTO.getNome();
         this.idade = alunoDTO.getIdade();
         this.turma = alunoDTO.getTurma();
-        this.professor = alunoDTO.getProfessor();
+        this.instrutor.editar(alunoDTO.getInstrutorDTO());
 
         this.nome = nome != null ? nome : this.nome;
     }
 
     public AlunoDTO getDto() {
-        return new AlunoDTO(this.nome, this.idade, this.turma, this.professor);
+        return new AlunoDTO(this.nome, this.idade, this.turma, this.instrutor.getDto());
     }
 }

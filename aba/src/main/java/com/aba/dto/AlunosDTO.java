@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AlunosDTO {
-    
+
     private List<AlunoDTO> dadosAlunos;
 
     public AlunosDTO(List<Aluno> alunos) {
