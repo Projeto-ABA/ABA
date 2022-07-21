@@ -26,8 +26,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'cadastro-alunos-coordenador',
-    loadChildren: () => import('./cadastro-alunos-coordenador/cadastro-alunos-coordenador.module').then(m => m.CadastroAlunosCoordenadorModule)
+    path: 'cadastro-alunos',
+    loadChildren: () => import('./cadastro-alunos/cadastro-alunos.module').then(m => m.CadastroAlunosModule)
   },
 
   {

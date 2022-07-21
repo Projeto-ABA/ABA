@@ -1,10 +1,10 @@
-import { CadastroAlunosCoordenadorComponent } from './cadastro-alunos-coordenador.component';
+import { CadastroAlunosComponent } from './cadastro-alunos.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', component: CadastroAlunosCoordenadorComponent
+    path: '', component: CadastroAlunosComponent
   }
 ];
 
@@ -12,4 +12,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CadastroAlunosCoordenadorRoutingModule { }
+export class CadastroAlunosRoutingModule { }
