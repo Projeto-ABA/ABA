@@ -14,6 +14,30 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./home/home-login/home-login.module').then(m => m.HomeLoginModule)
+  },
+
+  {path: 'turmas',
+    loadChildren: () => import('./turmas/turmas.module').then(m => m.TurmasModule)
+  },
+
+  {
+    path: 'cadastro-turmas-professor',
+    loadChildren: () => import('./cadastro-turmas-professor/cadastro-turmas-professor.module').then(m => m.CadastroTurmasProfessorModule)
+  },
+
+  {
+    path: 'cadastro-alunos-coordenador',
+    loadChildren: () => import('./cadastro-alunos-coordenador/cadastro-alunos-coordenador.module').then(m => m.CadastroAlunosCoordenadorModule)
+  },
+
+  {
+    path: 'cadastro-turmas-coordenador',
+    loadChildren: () => import('./cadastro-turmas-coordenador/cadastro-turmas-coordenador.module').then(m => m.CadastroTurmasCoordenadorModule)
+  },
+
+  {
+    path: 'listar-alunos',
+    loadChildren: () => import('./listar-alunos/listar-alunos.module').then(m => m.ListarAlunosModule)
   }
 
 ];

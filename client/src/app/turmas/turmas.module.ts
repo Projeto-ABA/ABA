@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { TurmasRoutingModule } from './turmas-routing.module';
+import { TurmasComponent } from './turmas/turmas.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TurmasComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    TurmasRoutingModule
   ]
 })
 export class TurmasModule { }
