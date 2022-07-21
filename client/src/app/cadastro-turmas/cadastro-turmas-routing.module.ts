@@ -1,10 +1,10 @@
-import { CadastroTurmasProfessorComponent } from './cadastro-turmas-professor.component';
+import { CadastroTurmasComponent } from './cadastro-turmas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', component: CadastroTurmasProfessorComponent
+    path: '', component: CadastroTurmasComponent
   }
 ];
 
@@ -12,4 +12,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CadastroTurmasProfessorRoutingModule { }
+export class CadastroTurmasRoutingModule { }

@@ -21,18 +21,13 @@ const routes: Routes = [
   },
 
   {
-    path: 'cadastro-turmas-professor',
-    loadChildren: () => import('./cadastro-turmas-professor/cadastro-turmas-professor.module').then(m => m.CadastroTurmasProfessorModule)
-  },
-
-  {
     path: 'cadastro-alunos',
     loadChildren: () => import('./cadastro-alunos/cadastro-alunos.module').then(m => m.CadastroAlunosModule)
   },
 
   {
-    path: 'cadastro-turmas-coordenador',
-    loadChildren: () => import('./cadastro-turmas-coordenador/cadastro-turmas-coordenador.module').then(m => m.CadastroTurmasCoordenadorModule)
+    path: 'cadastro-turmas',
+    loadChildren: () => import('./cadastro-turmas/cadastro-turmas.module').then(m => m.CadastroTurmasModule)
   },
 
   {
