@@ -15,7 +15,9 @@ import java.util.List;
 public class InstrutorDTO {
 
     String nome;
+
     int idade;
+
     String email;
 
 }

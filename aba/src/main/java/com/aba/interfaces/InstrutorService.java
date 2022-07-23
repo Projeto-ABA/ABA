@@ -16,4 +16,6 @@ public interface InstrutorService {
     public ResponseEntity<?> listarInstrutores();
 
     public Instrutor getInstrutorById(Long id);
+
+    public Instrutor getInstrutorByEmail(String email);
 }

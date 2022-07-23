@@ -3,6 +3,7 @@ package com.aba.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.aba.interfaces.InstrutorService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,9 +27,12 @@ public class AlunoServiceImpl implements AlunoService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    InstrutorService instrutorService;
+
     public ResponseEntity<?> cadastrarAluno(AlunoDTO alunoDTO) {
         Usuario aluno;
-        aluno = new Aluno(alunoDTO);
+        aluno = new Aluno(alunoDTO.getNome(), alunoDTO.getIdade(), alunoDTO.getTurma(), instrutorService.getInstrutorByEmail(alunoDTO.getInstrutorEmail()));
 
         alunoRepository.save((Aluno) aluno);
         usuarioRepository.save(aluno);
@@ -39,10 +43,10 @@ public class AlunoServiceImpl implements AlunoService {
     public ResponseEntity<?> editarAluno(Long id, AlunoDTO alunoDTO) {
         Aluno aluno;
         aluno = this.getAlunoById(id);
-        aluno.editar(alunoDTO);
+        aluno.editar(alunoDTO.getNome(), alunoDTO.getIdade(), alunoDTO.getTurma(), instrutorService.getInstrutorByEmail(alunoDTO.getInstrutorEmail()));
         this.alunoRepository.save(aluno);
         
-        return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());
+        return ResponseEntity.status(HttpStatus.OK).body(aluno.getTotalDto());
     }
 
     public ResponseEntity<?> removerAluno(Long id) {

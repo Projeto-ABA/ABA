@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.aba.dto.AlunoDTO;
 
+import com.aba.dto.AlunoTotalInfoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -50,28 +51,24 @@ public class Aluno extends Usuario {
         this.atividades = new ArrayList<>();
     }
 
-    public Aluno(AlunoDTO alunoDTO) {
-        super(alunoDTO.getNome());
-        this.idade = alunoDTO.getIdade();
-        this.turma = alunoDTO.getTurma();
-        this.instrutor.editar(alunoDTO.getInstrutorDTO());
-        this.atividades = new ArrayList<>();
-    }
-
     public void addAtividade(Atividade atividade) {
         this.atividades.add(atividade);
     }
 
-    public void editar(AlunoDTO alunoDTO) {
-        String nome = alunoDTO.getNome();
-        this.idade = alunoDTO.getIdade();
-        this.turma = alunoDTO.getTurma();
-        this.instrutor.editar(alunoDTO.getInstrutorDTO());
+    public void editar(String nome, int idade, String turma, Instrutor instrutor) {
+        this.setNome(nome);
+        this.setIdade(idade);
+        this.setTurma(turma);
+        this.setInstrutor(instrutor);
 
         this.nome = nome != null ? nome : this.nome;
     }
 
+    public AlunoTotalInfoDTO getTotalDto() {
+        return new AlunoTotalInfoDTO(this.id, this.nome, this.idade, this.turma, this.instrutor.getEmail());
+    }
+
     public AlunoDTO getDto() {
-        return new AlunoDTO(this.nome, this.idade, this.turma, this.instrutor.getDto());
+        return new AlunoDTO(this.nome, this.idade, this.turma, this.instrutor.getEmail());
     }
 }

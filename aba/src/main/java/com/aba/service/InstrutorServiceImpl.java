@@ -70,4 +70,12 @@ public class InstrutorServiceImpl implements InstrutorService {
 
         return instrutorOptional.get();
     }
+
+    public Instrutor getInstrutorByEmail(String email) {
+        Optional<Instrutor> instrutorOptional = this.instrutorRepository.findByEmail(email);
+
+        if(!instrutorOptional.isPresent()) {
+            return null;
+        } return instrutorOptional.get();
+    }
 }
