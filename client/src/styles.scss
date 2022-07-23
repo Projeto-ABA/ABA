@@ -41,7 +41,10 @@ html, body { height: 100%; }
 body { margin: 0; font-family: 'Martel', serif; }
 
 mat-card{
-  margin: 1%;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
   padding: auto;
 
 }
@@ -51,6 +54,8 @@ div{
   align-items: center;
   justify-content: space-between;
   justify-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mat-card-title{
@@ -63,10 +68,25 @@ div{
   margin-top: 1%;
   font-family: 'Bad Script', cursive;
   font-size: 2rem;
-
 }
+
+#where{
+  margin-top: 1%;
+  font-family: 'Martel', serif;
+  font-size: 1rem;
+  color: #e72313;
+}
+
 
 .login{
   background-color: #026f6e;
   color: white;
 }
+
+a{
+  text-decoration: none;
+  color: #e72313;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
