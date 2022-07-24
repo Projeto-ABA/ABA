@@ -1,0 +1,982 @@
+Index: aba/src/main/java/com/aba/dto/AlunoDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.dto;\r\n\r\npublic class AlunoDTO {\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/dto/AlunoDTO.java b/aba/src/main/java/com/aba/dto/AlunoDTO.java
+--- a/aba/src/main/java/com/aba/dto/AlunoDTO.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/dto/AlunoDTO.java	(date 1658658858805)
+@@ -1,5 +1,21 @@
+ package com.aba.dto;
+ 
++import lombok.AllArgsConstructor;
++import lombok.Getter;
++import lombok.NoArgsConstructor;
++import lombok.Setter;
++
++@NoArgsConstructor
++@AllArgsConstructor
++@Getter
++@Setter
+ public class AlunoDTO {
+     
++    String nome;
++
++    int idade;
++
++    TurmaDTO turmaDTO;
++
++    InstrutorDTO instrutorDTO;
+ }
+Index: aba/src/main/java/com/aba/service/TurmaServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.service;\r\n\r\nimport org.springframework.stereotype.Service;\r\n\r\n@Service\r\npublic class TurmaServiceImpl {\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/service/TurmaServiceImpl.java b/aba/src/main/java/com/aba/service/TurmaServiceImpl.java
+--- a/aba/src/main/java/com/aba/service/TurmaServiceImpl.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/service/TurmaServiceImpl.java	(date 1658658851561)
+@@ -1,8 +1,142 @@
+ package com.aba.service;
+ 
++import com.aba.dto.TurmaDTO;
++import com.aba.dto.TurmasDTO;
++import com.aba.model.Aluno;
++import com.aba.model.Instrutor;
++import com.aba.model.Turma;
++import com.aba.repository.TurmaRepository;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.http.HttpStatus;
++import org.springframework.http.ResponseEntity;
+ import org.springframework.stereotype.Service;
+ 
++import java.util.List;
++import java.util.Optional;
++
+ @Service
+ public class TurmaServiceImpl {
+-    
++
++    @Autowired
++    TurmaRepository turmaRepository;
++
++    @Autowired
++    AlunoServiceImpl alunoService;
++
++    @Autowired
++    InstrutorServiceImpl instrutorService;
++
++    public ResponseEntity<?> cadastrarTurma(TurmaDTO turmaDTO) {
++        Turma turma;
++        turma = new Turma(turmaDTO);
++
++        this.turmaRepository.save(turma);
++
++        ResponseEntity.status(HttpStatus.CREATED).body(turmaDTO);
++        return ResponseEntity.status(HttpStatus.CREATED).body(turmaDTO);
++    }
++
++    public ResponseEntity<?> editarTurma(Long id, TurmaDTO turmaDTO) {
++        Turma turma;
++        turma = this.getTurmaById(id);
++        turma.setNome(turmaDTO.getNomeTurma());
++
++        this.turmaRepository.save(turma);
++        return ResponseEntity.status(HttpStatus.OK).body(turma.getDto());
++    }
++
++    public ResponseEntity<?> removerTurma(Long id) {
++        this.turmaRepository.deleteById(id);
++
++        return ResponseEntity.status(HttpStatus.OK).body("Turma removida!");
++    }
++
++    public ResponseEntity<?> listarTurmas() {
++        List<Turma> turmas = this.turmaRepository.findAll();
++        TurmasDTO listaDeTurmasDTO = new TurmasDTO(turmas);
++
++        return ResponseEntity.status(HttpStatus.OK).body(listaDeTurmasDTO.getDadosTurma()); //organizar uma melhor maneira de retornar os alunos aqui
++    }
++
++    public ResponseEntity<?> consultarTurma(Long id) {
++        Turma turma;
++        turma = this.getTurmaById(id);
++        return ResponseEntity.status(HttpStatus.OK).body(turma.getDto());
++    }
++
++    public ResponseEntity<?> adicionarAlunoEmTurma(Long idTurma, Long idAluno) {
++        Turma turma;
++        Aluno aluno;
++
++        turma = this.getTurmaById(idTurma);
++        aluno = this.alunoService.getAlunoById(idAluno);
++
++        turma.adicionarAluno(aluno);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
++    }
++
++    public ResponseEntity<?> adicionarInstrutorEmTurma(Long idTurma, Long idInstrutor) {
++        Turma turma;
++        Instrutor instrutor;
++
++        turma = this.getTurmaById(idTurma);
++        instrutor = this.instrutorService.getInstrutorById(idInstrutor);
++
++        turma.adicionarInstrutor(instrutor);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
++    }
++
++    public ResponseEntity<?> listarAlunosDeTurma(Long idTurma){
++        Turma turma;
++        turma = this.getTurmaById(idTurma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
++    }
++
++    public ResponseEntity<?> listarInstrutoresDeTurma(Long idTurma){
++        Turma turma;
++        turma = this.getTurmaById(idTurma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
++    }
++
++    public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno) {
++        Turma turma;
++        Aluno aluno;
++
++        turma = this.getTurmaById(idTurma);
++        aluno = this.alunoService.getAlunoById(idAluno);
++
++        turma.removerAluno(aluno);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
++    }
++
++    public ResponseEntity<?> removerInstrutorDeTurma(Long idTurma, Long idInstrutor) {
++        Turma turma;
++        Instrutor instrutor;
++
++        turma = this.getTurmaById(idTurma);
++        instrutor = this.instrutorService.getInstrutorById(idInstrutor);
++
++        turma.removerInstrutor(instrutor);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
++    }
++
++    public Turma getTurmaById(Long id){
++        Optional<Turma> turmaOptional = this.turmaRepository.findById(id);
++
++        if (!turmaOptional.isPresent()) {
++            return null;
++        }
++
++        return turmaOptional.get();
++    }
+ }
+Index: aba/src/main/java/com/aba/dto/TurmaDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.dto;\r\n\r\npublic class TurmaDTO {\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/dto/TurmaDTO.java b/aba/src/main/java/com/aba/dto/TurmaDTO.java
+--- a/aba/src/main/java/com/aba/dto/TurmaDTO.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/dto/TurmaDTO.java	(date 1658658851561)
+@@ -1,5 +1,17 @@
+ package com.aba.dto;
+ 
++
++import lombok.AllArgsConstructor;
++import lombok.Getter;
++import lombok.NoArgsConstructor;
++import lombok.Setter;
++
++@Getter
++@Setter
++@AllArgsConstructor
++@NoArgsConstructor
+ public class TurmaDTO {
+-    
++
++    private String nomeTurma;
++
+ }
+Index: aba/src/main/java/com/aba/model/Turma.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.model;\r\n\r\nimport javax.persistence.Entity;\r\nimport javax.persistence.GeneratedValue;\r\nimport javax.persistence.GenerationType;\r\nimport javax.persistence.Id;\r\n\r\n@Entity\r\npublic class Turma {\r\n    \r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/model/Turma.java b/aba/src/main/java/com/aba/model/Turma.java
+--- a/aba/src/main/java/com/aba/model/Turma.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/model/Turma.java	(date 1658658851561)
+@@ -1,14 +1,65 @@
+ package com.aba.model;
+ 
+-import javax.persistence.Entity;
+-import javax.persistence.GeneratedValue;
+-import javax.persistence.GenerationType;
+-import javax.persistence.Id;
++import lombok.*;
+ 
++import javax.persistence.*;
++import java.util.ArrayList;
++import java.util.List;
++import com.aba.dto.TurmaDTO;
++import com.aba.model.Aluno;
++
++@Data
++@Getter
++@Setter
++@AllArgsConstructor
++@NoArgsConstructor
+ @Entity
+ public class Turma {
+     
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
++
++    @ManyToMany
++    List<Instrutor> instrutores;
++
++    @ManyToMany
++    List<Aluno> alunos;
++
++    private String nome;
++
++    //pensar em como as atividades poderiam ser adicionadas por aqui!
++
++    public Turma(String nome) {
++        this.nome = nome;
++        this.instrutores = new ArrayList<>();
++        this.alunos = new ArrayList<>();
++    }
++
++    public Turma(TurmaDTO turmaDTO) {
++        this.nome = turmaDTO.getNomeTurma();
++        this.instrutores = new ArrayList<>();
++        this.alunos = new ArrayList<>();
++    }
++
++    public void adicionarAluno(Aluno aluno) {
++        this.alunos.add(aluno);
++    }
++
++    public void adicionarInstrutor(Instrutor instrutor) {
++        this.instrutores.add(instrutor);
++    }
++
++    public void removerAluno(Aluno aluno) {
++        this.alunos.remove(aluno);
++    }
++
++    public void removerInstrutor(Instrutor instrutor) {
++        this.instrutores.remove(instrutor);
++    }
++
++    public String listarAlunos() { return this.alunos.toString(); }
++    public String listarInstrutores() { return this.instrutores.toString(); }
++    public TurmaDTO getDto(){ return new TurmaDTO(this.nome); }
++
+ }
+Index: aba/src/main/java/com/aba/model/Aluno.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.model;\r\n\r\nimport javax.persistence.Entity;\r\nimport javax.persistence.GeneratedValue;\r\nimport javax.persistence.GenerationType;\r\nimport javax.persistence.Id;\r\n\r\n@Entity\r\npublic class Aluno {\r\n    \r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/model/Aluno.java b/aba/src/main/java/com/aba/model/Aluno.java
+--- a/aba/src/main/java/com/aba/model/Aluno.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/model/Aluno.java	(date 1658658851561)
+@@ -1,14 +1,78 @@
+ package com.aba.model;
+ 
++import java.util.ArrayList;
++import java.util.List;
++
++import javax.persistence.Column;
+ import javax.persistence.Entity;
+ import javax.persistence.GeneratedValue;
+ import javax.persistence.GenerationType;
+ import javax.persistence.Id;
++import javax.persistence.ManyToMany;
++import javax.persistence.ManyToOne;
++
++import com.aba.dto.AlunoDTO;
+ 
++import com.aba.dto.InstrutorDTO;
++import com.aba.dto.TurmaDTO;
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.Getter;
++import lombok.NoArgsConstructor;
++import lombok.Setter;
++
++@Data
++@Getter
++@Setter
++@NoArgsConstructor
+ @Entity
+-public class Aluno {
+-    
++public class Aluno extends Usuario {
++
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
++
++    private int idade;
++
++    @ManyToOne
++    private Turma turma;
++
++    @ManyToMany
++    private List<Atividade> atividades;
++
++    @ManyToOne
++    private Instrutor instrutor;
++
++    public Aluno(String nome, int idade, Turma turma, Instrutor instrutor) {
++        this.nome = nome;
++        this.idade = idade;
++        this.turma = turma;
++        this.instrutor = instrutor;
++        this.atividades = new ArrayList<>();
++    }
++
++    public Aluno(AlunoDTO alunoDTO) {
++        this.nome = alunoDTO.getNome();
++        this.idade = alunoDTO.getIdade();
++        TurmaDTO turmaDTO = alunoDTO.getTurmaDTO();
++        InstrutorDTO instrutorDTO = alunoDTO.getInstrutorDTO();
++        this.atividades = new ArrayList<>();
++    }
++
++    public void addAtividade(Atividade atividade) {
++        this.atividades.add(atividade);
++    }
++
++    public void editar(AlunoDTO alunoDTO) {
++        String nome = alunoDTO.getNome();
++        this.idade = alunoDTO.getIdade();
++        TurmaDTO turmaDTO = alunoDTO.getTurmaDTO();
++        InstrutorDTO instrutorDTO = alunoDTO.getInstrutorDTO();
++
++        this.nome = nome != null ? nome : this.nome;
++    }
++
++    public AlunoDTO getDto() {
++        return new AlunoDTO(this.nome, this.idade, this.turma.getDto(), this.instrutor.getDto());
++    }
+ }
+Index: aba/src/main/java/com/aba/controller/AlunoController.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/controller/AlunoController.java b/aba/src/main/java/com/aba/controller/AlunoController.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/controller/AlunoController.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ /dev/null	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
+@@ -1,17 +0,0 @@
+-package com.aba.controller;
+-
+-import org.springframework.web.bind.annotation.GetMapping;
+-import org.springframework.web.bind.annotation.RestController;
+-
+-import io.swagger.annotations.Api;
+-
+-@RestController
+-@Api
+-public class AlunoController {
+-
+-    @GetMapping
+-    public String ok() {
+-        return "ok";
+-    }
+-    
+-}
+Index: aba/src/main/java/com/aba/repository/ProfessorRepository.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/repository/ProfessorRepository.java b/aba/src/main/java/com/aba/repository/ProfessorRepository.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/repository/ProfessorRepository.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ /dev/null	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
+@@ -1,11 +0,0 @@
+-package com.aba.repository;
+-
+-import com.aba.model.Professor;
+-
+-import org.springframework.data.jpa.repository.JpaRepository;
+-import org.springframework.stereotype.Repository;
+-
+-@Repository
+-public interface ProfessorRepository extends JpaRepository<Professor, Long>{
+-    
+-}
+Index: aba/src/main/java/com/aba/service/ProfessorServiceImpl.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/service/ProfessorServiceImpl.java b/aba/src/main/java/com/aba/service/ProfessorServiceImpl.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/service/ProfessorServiceImpl.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ /dev/null	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
+@@ -1,8 +0,0 @@
+-package com.aba.service;
+-
+-import org.springframework.stereotype.Service;
+-
+-@Service
+-public class ProfessorServiceImpl {
+-    
+-}
+Index: aba/src/main/java/com/aba/model/Professor.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/model/Professor.java b/aba/src/main/java/com/aba/model/Professor.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/model/Professor.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ /dev/null	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
+@@ -1,14 +0,0 @@
+-package com.aba.model;
+-
+-import javax.persistence.Entity;
+-import javax.persistence.GeneratedValue;
+-import javax.persistence.GenerationType;
+-import javax.persistence.Id;
+-
+-@Entity
+-public class Professor {
+-    
+-    @Id
+-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+-    private Long id;
+-}
+Index: client/src/app/home/logout/home-logout/home-logout.component.html
+===================================================================
+diff --git a/client/src/app/home/logout/home-logout/home-logout.component.html b/client/src/app/home/logout/home-logout/home-logout.component.html
+deleted file mode 100644
+--- a/client/src/app/home/logout/home-logout/home-logout.component.html	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ /dev/null	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
+@@ -1,1 +0,0 @@
+-<p>home-logout works!</p>
+Index: aba/src/main/java/com/aba/interfaces/ProfessorService.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/interfaces/ProfessorService.java b/aba/src/main/java/com/aba/interfaces/ProfessorService.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/interfaces/ProfessorService.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ /dev/null	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
+@@ -1,5 +0,0 @@
+-package com.aba.interfaces;
+-
+-public interface ProfessorService {
+-    
+-}
+Index: aba/src/main/java/com/aba/dto/ProfessorDTO.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/dto/ProfessorDTO.java b/aba/src/main/java/com/aba/dto/ProfessorDTO.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/dto/ProfessorDTO.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ /dev/null	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
+@@ -1,5 +0,0 @@
+-package com.aba.dto;
+-
+-public class ProfessorDTO {
+-    
+-}
+Index: aba/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.jpa.database=POSTGRESQL\nspring.datasource.url=jdbc:postgresql://localhost:5433/aba\nspring.datasource.username=postgres\nspring.datasource.password=secretdb\n\nspring.jpa.show-sql=true\nspring.jpa.generate-ddl=true\nspring.jpa.hibernate.ddl-auto=update\nspring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/aba/src/main/resources/application.properties b/aba/src/main/resources/application.properties
+--- a/aba/src/main/resources/application.properties	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/resources/application.properties	(date 1658658851561)
+@@ -1,9 +1,25 @@
+-spring.jpa.database=POSTGRESQL
+-spring.datasource.url=jdbc:postgresql://localhost:5433/aba
+-spring.datasource.username=postgres
+-spring.datasource.password=secretdb
++#spring.jpa.database=POSTGRESQL
++#spring.datasource.url=jdbc:postgresql://localhost:5433/aba
++#spring.datasource.username=postgres
++#spring.datasource.password=secretdb
++
++#spring.jpa.show-sql=true
++#spring.jpa.generate-ddl=true
++#spring.jpa.hibernate.ddl-auto=update
++#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true*/
++
++
++# DATASOURCE
++spring.datasource.url=jdbc:h2:mem:testdb
++spring.datasource.driverClassName=org.h2.Driver
++spring.datasource.username=sa
++spring.datasource.password=password
+ 
+-spring.jpa.show-sql=true
+-spring.jpa.generate-ddl=true
++# H2 Console
++spring.h2.console.enabled=true
++spring.h2.console.path=/h2-console
++
++# JPA
++spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+ spring.jpa.hibernate.ddl-auto=update
+-spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
++spring.jpa.show-sql=true
+Index: client/src/styles.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\n// Custom Theming for Angular Material\n// For more information: https://material.angular.io/guide/theming\n@use '@angular/material' as mat;\n// Plus imports for other components in your app.\n\n// Include the common styles for Angular Material. We include this here so that you only\n// have to load a single css file for Angular Material in your app.\n// Be sure that you only ever include this mixin once!\n@include mat.core();\n\n// Define the palettes for your theme using the Material Design palettes available in palette.scss\n// (imported above). For each palette, you can optionally specify a default, lighter, and darker\n// hue. Available color palettes: https://material.io/design/color/\n$client-primary: mat.define-palette(mat.$indigo-palette);\n$client-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);\n\n// The warn palette is optional (defaults to red).\n$client-warn: mat.define-palette(mat.$red-palette);\n\n// Create the theme object. A theme consists of configurations for individual\n// theming systems such as \"color\" or \"typography\".\n$client-theme: mat.define-light-theme((\n  color: (\n    primary: $client-primary,\n    accent: $client-accent,\n    warn: $client-warn,\n  )\n));\n\n// Include theme styles for core and each component used in your app.\n// Alternatively, you can import and @include the theme mixins for each component\n// that you are using.\n@include mat.all-component-themes($client-theme);\n\nbody{\n  background-color: #feedbf;\n}\n\nhtml, body { height: 100%; }\nbody { margin: 0; font-family: 'Martel', serif; }\n\nmat-card{\n  margin: 1%;\n  padding: auto;\n\n}\n\ndiv{\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  justify-items: center;\n}\n\n.mat-card-title{\n  margin-top: 1%;\n  font-family: 'Sacramento', cursive;\n  font-size: 2rem;\n}\n\n#subtitle{\n  margin-top: 1%;\n  font-family: 'Bad Script', cursive;\n  font-size: 2rem;\n\n}\n\n.login{\n  background-color: #026f6e;\n  color: white;\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/styles.scss b/client/src/styles.scss
+--- a/client/src/styles.scss	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/src/styles.scss	(date 1657160643821)
+@@ -41,7 +41,10 @@
+ body { margin: 0; font-family: 'Martel', serif; }
+ 
+ mat-card{
+-  margin: 1%;
++  margin-top: 1rem;
++  margin-left: 2rem;
++  margin-right: 2rem;
++  margin-bottom: 1rem;
+   padding: auto;
+ 
+ }
+@@ -51,6 +54,8 @@
+   align-items: center;
+   justify-content: space-between;
+   justify-items: center;
++  margin-left: 1rem;
++  margin-right: 1rem;
+ }
+ 
+ .mat-card-title{
+@@ -63,10 +68,25 @@
+   margin-top: 1%;
+   font-family: 'Bad Script', cursive;
+   font-size: 2rem;
++}
+ 
++#where{
++  margin-top: 1%;
++  font-family: 'Martel', serif;
++  font-size: 1rem;
++  color: #e72313;
+ }
++
+ 
+ .login{
+   background-color: #026f6e;
+   color: white;
+ }
++
++a{
++  text-decoration: none;
++  color: #e72313;
++}
++
++html, body { height: 100%; }
++body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+Index: aba/src/main/java/com/aba/service/AlunoServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.service;\r\n\r\nimport org.springframework.stereotype.Service;\r\n\r\n@Service\r\npublic class AlunoServiceImpl {\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/service/AlunoServiceImpl.java b/aba/src/main/java/com/aba/service/AlunoServiceImpl.java
+--- a/aba/src/main/java/com/aba/service/AlunoServiceImpl.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/service/AlunoServiceImpl.java	(date 1658658851561)
+@@ -1,8 +1,75 @@
+ package com.aba.service;
+ 
++import java.util.List;
++import java.util.Optional;
++
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.http.HttpStatus;
++import org.springframework.http.ResponseEntity;
+ import org.springframework.stereotype.Service;
+ 
++import com.aba.dto.AlunoDTO;
++import com.aba.dto.AlunosDTO;
++import com.aba.interfaces.AlunoService;
++import com.aba.model.Aluno;
++import com.aba.model.Usuario;
++import com.aba.repository.AlunoRepository;
++import com.aba.repository.UsuarioRepository;
++
+ @Service
+-public class AlunoServiceImpl {
+-    
++public class AlunoServiceImpl implements AlunoService {
++
++    @Autowired
++    AlunoRepository alunoRepository;
++
++    @Autowired
++    UsuarioRepository usuarioRepository;
++
++    public ResponseEntity<?> cadastrarAluno(AlunoDTO alunoDTO) {
++        Usuario aluno;
++        aluno = new Aluno(alunoDTO);
++
++        alunoRepository.save((Aluno) aluno);
++        usuarioRepository.save(aluno);
++
++        return ResponseEntity.status(HttpStatus.CREATED).body(alunoDTO);
++    }
++
++    public ResponseEntity<?> editarAluno(Long id, AlunoDTO alunoDTO) {
++        Aluno aluno;
++        aluno = this.getAlunoById(id);
++        aluno.editar(alunoDTO);
++        this.alunoRepository.save(aluno);
++
++        return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());
++    }
++
++    public ResponseEntity<?> removerAluno(Long id) {
++        this.usuarioRepository.deleteById(id);
++
++        return ResponseEntity.status(HttpStatus.OK).body("Aluno(a) removido(a)!");
++    }
++
++    public ResponseEntity<?> listarAlunos() {
++        List<Aluno> alunos = this.alunoRepository.findAll();
++        AlunosDTO listaDeAlunos = new AlunosDTO(alunos);
++
++        return ResponseEntity.status(HttpStatus.OK).body(listaDeAlunos.getDadosAlunos());
++    }
++
++    public ResponseEntity<?> consultarAluno(Long id) {
++        Aluno aluno;
++        aluno = this.getAlunoById(id);
++        return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());
++    }
++
++    public Aluno getAlunoById(Long id) {
++        Optional<Aluno> alunoOptional = this.alunoRepository.findById(id);
++
++        if (!alunoOptional.isPresent()) {
++            return null;
++        } //criar excecao futuramente
++
++        return alunoOptional.get();
++    }
+ }
+Index: client/angular.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\n  \"$schema\": \"./node_modules/@angular/cli/lib/config/schema.json\",\n  \"version\": 1,\n  \"newProjectRoot\": \"projects\",\n  \"projects\": {\n    \"client\": {\n      \"projectType\": \"application\",\n      \"schematics\": {\n        \"@schematics/angular:component\": {\n          \"style\": \"scss\"\n        }\n      },\n      \"root\": \"\",\n      \"sourceRoot\": \"src\",\n      \"prefix\": \"app\",\n      \"architect\": {\n        \"build\": {\n          \"builder\": \"@angular-devkit/build-angular:browser\",\n          \"options\": {\n            \"outputPath\": \"dist/client\",\n            \"index\": \"src/index.html\",\n            \"main\": \"src/main.ts\",\n            \"polyfills\": \"src/polyfills.ts\",\n            \"tsConfig\": \"tsconfig.app.json\",\n            \"inlineStyleLanguage\": \"scss\",\n            \"assets\": [\n              \"src/favicon.ico\",\n              \"src/assets\"\n            ],\n            \"styles\": [\n              \"src/styles.scss\"\n            ],\n            \"scripts\": []\n          },\n          \"configurations\": {\n            \"production\": {\n              \"budgets\": [\n                {\n                  \"type\": \"initial\",\n                  \"maximumWarning\": \"500kb\",\n                  \"maximumError\": \"1mb\"\n                },\n                {\n                  \"type\": \"anyComponentStyle\",\n                  \"maximumWarning\": \"2kb\",\n                  \"maximumError\": \"4kb\"\n                }\n              ],\n              \"fileReplacements\": [\n                {\n                  \"replace\": \"src/environments/environment.ts\",\n                  \"with\": \"src/environments/environment.prod.ts\"\n                }\n              ],\n              \"outputHashing\": \"all\"\n            },\n            \"development\": {\n              \"buildOptimizer\": false,\n              \"optimization\": false,\n              \"vendorChunk\": true,\n              \"extractLicenses\": false,\n              \"sourceMap\": true,\n              \"namedChunks\": true\n            }\n          },\n          \"defaultConfiguration\": \"production\"\n        },\n        \"serve\": {\n          \"builder\": \"@angular-devkit/build-angular:dev-server\",\n          \"configurations\": {\n            \"production\": {\n              \"browserTarget\": \"client:build:production\"\n            },\n            \"development\": {\n              \"browserTarget\": \"client:build:development\"\n            }\n          },\n          \"defaultConfiguration\": \"development\"\n        },\n        \"extract-i18n\": {\n          \"builder\": \"@angular-devkit/build-angular:extract-i18n\",\n          \"options\": {\n            \"browserTarget\": \"client:build\"\n          }\n        },\n        \"test\": {\n          \"builder\": \"@angular-devkit/build-angular:karma\",\n          \"options\": {\n            \"main\": \"src/test.ts\",\n            \"polyfills\": \"src/polyfills.ts\",\n            \"tsConfig\": \"tsconfig.spec.json\",\n            \"karmaConfig\": \"karma.conf.js\",\n            \"inlineStyleLanguage\": \"scss\",\n            \"assets\": [\n              \"src/favicon.ico\",\n              \"src/assets\"\n            ],\n            \"styles\": [\n              \"src/styles.scss\"\n            ],\n            \"scripts\": []\n          }\n        }\n      }\n    }\n  },\n  \"cli\": {\n    \"analytics\": \"13dd3478-2ec2-489b-90e0-7209c82e9048\"\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/angular.json b/client/angular.json
+--- a/client/angular.json	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/angular.json	(date 1657160643314)
+@@ -28,6 +28,7 @@
+               "src/assets"
+             ],
+             "styles": [
++              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+               "src/styles.scss"
+             ],
+             "scripts": []
+@@ -96,6 +97,7 @@
+               "src/assets"
+             ],
+             "styles": [
++              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+               "src/styles.scss"
+             ],
+             "scripts": []
+Index: client/src/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html lang=\"pt-br\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ABA</title>\n  <base href=\"/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n  <link href=\"https://fonts.googleapis.com/css2?family=Martel:wght@600&display=swap\" rel=\"stylesheet\">\n  <link href=\"https://fonts.googleapis.com/css2?family=Bad+Script&display=swap\" rel=\"stylesheet\">\n\n</head>\n<body class=\"mat-typography\">\n  <app-root></app-root>\n</body>\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/index.html b/client/src/index.html
+--- a/client/src/index.html	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/src/index.html	(date 1657160643821)
+@@ -10,7 +10,12 @@
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Martel:wght@600&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
++  <link href = ”https://fonts.googleapis.com/icon?family=Material+Icons” rel = ”stylesheet”>
+ 
++
++  <link rel="preconnect" href="https://fonts.gstatic.com">
++  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
++  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ </head>
+ <body class="mat-typography">
+   <app-root></app-root>
+Index: client/package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\n  \"name\": \"client\",\n  \"version\": \"0.0.0\",\n  \"scripts\": {\n    \"ng\": \"ng\",\n    \"start\": \"ng serve\",\n    \"build\": \"ng build\",\n    \"watch\": \"ng build --watch --configuration development\",\n    \"test\": \"ng test\"\n  },\n  \"private\": true,\n  \"dependencies\": {\n    \"@angular/animations\": \"^14.0.1\",\n    \"@angular/cdk\": \"^14.0.1\",\n    \"@angular/common\": \"^14.0.0\",\n    \"@angular/compiler\": \"^14.0.0\",\n    \"@angular/core\": \"^14.0.0\",\n    \"@angular/forms\": \"^14.0.0\",\n    \"@angular/material\": \"^14.0.1\",\n    \"@angular/platform-browser\": \"^14.0.0\",\n    \"@angular/platform-browser-dynamic\": \"^14.0.0\",\n    \"@angular/router\": \"^14.0.0\",\n    \"rxjs\": \"~7.5.0\",\n    \"tslib\": \"^2.3.0\",\n    \"zone.js\": \"~0.11.4\"\n  },\n  \"devDependencies\": {\n    \"@angular-devkit/build-angular\": \"^14.0.1\",\n    \"@angular/cli\": \"~14.0.1\",\n    \"@angular/compiler-cli\": \"^14.0.0\",\n    \"@types/jasmine\": \"~4.0.0\",\n    \"jasmine-core\": \"~4.1.0\",\n    \"karma\": \"~6.3.0\",\n    \"karma-chrome-launcher\": \"~3.1.0\",\n    \"karma-coverage\": \"~2.2.0\",\n    \"karma-jasmine\": \"~5.0.0\",\n    \"karma-jasmine-html-reporter\": \"~1.7.0\",\n    \"typescript\": \"~4.7.2\"\n  }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/package.json b/client/package.json
+--- a/client/package.json	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/package.json	(date 1658658851561)
+@@ -36,5 +36,9 @@
+     "karma-jasmine": "~5.0.0",
+     "karma-jasmine-html-reporter": "~1.7.0",
+     "typescript": "~4.7.2"
+-  }
+-}
+\ No newline at end of file
++  },
++  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.1.",
++  "main": "karma.conf.js",
++  "author": "",
++  "license": "ISC"
++}
+Index: client/src/app/app.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Sacramento&display=swap\" rel=\"stylesheet\">\n\n<mat-card>\n  <div>\n    <mat-card-title>ABA</mat-card-title>\n    <mat-card-title id=\"subtitle\">Sua assistente de planejamento</mat-card-title>\n    <button mat-raised-button class=\"login\">Login</button>\n  </div>\n\n</mat-card>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/app/app.component.html b/client/src/app/app.component.html
+--- a/client/src/app/app.component.html	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/src/app/app.component.html	(date 1657160643314)
+@@ -2,11 +2,6 @@
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+ 
+-<mat-card>
+-  <div>
+-    <mat-card-title>ABA</mat-card-title>
+-    <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+-    <button mat-raised-button class="login">Login</button>
+-  </div>
+ 
+-</mat-card>
++<router-outlet></router-outlet>
++
+Index: client/src/app/app.component.spec.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { TestBed } from '@angular/core/testing';\nimport { RouterTestingModule } from '@angular/router/testing';\nimport { AppComponent } from './app.component';\n\ndescribe('AppComponent', () => {\n  beforeEach(async () => {\n    await TestBed.configureTestingModule({\n      imports: [\n        RouterTestingModule\n      ],\n      declarations: [\n        AppComponent\n      ],\n    }).compileComponents();\n  });\n\n  it('should create the app', () => {\n    const fixture = TestBed.createComponent(AppComponent);\n    const app = fixture.componentInstance;\n    expect(app).toBeTruthy();\n  });\n\n  it(`should have as title 'client'`, () => {\n    const fixture = TestBed.createComponent(AppComponent);\n    const app = fixture.componentInstance;\n    expect(app.title).toEqual('client');\n  });\n\n  it('should render title', () => {\n    const fixture = TestBed.createComponent(AppComponent);\n    fixture.detectChanges();\n    const compiled = fixture.nativeElement as HTMLElement;\n    expect(compiled.querySelector('.content span')?.textContent).toContain('client app is running!');\n  });\n});\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/app/app.component.spec.ts b/client/src/app/app.component.spec.ts
+--- a/client/src/app/app.component.spec.ts	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/src/app/app.component.spec.ts	(date 1657160643314)
+@@ -2,6 +2,7 @@
+ import { RouterTestingModule } from '@angular/router/testing';
+ import { AppComponent } from './app.component';
+ 
++
+ describe('AppComponent', () => {
+   beforeEach(async () => {
+     await TestBed.configureTestingModule({
+Index: aba/src/main/java/com/aba/model/Usuario.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.model;\r\n\r\nimport javax.persistence.Entity;\r\nimport javax.persistence.GeneratedValue;\r\nimport javax.persistence.GenerationType;\r\nimport javax.persistence.Id;\r\n\r\n@Entity\r\npublic class Usuario {\r\n    \r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/model/Usuario.java b/aba/src/main/java/com/aba/model/Usuario.java
+--- a/aba/src/main/java/com/aba/model/Usuario.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/model/Usuario.java	(date 1657159171827)
+@@ -4,11 +4,28 @@
+ import javax.persistence.GeneratedValue;
+ import javax.persistence.GenerationType;
+ import javax.persistence.Id;
++import javax.persistence.Inheritance;
+ 
++import lombok.AllArgsConstructor;
++import lombok.Getter;
++import lombok.NoArgsConstructor;
++import lombok.Setter;
++
++@Inheritance
++@Getter
++@Setter
++@NoArgsConstructor
++@AllArgsConstructor
+ @Entity
+ public class Usuario {
+     
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+-    private Long id;
++    protected Long id;
++
++    protected String nome;
++
++    public Usuario(String nome) {
++        this.nome = nome;
++    }
+ }
+Index: client/src/app/app.module.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport {MatCardModule} from '@angular/material/card';\nimport {MatButtonModule} from '@angular/material/button';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    MatCardModule,\n    MatButtonModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/app/app.module.ts b/client/src/app/app.module.ts
+--- a/client/src/app/app.module.ts	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/src/app/app.module.ts	(date 1657160643314)
+@@ -2,19 +2,27 @@
+ import { BrowserModule } from '@angular/platform-browser';
+ import {MatCardModule} from '@angular/material/card';
+ import {MatButtonModule} from '@angular/material/button';
+-
+ import { AppRoutingModule } from './app-routing.module';
+ import { AppComponent } from './app.component';
++import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
++import { HomeLogoutComponent } from './home/home-logout/home-logout.component';
++import { HomeLoginComponent } from './home/home-login/home-login.component';
++import {MatIconModule} from '@angular/material/icon';
++
+ 
+ @NgModule({
+   declarations: [
+-    AppComponent
++    AppComponent,
++    HomeLogoutComponent,
++    HomeLoginComponent
+   ],
+   imports: [
+     BrowserModule,
+     AppRoutingModule,
+     MatCardModule,
+-    MatButtonModule
++    MatButtonModule,
++    BrowserAnimationsModule,
++    MatIconModule
+   ],
+   providers: [],
+   bootstrap: [AppComponent]
+Index: client/src/app/app-routing.module.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nconst routes: Routes = [];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/app/app-routing.module.ts b/client/src/app/app-routing.module.ts
+--- a/client/src/app/app-routing.module.ts	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/client/src/app/app-routing.module.ts	(date 1658658851561)
+@@ -1,10 +1,45 @@
+ import { NgModule } from '@angular/core';
+ import { RouterModule, Routes } from '@angular/router';
+ 
+-const routes: Routes = [];
++const routes: Routes = [
++  {
++    path: '', pathMatch: 'full', redirectTo: 'home'
++  },
++
++  {
++    path: 'home',
++    loadChildren: () => import('./home/home-logout/home-logout.module').then(m => m.HomeLogoutModule)
++  },
++
++  {
++    path: 'menu',
++    loadChildren: () => import('./home/home-login/home-login.module').then(m => m.HomeLoginModule)
++  },
++
++  {path: 'turmas',
++    loadChildren: () => import('./turmas/turmas.module').then(m => m.TurmasModule)
++  },
++
++  {
++    path: 'cadastro-alunos',
++    loadChildren: () => import('./cadastro-alunos/cadastro-alunos.module').then(m => m.CadastroAlunosModule)
++  },
++
++  {
++    path: 'cadastro-turmas',
++    loadChildren: () => import('./cadastro-turmas/cadastro-turmas.module').then(m => m.CadastroTurmasModule)
++  },
++
++  {
++    path: 'listar-alunos',
++    loadChildren: () => import('./listar-alunos/listar-alunos.module').then(m => m.ListarAlunosModule)
++  }
++
++];
+ 
+ @NgModule({
+   imports: [RouterModule.forRoot(routes)],
+   exports: [RouterModule]
+ })
+-export class AppRoutingModule { }
++export class AppRoutingModule {}
++
+Index: aba/src/main/java/com/aba/config/SwaggerConfiguration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.config;\r\n\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.web.servlet.view.InternalResourceViewResolver;\r\n\r\nimport springfox.documentation.builders.PathSelectors;\r\nimport springfox.documentation.builders.RequestHandlerSelectors;\r\nimport springfox.documentation.spi.DocumentationType;\r\nimport springfox.documentation.spring.web.plugins.Docket;\r\nimport springfox.documentation.swagger2.annotations.EnableSwagger2;\r\n\r\n@Configuration\r\n@EnableSwagger2\r\npublic class SwaggerConfiguration {\r\n\r\n    @Bean\r\n    public Docket api() {\r\n        return new Docket(DocumentationType.SWAGGER_2)\r\n        .select()\r\n        .apis(RequestHandlerSelectors.any())\r\n        .paths(PathSelectors.any())\r\n        .build();\r\n    }\r\n\r\n    @Bean\r\n    public InternalResourceViewResolver defaultViewResolver() {\r\n        return new InternalResourceViewResolver();\r\n      }\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/config/SwaggerConfiguration.java b/aba/src/main/java/com/aba/config/SwaggerConfiguration.java
+--- a/aba/src/main/java/com/aba/config/SwaggerConfiguration.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/config/SwaggerConfiguration.java	(date 1658658851557)
+@@ -27,5 +27,4 @@
+     public InternalResourceViewResolver defaultViewResolver() {
+         return new InternalResourceViewResolver();
+       }
+-    
+ }
+Index: aba/src/main/java/com/aba/interfaces/AlunoService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.interfaces;\r\n\r\npublic interface AlunoService {\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/interfaces/AlunoService.java b/aba/src/main/java/com/aba/interfaces/AlunoService.java
+--- a/aba/src/main/java/com/aba/interfaces/AlunoService.java	(revision 96506e9ef86a1a5fd86b18296ed93a62afcd2f8a)
++++ b/aba/src/main/java/com/aba/interfaces/AlunoService.java	(date 1657159171827)
+@@ -1,5 +1,17 @@
+ package com.aba.interfaces;
+ 
++import org.springframework.http.ResponseEntity;
++
++import com.aba.dto.AlunoDTO;
++
+ public interface AlunoService {
+-    
++    public ResponseEntity<?> cadastrarAluno(AlunoDTO alunoDTO);
++
++    public ResponseEntity<?> editarAluno(Long id, AlunoDTO alunoDTO);
++
++    public ResponseEntity<?> removerAluno(Long id);
++
++    public ResponseEntity<?> consultarAluno(Long id);
++
++    public ResponseEntity<?> listarAlunos();
+ }

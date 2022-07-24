@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_24_07_2022_07_49_[Changes]" date="1658659763686" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_07_2022_07_49_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 24/07/2022 07:49 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="client/src/app/home/home-routing.module.ts" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="client/src/app/home/logout/home-logout/home-logout.component.scss" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="client/src/app/home/logout/home-logout/home-logout.component.spec.ts" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="client/src/app/home/home.module.ts" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="client/src/app/home/logout/home-logout/home-logout.component.ts" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>
