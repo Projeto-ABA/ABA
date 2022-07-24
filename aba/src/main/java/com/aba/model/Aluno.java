@@ -33,8 +33,8 @@ public class Aluno extends Usuario {
 
     private int idade;
 
-    //@ManyToOne
-    private String turma; //Temporariamente criado como string enquanto n existe o crud de turma
+    @ManyToOne
+    private Turma turma;
 
     @ManyToMany
     private List<Atividade> atividades;
@@ -42,7 +42,7 @@ public class Aluno extends Usuario {
     @ManyToOne
     private Instrutor instrutor;
 
-    public Aluno(String nome, int idade, String turma, Instrutor instrutor) {
+    public Aluno(String nome, int idade, Turma turma, Instrutor instrutor) {
         super(nome);
 
         this.idade = idade;
@@ -55,7 +55,7 @@ public class Aluno extends Usuario {
         this.atividades.add(atividade);
     }
 
-    public void editar(String nome, int idade, String turma, Instrutor instrutor) {
+    public void editar(String nome, int idade, Turma turma, Instrutor instrutor) {
         this.setNome(nome);
         this.setIdade(idade);
         this.setTurma(turma);
@@ -65,10 +65,10 @@ public class Aluno extends Usuario {
     }
 
     public AlunoTotalInfoDTO getTotalDto() {
-        return new AlunoTotalInfoDTO(this.id, this.nome, this.idade, this.turma, this.instrutor.getEmail());
+        return new AlunoTotalInfoDTO(this.id, this.nome, this.idade, this.turma.getNome(), this.instrutor.getEmail());
     }
 
     public AlunoDTO getDto() {
-        return new AlunoDTO(this.nome, this.idade, this.turma, this.instrutor.getEmail());
+        return new AlunoDTO(this.nome, this.idade, this.turma.getNome(), this.instrutor.getEmail());
     }
 }

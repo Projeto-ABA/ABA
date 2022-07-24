@@ -2,12 +2,14 @@ package com.aba.service;
 
 import com.aba.dto.TurmaDTO;
 import com.aba.dto.TurmasDTO;
+import com.aba.excecoes.AlunoInexistenteException;
 import com.aba.interfaces.TurmaService;
 import com.aba.model.Aluno;
 import com.aba.model.Instrutor;
 import com.aba.model.Turma;
 import com.aba.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class TurmaServiceImpl implements TurmaService {
     @Autowired
     AlunoServiceImpl alunoService;
 
-    @Autowired
+    @Lazy
     InstrutorServiceImpl instrutorService;
 
     public ResponseEntity<?> cadastrarTurma(TurmaDTO turmaDTO) {
@@ -65,7 +67,7 @@ public class TurmaServiceImpl implements TurmaService {
         return ResponseEntity.status(HttpStatus.OK).body(turma.getDto());
     }
 
-    public ResponseEntity<?> adicionarAlunoEmTurma(Long idTurma, Long idAluno) {
+    public ResponseEntity<?> adicionarAlunoEmTurma(Long idTurma, Long idAluno) throws AlunoInexistenteException {
         Turma turma;
         Aluno aluno;
 
@@ -105,7 +107,7 @@ public class TurmaServiceImpl implements TurmaService {
         return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
     }
 
-    public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno) {
+    public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno) throws AlunoInexistenteException {
         Turma turma;
         Aluno aluno;
 
@@ -133,6 +135,16 @@ public class TurmaServiceImpl implements TurmaService {
 
     public Turma getTurmaById(Long id){
         Optional<Turma> turmaOptional = this.turmaRepository.findById(id);
+
+        if (!turmaOptional.isPresent()) {
+            return null;
+        }
+
+        return turmaOptional.get();
+    }
+
+    public Turma getTurmaByNome(String nome) {
+        Optional<Turma> turmaOptional = this.turmaRepository.findByNome(nome);
 
         if (!turmaOptional.isPresent()) {
             return null;
