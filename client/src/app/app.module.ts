@@ -11,22 +11,24 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeLogoutComponent,
-    HomeLoginComponent,
-
-  ],
+    HomeLoginComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+
   ],
-  providers: [],
+  providers: [
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

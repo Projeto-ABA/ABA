@@ -1,0 +1,61 @@
+#back{
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-bottom: -4rem;
+  color: #026f6e;
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  cursor: pointer;
+}
+#page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#card{
+  display: block;
+  margin-top: 5rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: 27rem;
+  width: 25rem;
+  -webkit-box-shadow: -3px 0px 16px 0px rgba(99, 50, 50, 0.84);
+  -moz-box-shadow: -3px 0px 16px 0px rgba(99, 50, 50, 0.84);
+  box-shadow: -3px 0px 16px 0px rgba(99, 50, 50, 0.84);
+}
+#logo{
+  height: 10rem;
+  width: 10rem;
+}
+#aba{
+  display: block;
+  align-content: center;
+  margin-bottom: 1rem;
+}
+#dados{
+  display: block;
+  text-align: center;
+}
+input{
+  margin-bottom: 1rem;
+  border-color: #026f6e;
+  border-style: solid;
+  border-radius: 0.2rem;
+  border-width: 0.1rem;
+  outline-color: #770493
+  ;
+}
+#inputs{
+  display: inline-grid;
+  align-items: center;
+}
+a{
+cursor: pointer;
+}
+label{
+  color: #e72313
+  ;
+  margin-left: -10rem;
+}
+

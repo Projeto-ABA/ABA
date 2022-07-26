@@ -16,7 +16,7 @@ export class HomeLogoutComponent implements OnInit {
   }
 
   login(): void{
-    this.router.navigateByUrl('menu');
+    this.router.navigateByUrl('login');
   }
 
 }
