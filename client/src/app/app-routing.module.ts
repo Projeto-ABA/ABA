@@ -33,6 +33,31 @@ const routes: Routes = [
   {
     path: 'listar-alunos',
     loadChildren: () => import('./listar-alunos/listar-alunos.module').then(m => m.ListarAlunosModule)
+  },
+
+  {
+    path: 'planos',
+    loadChildren: () => import('./planos/planos.module').then(m => m.PlanosModule)
+  },
+
+  {
+    path: 'listar-planos',
+    loadChildren: () => import('./listar-planos/listar-planos.module').then(m => m.ListarPlanosModule)
+  },
+
+  {
+    path: 'planos-detalhes',
+    loadChildren: () => import('./planos-detalhes/planos-detalhes.module').then(m => m.PlanosDetalhesModule)
+  },
+
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule)
+  },
+
+  {
+    path: 'cadastra-atividade',
+    loadChildren: () => import('./cadastra-atividade/cadastra-atividade.module').then(m => m.CadastraAtividadeModule)
   }
 
 ];
