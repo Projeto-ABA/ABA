@@ -160,15 +160,17 @@ h2{
 .p3{
   display: flex;
   justify-content: center;
+  padding: 3rem;
 }
 .card11{
-  width: 20rem;
+  display: table;
+  width: 44rem;
   height: 15rem;
   background-color: #b2d8f1;
 }
 
-.card12{
-  width: 20rem;
-  height: 15rem;
-  background-color: #b2d8f1;
+.card1{
+  display: table;
+  text-align: start;
 }
+

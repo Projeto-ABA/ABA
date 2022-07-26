@@ -1,4 +1,4 @@
-import { TurmasComponent } from './turmas/turmas.component';
+import { TurmasComponent } from './turmas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
