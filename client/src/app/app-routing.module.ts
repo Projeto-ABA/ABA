@@ -31,8 +31,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'listar-alunos',
-    loadChildren: () => import('./listar-alunos/listar-alunos.module').then(m => m.ListarAlunosModule)
+    path: 'alunos',
+    loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule)
   },
 
   {
@@ -58,8 +58,7 @@ const routes: Routes = [
   {
     path: 'cadastra-atividade',
     loadChildren: () => import('./cadastra-atividade/cadastra-atividade.module').then(m => m.CadastraAtividadeModule)
-    path: 'alunos',
-    loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule)
+
   }
 
 ];
