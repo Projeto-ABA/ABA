@@ -3,7 +3,7 @@
   <div>
     <mat-card-title>ABA</mat-card-title>
     <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-    <mat-card-title id="where"><a href="#" onclick="home()">Home</a></mat-card-title>
+    <mat-card-title id="where"><a href="#" (click)="home()">Home</a></mat-card-title>
   </div>
 </mat-card>
 
@@ -21,22 +21,22 @@
 
   <div class="options">
     <mat-card id="tela">
-      <div class="p2">
+      <div class="p2" (click)="addAluno()">
         <mat-icon id="p2">person</mat-icon>
         <h4>Adicionar alunos</h4>
       </div>
     </mat-card>
     <mat-card id="tela">
-      <div class="p2">
+      <div class="p2" (click)="alunos()">
         <mat-icon id="p2">supervisor_account</mat-icon>
         <h4>Acompanhar alunos</h4>
       </div>
 
     </mat-card>
     <mat-card id="tela">
-      <div class="p2">
+      <div class="p2" (click)="home()">
         <mat-icon id="p2">insert_drive_file</mat-icon>
-        <h4 id="relatorio">Gerar relatórios</h4>
+       <h4 id="relatorio">Gerar relatórios</h4>
       </div>
     </mat-card>
   </div>

@@ -21,4 +21,12 @@ export class HomeLoginComponent implements OnInit {
     this.router.navigateByUrl('home');
   }
 
+  addAluno() :void{
+    this.router.navigateByUrl('cadastro-alunos');
+  }
+
+  alunos() :void{
+    this.router.navigateByUrl('alunos');
+  }
+
 }

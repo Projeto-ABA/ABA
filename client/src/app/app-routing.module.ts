@@ -59,6 +59,16 @@ const routes: Routes = [
     path: 'cadastra-atividade',
     loadChildren: () => import('./cadastra-atividade/cadastra-atividade.module').then(m => m.CadastraAtividadeModule)
 
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login/login.module').then(m => m.LoginModule)
+
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./login/user/user.module').then(m => m.UserModule,)
+
   }
 
 ];
