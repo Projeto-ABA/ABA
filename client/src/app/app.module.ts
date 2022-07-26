@@ -10,11 +10,13 @@ import { HomeLoginComponent } from './home/home-login/home-login.component';
 import {MatIconModule} from '@angular/material/icon';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeLogoutComponent,
-    HomeLoginComponent
+    HomeLoginComponent,
+
   ],
   imports: [
     BrowserModule,
