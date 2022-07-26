@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TurmasRoutingModule } from './turmas-routing.module';
-import { TurmasComponent } from './turmas/turmas.component';
+import { TurmasComponent } from './turmas.component';
 
 
 @NgModule({

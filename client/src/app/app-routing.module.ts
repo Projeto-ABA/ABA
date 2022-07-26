@@ -58,6 +58,8 @@ const routes: Routes = [
   {
     path: 'cadastra-atividade',
     loadChildren: () => import('./cadastra-atividade/cadastra-atividade.module').then(m => m.CadastraAtividadeModule)
+    path: 'alunos',
+    loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule)
   }
 
 ];
