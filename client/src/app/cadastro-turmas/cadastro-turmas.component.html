@@ -110,12 +110,31 @@
         <label for="">Adicione alunos</label>
         <mat-card class="card11">
           <br>
+          <table mat-table>
+            <ng-container matColumnDef="aluno">
 
+              <th mat-header-cell *matHeaderCellDef>Aluno</th>
+
+            </ng-container>
+          </table>
         </mat-card>
 
       </div>
 
     </div>
+    <div class="botoes">
+
+      <div class="registrar">
+
+        <button id="registrar">Registrar</button>
+
+      </div>
+
+      <div class="cancelar">
+        <button id="cancelar">Cancelar</button>
+      </div>
+    </div>
+    
   </mat-card>
 </div>
 

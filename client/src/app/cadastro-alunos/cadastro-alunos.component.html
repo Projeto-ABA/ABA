@@ -53,14 +53,11 @@
 
     <div class="parte1">
 
-      <div class="foto">
-        <picture></picture>
-      </div>
-
       <div class="nome">
         <label for="dados">Nome</label>
         <input type="text" id="name">
       </div>
+      
     </div>
 
     <div class="parte2">
@@ -90,7 +87,7 @@
       <div class="laudo">
 
         <label for="dados" id="labellaudo">Laudo</label>
-        <input type="file" id="laudo" accept=".pdf" >
+        <input type="file" id="laudo" name="laudo" accept=".pdf" >
 
       </div>
 
@@ -132,9 +129,23 @@
 
     </div>
 
+    <div class="botoes">
 
+      <div class="registrar">
+
+        <button id="registrar">Registrar</button>
+
+      </div>
+
+      <div class="cancelar">
+        <button id="cancelar">Cancelar</button>
+      </div>
+    </div>
 
   </mat-card>
+
 </div>
+
+
 
 </div>

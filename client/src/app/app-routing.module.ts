@@ -69,6 +69,10 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./login/user/user.module').then(m => m.UserModule)
 
+  },
+  {
+    path: 'cadastro-usuario',
+    loadChildren: () => import('./cadastro-usuario/cadastro-usuario.module').then(m => m.CadastroUsuarioModule)
   }
 
 ];

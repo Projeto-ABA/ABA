@@ -98,6 +98,11 @@ a:hover{
   display: flex;
 }
 
+.dados{
+
+  font-family: 'Bad Script', cursive;
+  color: #026f6e;
+}
 label{
   display: flex;
 }
@@ -106,6 +111,8 @@ label{
   margin-top: 2rem;
   margin-right: 5.5rem;
   display: table;
+  color: #e72313;
+  font-family: 'Martel', serif;
 }
 
 #nome{
@@ -120,6 +127,8 @@ label{
   margin-top: 2rem;
   margin-right: 5.5rem;
   display: table;
+  color: #e72313;
+  font-family: 'Martel', serif;
 }
 
 #turno{
@@ -132,12 +141,14 @@ label{
 
 .title{
   display: flexbox;
+  color: #e72313;
 }
+
 
 h2{
   padding-top: 3rem;
   padding-left: 1.7rem;
-
+  font-family: 'Martel', serif;
 }
 
 .p2{
@@ -172,5 +183,53 @@ h2{
 .card1{
   display: table;
   text-align: start;
+  color: #e72313;
+  font-family: 'Martel', serif;
 }
 
+.botoes{
+  justify-content: center;
+}
+
+#registrar{
+  background-color: #026f6e;
+  color: white;
+  border-color: #5adb94;
+  font-family: 'Martel', serif;
+  height: 2.6rem;
+  border-radius: .5rem;
+  width: 8rem;
+}
+
+#registrar:hover{
+  transition-duration: .5s;
+  background-color: #004948;
+}
+
+#cancelar{
+  font-family: 'Martel', serif;
+  background-color: #e72313;
+  border-color: #ffbc11;
+  color: white;
+  border-radius: .5rem;
+  height: 2.6rem;
+  width: 8rem;
+}
+#cancelar:hover{
+  transition-duration: .5s;
+  background-color: #9b1509;
+}
+
+input{
+  border-color:#24c0eb;
+  border-radius: .5rem;
+  color: #e72313;
+  border-style:solid;
+}
+
+
+select{
+  border-color:#24c0eb;
+  border-radius: .5rem;
+  color: #e72313;
+}
