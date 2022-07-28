@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+#back:hover{
+  color: #07a09d;
+  transition-duration: .5s;
+}
+
 .cartao1{
   display: flex;
   justify-content: center;

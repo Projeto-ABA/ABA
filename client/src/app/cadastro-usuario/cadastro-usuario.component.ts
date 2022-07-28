@@ -20,4 +20,8 @@ export class CadastroUsuarioComponent implements OnInit {
   home() :void{
     this.router.navigateByUrl('home');
   }
+
+  login() :void{
+    this.router.navigateByUrl('login');
+  }
 }

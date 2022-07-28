@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   user() :void{
-    this.router.navigateByUrl('cadastro-alunos');
+    this.router.navigateByUrl('cadastro-usuario');
   }
   home() :void{
     this.router.navigateByUrl('home');

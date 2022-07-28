@@ -8,6 +8,10 @@
   font-size: 4rem;
   cursor: pointer;
 }
+#back:hover{
+  color: #07a09d;
+  transition-duration: .5s;
+}
 #page{
   display: flex;
   align-items: center;
@@ -57,4 +61,24 @@ label{
   color: #e72313;
   margin-left: -10rem;
 }
+#login{
+  background-color: #026f6e;
+  color: white;
+  border-color: #5adb94;
+  font-family: 'Martel', serif;
+  height: 2.6rem;
+  border-radius: .5rem;
+  width: 6rem;
+}
 
+#login:hover{
+  transition-duration: .5s;
+  background-color: #004948;
+}
+
+
+
+#botao{
+  margin-top: 1.5rem;
+  display: block;
+}

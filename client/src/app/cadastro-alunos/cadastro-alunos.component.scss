@@ -1,3 +1,4 @@
+//Side menu início
 #foto{
   border-radius: 50rem;
 }
@@ -6,9 +7,15 @@
 display: flex;
 text-align: center;
 }
+
 img{
   width: 13rem;
   height: 13rem;
+}
+
+#aba{
+  display: inline-grid;
+  align-items: center;
 }
 
 .side-menu{
@@ -91,7 +98,7 @@ a:hover{
   box-shadow:         -3px 0px 16px 0px rgba(0, 0, 0, 0.45);
   width: 12rem;
 }
-
+//Side menu fim
 .centercard{
 
   display:flexbox;
