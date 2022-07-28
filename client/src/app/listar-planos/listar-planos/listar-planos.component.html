@@ -45,21 +45,25 @@
     <div class="centercard">
     
         <mat-card class="cartao1">
-            <h3 class="titulos-card">Planos Realizados:</h3>
-            <h3 class="titulos-card">Objetivos em desenvolvimento:</h3>
+            <div class="titulos-card"><h3 class="TituloDireito">Objetivos em desenvolvimento:{{obDesenvolvimento}}</h3></div>
+            <div class="titulos-card"><h3 class="TituloEsquerdo">Planos Realizados: {{obRealizados}}</h3></div>
         </mat-card>
         <mat-card class="cartao2">
             <h2 class="titulo-P-card">Planos de Objetivos</h2>
-            <button>Criar Plano</button>
-            <table>
-                <tr>
-                    <td>teste</td>
-                    <td>teste</td>
-                </tr>
-                <mat-divider></mat-divider>
-                
-            </table>
+            <button mat-raised-button color="primary"class="button-Criar">Criar Plano</button>
+            <div class="divTabela">
+                <table>
+                    <tr>
+                        <td class="nomeItem">teste</td>
+                        <td class="statusItem">teste</td>
+                    </tr>
+                </table> 
+                <mat-divider></mat-divider>               
+            </div>
+            
+            
         </mat-card>
+        
     </div>
   
   </div>

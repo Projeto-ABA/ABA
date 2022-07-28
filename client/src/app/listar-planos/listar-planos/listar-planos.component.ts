@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listar-planos.component.scss']
 })
 export class ListarPlanosComponent implements OnInit {
-
-  constructor() { }
+  obDesenvolvimento = 0;
+  obRealizados = 0;
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
   }
