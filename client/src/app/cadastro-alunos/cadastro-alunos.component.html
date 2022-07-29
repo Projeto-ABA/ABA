@@ -3,7 +3,7 @@
   <div>
     <mat-card-title>ABA</mat-card-title>
     <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-    <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home</a></mat-card-title>
+    <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home/Novo Aluno</a></mat-card-title>
   </div>
 </mat-card>
 
@@ -25,20 +25,19 @@
 
     <div class="links">
 
-      <a href="turmas" class="minhas-turmas">Minhas Turmas</a>
-      <a href="cadastro-turmas" class="criar-turmas">Criar Turmas</a>
-      <a href="alunos" class="meus-alunos"> Meus Alunos</a>
-      <a href="cadastro-alunos" class="cadastrar-aluno">Cadastrar Aluno</a>
-      <a href="listar-planos" class="planos-vigentes">Planos Vigentes</a>
-      <a href="listar-planos" class="planos-finalizados">Planos Finalizados</a>
-      <a href="" class="relatorios">Relatórios</a>
-      <a href="perfil" class="perfil">Meu Perfil</a>
+      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="turmas()" class="relatorios">Relatórios</a>
+      <a (click)="perfil()" class="perfil">Meu Perfil</a>
 
     </div>
 
     <div class="sair">
       <h4>
-        <a href="" class="sairbutton">Sair</a>
+        <a (click)="home()" class="sairbutton">Sair</a>
       </h4>
     </div>
 
@@ -54,7 +53,7 @@
     <div class="parte1">
 
       <div class="nome">
-        <label for="dados">Nome</label>
+        <label for="dados" id="nome">Nome</label>
         <input type="text" id="name">
       </div>
 
@@ -63,20 +62,25 @@
     <div class="parte2">
 
       <div class="nascimento">
-        <label for="dados">Data de Nascimento</label>
+        <label for="dados" id="data">Data de Nascimento</label>
         <input type="date" id="date">
       </div>
 
       <div class="genero">
-        <label for="dados">Gênero</label>
+        <label for="dados" id="gen">Gênero</label>
         <select name="gender" id="genero">
           <option value="masculino">Masculino</option>
           <option value="feminino">Feminino</option>
         </select>
       </div>
+      <div class="cid">
+
+        <label for="dados">CID</label>
+        <input type="text" name="cid" id="cid">
+      </div>
 
       <div class="cpf">
-        <label for="dados">CPF</label>
+        <label for="dados" id="CPF">CPF</label>
         <input type="text" id="cpf">
       </div>
 
@@ -84,34 +88,23 @@
 
     <div class="parte3">
 
-      <div class="laudo">
+      <div class="endereco">
 
-        <label for="dados" id="labellaudo">Laudo</label>
-        <input type="file" id="laudo" name="laudo" accept=".pdf" >
-
+        <label for="dados" id="address">Endereço</label>
+        <input type="text" name="address" id="endereco">
       </div>
-
 
       <div class="contato" >
 
-        <label for="dados"> Contato</label>
+        <label for="dados" id="contato"> Contato</label>
         <input type="text" id="contact">
 
       </div>
 
-      <div class="cid">
-
-        <label for="dados">CID</label>
-        <select name="cid" id="cid"></select>
-      </div>
 
     </div>
 
-    <div class="endereco">
 
-      <label for="dados" id="address">Endereço</label>
-      <input type="text" name="address" id="endereco">
-    </div>
 
     <div class="parte4">
 
@@ -127,6 +120,15 @@
         </div>
       </div>
 
+    </div>
+
+    <div class="parte5">
+      <div class="laudo">
+
+        <label for="laudo" id="labellaudo">Envie o laudo</label>
+        <input type="file" id="laudo" name="laudo" accept=".pdf" >
+
+      </div>
     </div>
 
     <div class="botoes">

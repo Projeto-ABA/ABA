@@ -14,6 +14,7 @@ img{
 }
 
 #aba{
+  margin-top: -5rem;
   display: inline-grid;
   align-items: center;
 }
@@ -104,6 +105,12 @@ a:hover{
   display:flexbox;
 }
 
+input{
+  border-style: solid;
+  outline-color: #770493
+  ;
+}
+
 .cartao2{
   padding-top: 3rem;
   height: 43rem;
@@ -112,7 +119,7 @@ a:hover{
 }
 
 #name{
-  width: 40rem;
+  width: 46rem;
   padding: .3rem;
   margin: .4rem;
   position: relative;
@@ -123,9 +130,14 @@ a:hover{
   justify-content: center;
 }
 
+#nome{
+  margin-left: 0.8rem;
+
+}
 
 .nome{
   margin-top: 2rem;
+  margin-left: 5rem;
   margin-right: 5.5rem;
   display: table;
   align-items: center;
@@ -133,21 +145,26 @@ a:hover{
 
 .parte2{
   padding-left: 1rem;
-  padding-top: 2.5rem;
   position: relative;
   display: flex;
 }
 
+#data{
+  margin-left: 1.4rem;
+
+}
+
 .nascimento{
   margin-top: 2rem;
-  margin-right: 5.5rem;
+  margin-right: 1.5rem;
   display: table;
 
 }
 
 #date{
   padding: .3rem;
-  margin: .4rem;
+  margin: .3rem;
+  margin-left: 0.8rem;
   position: relative;
   display: flexbox;
 }
@@ -158,7 +175,13 @@ a:hover{
   display: table;
 }
 
+#gen{
+  margin-left: 0.8rem;
+
+}
+
 #genero{
+  border-width: 0.15rem;
   padding: .3rem;
   margin: .4rem;
   position: relative;
@@ -167,13 +190,20 @@ a:hover{
 
 .cpf{
   margin-top: 2rem;
-  margin-right: 5.5rem;
+  margin-right: 3.3rem;
   display: table;
 }
 
+#CPF{
+  margin-left: 1.4rem;
+
+}
+
 #cpf{
+  width: 12rem;
   padding: .3rem;
   margin: .4rem;
+  margin-left: 1rem;
   position: relative;
   display: flexbox;
 }
@@ -185,17 +215,15 @@ a:hover{
   display: flex;
 }
 
-.laudo{
-  margin-top: 2rem;
-  margin-right: 5.5rem;
+.contato{
+  margin-top: 1rem;
+  margin-right: 3.8rem;
   display: table;
+
 }
 
-
-.contato{
-  margin-top: 2rem;
-  margin-right: 5.5rem;
-  display: table;
+#contato{
+  margin-left: 1.2rem;
 }
 
 #contact{
@@ -203,16 +231,19 @@ a:hover{
   padding-top: .6rem;
   position: relative;
   display: table;
+  width: 11.3rem;
+  margin-left: 1rem;
 }
 
 .cid{
   margin-top: 2rem;
-  margin-right: 5.5rem;
+  margin-left: -2rem;
+  margin-right: 1rem;
   display: table;
 }
 
 #cid{
-
+width: 5rem;
   padding-left: 1rem;
   padding-top: .6rem;
   position: relative;
@@ -220,27 +251,24 @@ a:hover{
 }
 
 .endereco{
-
-  padding-left: 1rem;
   padding-top: .6rem;
   position: relative;
   display: table;
 }
 
 #address{
-  padding-left: 1rem;
+  margin-left: 1.3rem;
   padding-top: .6rem;
   position: relative;
   display: table;
 }
 
 #endereco{
-
+margin-left: 1.3rem;
   padding: .3rem;
-  margin-left: 1.3rem;
   position: relative;
   display: flexbox;
-  width: 45rem;
+  width: 29rem;
 }
 
 .parte4{
@@ -250,6 +278,8 @@ a:hover{
 }
 
 #responsible{
+  margin-left: 1.8rem;
+
   padding-left: 1rem;
   padding-top: .6rem;
   position: relative;
@@ -257,10 +287,11 @@ a:hover{
 }
 #responsavel{
   padding: .3rem;
-  margin-left: 1.3rem;
+  margin-left: 2.3rem;
   position: relative;
   display: flexbox;
   width: 30rem;
+  margin-right: -5.7rem;
 }
 
 .responsavel{
@@ -270,16 +301,63 @@ a:hover{
 .parentesco{
   display: table;
 
+  margin-left: 6.3rem;
+
+}
+
+#parentesco{
+  margin-left: -4rem;
+  padding-top: .6rem;
+  position: relative;
+  display: table;
+
 }
 
 #relative{
+  border-width: 0.15rem;
   padding: .3rem;
   position: relative;
   display: flexbox;
-  width: 10rem;
+  width: 12.5rem;
+  margin-left: -4.5rem;
+  margin-right: 1.9rem;
 }
 
+.parte5{
+  padding-left: 15rem;
+  padding-top: .6rem;
+  position: relative;
+  display: flex;
+}
+.laudo{
+  margin-top: 3rem;
+  margin-right: 5.5rem;
+  margin-bottom: 1.5rem;
+  display: table;
+}
 
+input[type="file"] {
+  display: none;
+}
+
+#labellaudo{
+  padding: 1rem 1rem;
+  width: 20rem;
+  background-color:#770493;
+  color: white;
+  border-radius: 2rem;
+  border-width: 0.15rem;
+  border-color: #5adb94;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+#labellaudo:hover{
+  transition-duration: .8s;
+  background-color: #24c0eb;
+}
 .botoes{
   padding: 3rem;
   justify-content: center;

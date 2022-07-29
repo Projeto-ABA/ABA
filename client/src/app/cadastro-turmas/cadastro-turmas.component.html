@@ -2,7 +2,7 @@
   <div>
     <mat-card-title>ABA</mat-card-title>
     <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-    <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home</a></mat-card-title>
+    <mat-card-title id="where"><a (click)="home()" class="home">Home</a></mat-card-title>
   </div>
 </mat-card>
 
@@ -23,21 +23,18 @@
     </div>
 
     <div class="links">
-
-      <a href="turmas" class="minhas-turmas">Minhas Turmas</a>
-      <a href="cadastro-turmas" class="criar-turmas">Criar Turmas</a>
-      <a href="alunos" class="meus-alunos"> Meus Alunos</a>
-      <a href="cadastro-alunos" class="cadastrar-aluno">Cadastrar Aluno</a>
-      <a href="listar-planos" class="planos-vigentes">Planos Vigentes</a>
-      <a href="listar-planos" class="planos-finalizados">Planos Finalizados</a>
-      <a href="" class="relatorios">Relatórios</a>
-      <a href="perfil" class="perfil">Meu Perfil</a>
-
+      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="turmas()" class="relatorios">Relatórios</a>
+      <a (click)="perfil()" class="perfil">Meu Perfil</a>
     </div>
 
     <div class="sair">
       <h4>
-        <a href="" class="sairbutton">Sair</a>
+        <a (click)="home()" class="sairbutton">Sair</a>
       </h4>
     </div>
 
@@ -134,7 +131,7 @@
         <button id="cancelar">Cancelar</button>
       </div>
     </div>
-    
+
   </mat-card>
 </div>
 
