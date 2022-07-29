@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlanosRoutingModule } from './planos-routing.module';
 import { PlanosComponent } from './planos/planos.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 @NgModule({
@@ -10,7 +13,9 @@ import { PlanosComponent } from './planos/planos.component';
   ],
   imports: [
     CommonModule,
-    PlanosRoutingModule
+    PlanosRoutingModule,
+    MatCardModule,
+    MatFormFieldModule
   ]
 })
 export class PlanosModule { }
