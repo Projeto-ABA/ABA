@@ -9,6 +9,7 @@ import { HomeLogoutComponent } from './home/home-logout/home-logout.component';
 import { HomeLoginComponent } from './home/home-login/home-login.component';
 import {MatIconModule} from '@angular/material/icon';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
+import { EditarTurmaComponent } from './editar-turma/editar-turma.component';
 
 
 
@@ -18,7 +19,8 @@ import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
     AppComponent,
     HomeLogoutComponent,
     HomeLoginComponent,
-    EditarAlunoComponent
+    EditarAlunoComponent,
+    EditarTurmaComponent
    ],
   imports: [
     BrowserModule,
