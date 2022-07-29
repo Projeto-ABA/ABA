@@ -1,1 +1,155 @@
-<p>editar-aluno works!</p>
+
+<mat-card>
+  <div>
+    <mat-card-title>ABA</mat-card-title>
+    <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+    <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home/Editar Aluno</a></mat-card-title>
+  </div>
+</mat-card>
+
+<div class="all">
+
+<div class="side-menu">
+  <div id="aba">
+    <img src="../../assets/ABA.png" alt="">
+  </div>
+
+  <mat-card class="sidecard">
+
+    <div class="titles">
+       <h3 class="titulo1">Olá Fulana</h3>
+      <h3 class="titulo2">
+        O que deseja?
+      </h3>
+    </div>
+
+    <div class="links">
+
+      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
+      <a (click)="turmas()" class="relatorios">Relatórios</a>
+      <a (click)="perfil()" class="perfil">Meu Perfil</a>
+
+    </div>
+
+    <div class="sair">
+      <h4>
+        <a (click)="home()" class="sairbutton">Sair</a>
+      </h4>
+    </div>
+
+  </mat-card>
+</div>
+
+<div class="centercard">
+
+  <mat-card class="cartao2">
+
+    <h1 class="dados">Editar Aluno</h1>
+
+    <div class="parte1">
+
+      <div class="nome">
+        <label for="dados" id="nome">Nome</label>
+        <input type="text" id="name">
+      </div>
+
+    </div>
+
+    <div class="parte2">
+
+      <div class="nascimento">
+        <label for="dados" id="data">Data de Nascimento</label>
+        <input type="date" id="date">
+      </div>
+
+      <div class="genero">
+        <label for="dados" id="gen">Gênero</label>
+        <select name="gender" id="genero">
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+        </select>
+      </div>
+      <div class="cid">
+
+        <label for="dados">CID</label>
+        <input type="text" name="cid" id="cid">
+      </div>
+
+      <div class="cpf">
+        <label for="dados" id="CPF">CPF</label>
+        <input type="text" id="cpf">
+      </div>
+
+    </div>
+
+    <div class="parte3">
+
+      <div class="endereco">
+
+        <label for="dados" id="address">Endereço</label>
+        <input type="text" name="address" id="endereco">
+      </div>
+
+      <div class="contato" >
+
+        <label for="dados" id="contato"> Contato</label>
+        <input type="text" id="contact">
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="parte4">
+
+      <div class="responsavel">
+        <label for="dados" id="responsible">Responsável</label>
+        <input type="text" id="responsavel">
+      </div>
+
+      <div class="capeta">
+        <div class="parentesco">
+          <label for="dados" id="parentesco">Parentesco</label>
+          <select name="relative" id="relative"></select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="parte5">
+      <div class="laudo">
+
+        <label for="laudo" id="labellaudo">Envie o laudo</label>
+        <input type="file" id="laudo" name="laudo" accept=".pdf" >
+
+      </div>
+    </div>
+
+    <div class="botoes">
+
+      <div class="registrar">
+
+        <button id="registrar">Registrar</button>
+
+      </div>
+
+      <div class="cancelar">
+        <button id="cancelar">Cancelar</button>
+      </div>
+    </div>
+
+  </mat-card>
+
+</div>
+
+
+
+</div>
+

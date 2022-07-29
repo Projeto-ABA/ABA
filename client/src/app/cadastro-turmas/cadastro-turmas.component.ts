@@ -33,6 +33,9 @@ export class CadastroTurmasComponent implements OnInit {
     this.router.navigateByUrl('alunos');
   }
   planos(): void{
+    this.router.navigateByUrl('listar-planos');
+  }
+  novoPlano(): void{
     this.router.navigateByUrl('planos');
   }
   perfil(): void{
