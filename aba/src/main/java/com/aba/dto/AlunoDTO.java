@@ -18,5 +18,5 @@ public class AlunoDTO {
 
     String turma;
 
-    InstrutorDTO instrutorDTO;
+    String instrutorEmail;
 }

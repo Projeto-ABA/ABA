@@ -1,0 +1,211 @@
+#back{
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-bottom: -4rem;
+  color: #026f6e;
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  cursor: pointer;
+}
+
+#back:hover{
+  color: #07a09d;
+  transition-duration: .5s;
+}
+
+.cartao1{
+  display: flex;
+  justify-content: center;
+}
+
+.backcard{
+  height: 50rem;
+  width: 56rem;
+  justify-content: center;
+  border-radius: 1rem;
+  display: block;
+  text-align: center;
+}
+
+.logo{
+  justify-content: center;
+  padding-bottom: 1.5rem;
+}
+
+#logo{
+  height: 9rem;
+  width: 9rem;
+}
+
+mat-card-title{
+  font-size: 3rem;
+}
+
+
+.parte1{
+  justify-content: center;
+}
+
+.parte2{
+  justify-content: center;
+}
+
+.parte3{
+  justify-content:space-evenly;
+}
+
+.parte4{
+  justify-content: center;
+}
+
+.parte5{
+  justify-content: space-evenly;
+}
+
+.nome{
+  margin-top: 2rem;
+  display: table;
+}
+
+#name{
+  width: 12rem;
+  padding: .3rem;
+}
+
+.cpf{
+  margin-top: 2rem;
+  display: table;
+}
+
+#cpf{
+  width: 10rem;
+  padding: .3rem;
+}
+.telefone{
+  margin-top: 2rem;
+  display: table;
+}
+
+#telefone{
+  width: 10rem;
+  padding: .3rem;
+}
+
+.sobrenome{
+  margin-top: 2rem;
+  display: table;
+}
+
+#sobrenome{
+  width: 37.7rem;
+  padding: .3rem;
+}
+
+.instituicao{
+  margin-top: 2rem;
+  display: table;
+}
+
+#instituicao{
+  width: 20rem;
+  padding: .3rem;
+}
+
+.nascimento{
+  margin-top: 2rem;
+  display: table;
+}
+
+#nascimento{
+  width: 9.2rem;
+  padding: .3rem;
+}
+
+.email{
+  margin-top: 2rem;
+  display: table;
+}
+
+#email{
+  width: 17.9rem;
+  padding: .3rem;
+}
+
+.confirmemail{
+  margin-top: 2rem;
+  display: table;
+}
+
+#confirmemail{
+  width: 17.9rem;
+  padding: .3rem;
+}
+
+.senha{
+  margin-top: 2rem;
+  display: table;
+}
+
+#senha{
+  width: 11rem;
+  padding: .3rem;
+}
+
+.confirmsenha{
+  margin-top: 2rem;
+  display: table;
+}
+
+#confirmsenha{
+  width: 11rem;
+  padding: .3rem;
+}
+
+input{
+  border-color:#24c0eb;
+  border-radius: .5rem;
+  color: #e72313;
+}
+
+h3{
+  text-align: start;
+  margin-bottom: -.1rem;
+  display: flex;
+  color: #e72313;
+  font-family: 'Martel', serif;
+}
+
+.botoes{
+  padding: 3rem;
+  justify-content: center;
+}
+
+#cadastro{
+  background-color: #026f6e;
+  color: white;
+  border-color: #5adb94;
+  font-family: 'Martel', serif;
+  height: 2.6rem;
+  border-radius: .5rem;
+  width: 8rem;
+}
+
+#cadastro:hover{
+  transition-duration: .5s;
+  background-color: #004948;
+}
+
+#cancelar{
+  font-family: 'Martel', serif;
+  background-color: #e72313;
+  border-color: #ffbc11;
+  color: white;
+  border-radius: .5rem;
+  height: 2.6rem;
+  width: 8rem;
+}
+#cancelar:hover{
+  transition-duration: .5s;
+  background-color: #9b1509;
+}

@@ -1,0 +1,98 @@
+<mat-card>
+  <div>
+    <mat-card-title>ABA</mat-card-title>
+    <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+    <mat-card-title id="where"><a (click)="home()" class="home">Home</a></mat-card-title>
+  </div>
+</mat-card>
+
+<div class="all">
+
+<div class="side-menu">
+  <div id="aba">
+    <img src="../../assets/ABA.png" alt="">
+  </div>
+
+  <mat-card class="sidecard">
+
+    <div class="titles">
+       <h3 class="titulo1">Olá Fulana</h3>
+      <h3 class="titulo2">
+        O que deseja?
+      </h3>
+    </div>
+
+    <div class="links">
+      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
+      <a (click)="turmas()" class="relatorios">Relatórios</a>
+      <a (click)="perfil()" class="perfil">Meu Perfil</a>
+    </div>
+
+    <div class="sair">
+        <h4>
+        <a (click)="home()" class="sairbutton">Sair</a>
+        </h4>
+    </div>
+
+  </mat-card>
+</div>
+
+<div class="centercard">
+
+  <mat-card class="cartao2">
+
+    <h1 class="dados">Meus Alunos</h1>
+
+    <table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef id="column"> {{column}} </th>
+    <td mat-cell *matCellDef="let element"  id="element"> {{element[column]}} </td>
+  </ng-container>
+  <ng-container matColumnDef="expand">
+    <th mat-header-cell *matHeaderCellDef id="column">Ações</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()" id="seta">
+        <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="example-element-diagram">
+
+          <button id="contato">Contato</button>
+          <button id="laudo">Laudo</button>
+          <button id="planos">Planos</button>
+          <button id="editar">Editar</button>
+
+
+        </div>
+
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+  </mat-card>
+</div>
+

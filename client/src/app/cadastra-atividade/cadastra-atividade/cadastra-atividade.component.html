@@ -1,0 +1,68 @@
+<mat-card>
+    <div>
+      <mat-card-title>ABA</mat-card-title>
+      <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+      <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home</a></mat-card-title>
+    </div>
+</mat-card>
+  
+<div class="all">
+  
+    <div class="side-menu">
+        <div class="img">
+            <img src="../../assets/ABA.png" alt="">
+        </div>
+        
+        <mat-card class="sidecard">
+        
+            <div class="titles">
+                <h3 class="titulo1">Olá Fulana</h3>
+                <h3 class="titulo2">O que deseja?</h3>
+            </div>
+            
+            <div class="links">
+            
+                <a href="turmas" class="minhas-turmas">Minhas Turmas</a>
+                <a href="cadastro-turmas" class="criar-turmas">Criar Turmas</a>
+                <a href="alunos" class="meus-alunos"> Meus Alunos</a>
+                <a href="cadastro-alunos" class="cadastrar-aluno">Cadastrar Aluno</a>
+                <a href="listar-planos" class="planos-vigentes">Planos Vigentes</a>
+                <a href="listar-planos" class="planos-finalizados">Planos Finalizados</a>
+                <a href="" class="relatorios">Relatórios</a>
+                <a href="perfil" class="perfil">Meu Perfil</a>
+        
+            </div>
+            
+            <div class="sair">
+                <h4>
+                <a href="" class="sairbutton">Sair</a>
+                </h4>
+            </div>
+        
+        </mat-card>
+    </div>
+    
+    <div class="centercard">
+        <mat-card class="CardCenter">
+            <mat-card-title class="TitleCardCent">Nova atividade</mat-card-title>
+            <div class="input">
+                <div class="TituloInputs">
+                    <h3 class="titles-inputs">Nome Atividade</h3>
+                    <input type="text" id="Obj">
+                </div>
+                <div class="TituloInputs">
+                    <h3 class="titles-inputs">Estimativa de realização</h3>
+                    <input type="date" id="Data">
+                </div>
+            </div>
+            <div class="input">
+                <div class="TituloInputs">
+                    <h3 class="titles-inputs">Descrição</h3>
+                    <textarea #Desc id="Desc" rows="10" cols="50" maxlength="500" ></textarea>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+  
+</div>
+  

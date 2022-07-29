@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.aba.dto.AlunoDTO;
 
+import com.aba.dto.AlunoTotalInfoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -32,46 +33,68 @@ public class Aluno extends Usuario {
 
     private int idade;
 
-    //@ManyToOne
-    private String turma; //Temporariamente criado como string enquanto n existe o crud de turma
+    @ManyToOne
+    private Turma turma;
 
     @ManyToMany
     private List<Atividade> atividades;
+   // private List<PlanoObjetivos> planoObjetivos;
 
     @ManyToOne
     private Instrutor instrutor;
 
-    public Aluno(String nome, int idade, String turma, Instrutor instrutor) {
+    private String contato;
+
+    private String genero;
+
+    private String cpf;
+
+    private String endereco;
+
+    private String responsavel;
+
+    private String parentesco;
+
+    public Aluno(String nome, int idade, Turma turma, Instrutor instrutor) {
+   // public Aluno(String nome, int idade, Instrutor instrutor, String contato,
+                 //String genero, String cpf, String endereco, String responsavel, String parentesco) {
         super(nome);
 
         this.idade = idade;
-        this.turma = turma;
+        this.turma = null;
         this.instrutor = instrutor;
         this.atividades = new ArrayList<>();
+       // this.planoObjetivos = new ArrayList<>();
+        this.contato = contato;
+        this.genero = genero;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.responsavel = responsavel;
+        this.parentesco = parentesco;
     }
 
-    public Aluno(AlunoDTO alunoDTO) {
-        super(alunoDTO.getNome());
-        this.idade = alunoDTO.getIdade();
-        this.turma = alunoDTO.getTurma();
-        this.instrutor.editar(alunoDTO.getInstrutorDTO());
-        this.atividades = new ArrayList<>();
-    }
+   // public void addPlanoObjetivo(PlanoObjetivos planoObjetivos) {
+     //   this.planoObjetivos.add(planoObjetivos);
+   // }
 
-    public void addAtividade(Atividade atividade) {
-        this.atividades.add(atividade);
-    }
-
-    public void editar(AlunoDTO alunoDTO) {
-        String nome = alunoDTO.getNome();
-        this.idade = alunoDTO.getIdade();
-        this.turma = alunoDTO.getTurma();
-        this.instrutor.editar(alunoDTO.getInstrutorDTO());
+    public void editar(String nome, int idade, Turma turma, Instrutor instrutor) {
+        this.setNome(nome);
+        this.setIdade(idade);
+        this.setInstrutor(instrutor);
 
         this.nome = nome != null ? nome : this.nome;
     }
 
-    public AlunoDTO getDto() {
-        return new AlunoDTO(this.nome, this.idade, this.turma, this.instrutor.getDto());
+    public void novaTurma(Turma turma){
+        this.setTurma(turma);
     }
+
+    public AlunoTotalInfoDTO getTotalDto() {
+        return new AlunoTotalInfoDTO(this.id, this.nome, this.idade, this.turma.getNome(), this.instrutor.getEmail());
+    }
+
+    public AlunoDTO getDto() {
+        return new AlunoDTO(this.nome, this.idade, this.turma.getNome(), this.instrutor.getEmail());
+    }
+
 }

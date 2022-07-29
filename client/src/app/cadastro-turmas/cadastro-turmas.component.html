@@ -1,0 +1,140 @@
+<mat-card>
+  <div>
+    <mat-card-title>ABA</mat-card-title>
+    <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+    <mat-card-title id="where"><a (click)="home()" class="home">Home</a></mat-card-title>
+  </div>
+</mat-card>
+
+<div class="all">
+
+<div class="side-menu">
+  <div>
+    <img src="../../assets/ABA.png" alt="">
+  </div>
+
+  <mat-card class="sidecard">
+
+    <div class="titles">
+       <h3 class="titulo1">Olá Fulana</h3>
+      <h3 class="titulo2">
+        O que deseja?
+      </h3>
+    </div>
+
+    <div class="links">
+      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
+      <a (click)="turmas()" class="relatorios">Relatórios</a>
+      <a (click)="perfil()" class="perfil">Meu Perfil</a>
+    </div>
+
+    <div class="sair">
+      <h4>
+        <a (click)="home()" class="sairbutton">Sair</a>
+      </h4>
+    </div>
+
+  </mat-card>
+</div>
+
+
+<div class="centercard">
+
+  <mat-card class="cartao2">
+
+    <h1 class="dados">Nova Turma</h1>
+
+    <div class="p1">
+      <div class="nome">
+        <label for="dados">Nome</label>
+        <input type="text" name="name" id="nome">
+      </div>
+
+      <div class="turno">
+        <label for="dados">Turno</label>
+        <select name="shift" id="turno"></select>
+      </div>
+    </div>
+
+    <div class="title">
+      <h2>Dias da Semana</h2>
+    </div>
+
+    <div class="p2">
+
+      <div class="dias">
+        <div class="segunda">
+          <input type="checkbox" name="monday" id="dia">
+          Segunda
+        </div>
+
+        <div class="terca">
+          <input type="checkbox" name="tuesday" id="dia">
+          Terça
+        </div>
+
+        <div class="quarta">
+          <input type="checkbox" name="wednesday" id="dia">
+          Quarta
+        </div>
+
+        <div class="quinta">
+          <input type="checkbox" name="thursday" id="dia">
+          Quinta
+        </div>
+
+        <div class="sexta">
+          <input type="checkbox" name="friday" id="dia">
+          Sexta
+        </div>
+
+        <div class="sabado">
+          <input type="checkbox" name="saturday" id="dia">
+          Sábado
+        </div>
+
+      </div>
+    </div>
+
+    <div class="p3">
+
+      <div class="card1">
+
+        <label for="">Adicione alunos</label>
+        <mat-card class="card11">
+          <br>
+          <table mat-table>
+            <ng-container matColumnDef="aluno">
+
+              <th mat-header-cell *matHeaderCellDef>Aluno</th>
+
+            </ng-container>
+          </table>
+        </mat-card>
+
+      </div>
+
+    </div>
+    <div class="botoes">
+
+      <div class="registrar">
+
+        <button id="registrar">Registrar</button>
+
+      </div>
+
+      <div class="cancelar">
+        <button id="cancelar">Cancelar</button>
+      </div>
+    </div>
+
+  </mat-card>
+</div>
+
+</div>
+

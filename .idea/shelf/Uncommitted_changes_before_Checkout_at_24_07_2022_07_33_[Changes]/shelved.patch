@@ -1,0 +1,632 @@
+Index: aba/src/main/java/com/aba/model/Aluno.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.model;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport javax.persistence.Column;\r\nimport javax.persistence.Entity;\r\nimport javax.persistence.GeneratedValue;\r\nimport javax.persistence.GenerationType;\r\nimport javax.persistence.Id;\r\nimport javax.persistence.ManyToMany;\r\nimport javax.persistence.ManyToOne;\r\n\r\nimport com.aba.dto.AlunoDTO;\r\n\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Data;\r\nimport lombok.Getter;\r\nimport lombok.NoArgsConstructor;\r\nimport lombok.Setter;\r\n\r\n@Data\r\n@Getter\r\n@Setter\r\n@AllArgsConstructor\r\n@NoArgsConstructor\r\n@Entity\r\npublic class Aluno extends Usuario {\r\n    \r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n    \r\n    private int idade;\r\n\r\n    //@ManyToOne\r\n    private String turma; //Temporariamente criado como string enquanto n existe o crud de turma\r\n\r\n    @ManyToMany    \r\n    private List<Atividade> atividades;\r\n    \r\n    //@ManyToMany\r\n    private String professor; //Temporariamente criado como string enquanto n existe o crud de professor\r\n\r\n    public Aluno(String nome, int idade, String turma, String professor) {\r\n        super(nome);\r\n        \r\n        this.idade = idade;\r\n        this.turma = turma;\r\n        this.professor = professor;\r\n        this.atividades = new ArrayList<>();\r\n    }\r\n\r\n    public Aluno(AlunoDTO alunoDTO) {\r\n        super(alunoDTO.getNome());\r\n        this.idade = alunoDTO.getIdade();\r\n        this.turma = alunoDTO.getTurma();\r\n        this.professor = alunoDTO.getProfessor();\r\n        this.atividades = new ArrayList<>();\r\n    }\r\n\r\n    public void addAtividade(Atividade atividade) {\r\n        this.atividades.add(atividade);\r\n    }\r\n\r\n    public void editar(AlunoDTO alunoDTO) {\r\n        String nome = alunoDTO.getNome();\r\n        this.idade = alunoDTO.getIdade();\r\n        this.turma = alunoDTO.getTurma();\r\n        this.professor = alunoDTO.getProfessor();\r\n\r\n        this.nome = nome != null ? nome : this.nome;\r\n    }\r\n\r\n    public AlunoDTO getDto() {\r\n        return new AlunoDTO(this.nome, this.idade, this.turma, this.professor);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/model/Aluno.java b/aba/src/main/java/com/aba/model/Aluno.java
+--- a/aba/src/main/java/com/aba/model/Aluno.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/model/Aluno.java	(date 1658657406256)
+@@ -13,6 +13,8 @@
+ 
+ import com.aba.dto.AlunoDTO;
+ 
++import com.aba.dto.InstrutorDTO;
++import com.aba.dto.TurmaDTO;
+ import lombok.AllArgsConstructor;
+ import lombok.Data;
+ import lombok.Getter;
+@@ -22,40 +24,38 @@
+ @Data
+ @Getter
+ @Setter
+-@AllArgsConstructor
+ @NoArgsConstructor
+ @Entity
+ public class Aluno extends Usuario {
+-    
++
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
+-    
++
+     private int idade;
+ 
+-    //@ManyToOne
+-    private String turma; //Temporariamente criado como string enquanto n existe o crud de turma
++    @ManyToOne
++    private Turma turma;
+ 
+-    @ManyToMany    
++    @ManyToMany
+     private List<Atividade> atividades;
+-    
+-    //@ManyToMany
+-    private String professor; //Temporariamente criado como string enquanto n existe o crud de professor
++
++    @ManyToOne
++    private Instrutor instrutor;
+ 
+-    public Aluno(String nome, int idade, String turma, String professor) {
+-        super(nome);
+-        
++    public Aluno(String nome, int idade, Turma turma, Instrutor instrutor) {
++        this.nome = nome;
+         this.idade = idade;
+         this.turma = turma;
+-        this.professor = professor;
++        this.instrutor = instrutor;
+         this.atividades = new ArrayList<>();
+     }
+ 
+     public Aluno(AlunoDTO alunoDTO) {
+-        super(alunoDTO.getNome());
++        this.nome = alunoDTO.getNome();
+         this.idade = alunoDTO.getIdade();
+-        this.turma = alunoDTO.getTurma();
+-        this.professor = alunoDTO.getProfessor();
++        TurmaDTO turmaDTO = alunoDTO.getTurmaDTO();
++        InstrutorDTO instrutorDTO = alunoDTO.getInstrutorDTO();
+         this.atividades = new ArrayList<>();
+     }
+ 
+@@ -66,13 +66,13 @@
+     public void editar(AlunoDTO alunoDTO) {
+         String nome = alunoDTO.getNome();
+         this.idade = alunoDTO.getIdade();
+-        this.turma = alunoDTO.getTurma();
+-        this.professor = alunoDTO.getProfessor();
++        TurmaDTO turmaDTO = alunoDTO.getTurmaDTO();
++        InstrutorDTO instrutorDTO = alunoDTO.getInstrutorDTO();
+ 
+         this.nome = nome != null ? nome : this.nome;
+     }
+ 
+     public AlunoDTO getDto() {
+-        return new AlunoDTO(this.nome, this.idade, this.turma, this.professor);
++        return new AlunoDTO(this.nome, this.idade, this.turma.getDto(), this.instrutor.getDto());
+     }
+ }
+Index: aba/src/main/java/com/aba/controller/AlunoAPIController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.controller;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.GetMapping;\r\nimport org.springframework.web.bind.annotation.PathVariable;\r\nimport org.springframework.web.bind.annotation.RestController;\r\n\r\nimport com.aba.dto.AlunoDTO;\r\nimport com.aba.interfaces.AlunoService;\r\n\r\nimport io.swagger.annotations.Api;\r\nimport org.springframework.web.bind.annotation.PostMapping;\r\nimport org.springframework.web.bind.annotation.PutMapping;\r\nimport org.springframework.web.bind.annotation.RequestBody;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\n\r\n\r\n@RestController\r\n@RequestMapping(\"/api/alunos\")\r\n@Api\r\npublic class AlunoAPIController {\r\n\r\n    @Autowired\r\n    AlunoService alunoService;\r\n\r\n    @PostMapping(\"\")\r\n    public ResponseEntity<?> cadastrarAluno(@RequestBody AlunoDTO alunoDTO) {\r\n        return this.alunoService.cadastrarAluno(alunoDTO);\r\n    }\r\n\r\n    @PutMapping(\"/{id}\")\r\n    public ResponseEntity<?> editarAluno(@PathVariable Long id, @RequestBody AlunoDTO alunoDTO) {\r\n        return this.alunoService.editarAluno(id, alunoDTO);\r\n    }\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public ResponseEntity<?> consultarAluno(@PathVariable Long id) {\r\n        return this.alunoService.consultarAluno(id);\r\n    }\r\n\r\n    @GetMapping(\"/listar\")\r\n    public ResponseEntity<?> listarAlunos() {\r\n        return this.alunoService.listarAlunos();\r\n    }\r\n       \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/controller/AlunoAPIController.java b/aba/src/main/java/com/aba/controller/AlunoAPIController.java
+--- a/aba/src/main/java/com/aba/controller/AlunoAPIController.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/controller/AlunoAPIController.java	(date 1657676546642)
+@@ -2,18 +2,12 @@
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.http.ResponseEntity;
+-import org.springframework.web.bind.annotation.GetMapping;
+-import org.springframework.web.bind.annotation.PathVariable;
+-import org.springframework.web.bind.annotation.RestController;
++import org.springframework.web.bind.annotation.*;
+ 
+ import com.aba.dto.AlunoDTO;
+ import com.aba.interfaces.AlunoService;
+ 
+ import io.swagger.annotations.Api;
+-import org.springframework.web.bind.annotation.PostMapping;
+-import org.springframework.web.bind.annotation.PutMapping;
+-import org.springframework.web.bind.annotation.RequestBody;
+-import org.springframework.web.bind.annotation.RequestMapping;
+ 
+ 
+ @RestController
+@@ -39,9 +33,13 @@
+         return this.alunoService.consultarAluno(id);
+     }
+ 
++    @DeleteMapping("/{id}")
++    public ResponseEntity<?> removerAluno(@PathVariable Long id) {
++        return this.alunoService.removerAluno(id);
++    }
++
+     @GetMapping("/listar")
+     public ResponseEntity<?> listarAlunos() {
+         return this.alunoService.listarAlunos();
+     }
+-       
+ }
+Index: aba/src/main/java/com/aba/service/TurmaServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.service;\r\n\r\nimport org.springframework.stereotype.Service;\r\n\r\n@Service\r\npublic class TurmaServiceImpl {\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/service/TurmaServiceImpl.java b/aba/src/main/java/com/aba/service/TurmaServiceImpl.java
+--- a/aba/src/main/java/com/aba/service/TurmaServiceImpl.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/service/TurmaServiceImpl.java	(date 1658657350450)
+@@ -1,8 +1,142 @@
+ package com.aba.service;
+ 
++import com.aba.dto.TurmaDTO;
++import com.aba.dto.TurmasDTO;
++import com.aba.model.Aluno;
++import com.aba.model.Instrutor;
++import com.aba.model.Turma;
++import com.aba.repository.TurmaRepository;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.http.HttpStatus;
++import org.springframework.http.ResponseEntity;
+ import org.springframework.stereotype.Service;
+ 
++import java.util.List;
++import java.util.Optional;
++
+ @Service
+ public class TurmaServiceImpl {
+-    
++
++    @Autowired
++    TurmaRepository turmaRepository;
++
++    @Autowired
++    AlunoServiceImpl alunoService;
++
++    @Autowired
++    InstrutorServiceImpl instrutorService;
++
++    public ResponseEntity<?> cadastrarTurma(TurmaDTO turmaDTO) {
++        Turma turma;
++        turma = new Turma(turmaDTO);
++
++        this.turmaRepository.save(turma);
++
++        ResponseEntity.status(HttpStatus.CREATED).body(turmaDTO);
++        return ResponseEntity.status(HttpStatus.CREATED).body(turmaDTO);
++    }
++
++    public ResponseEntity<?> editarTurma(Long id, TurmaDTO turmaDTO) {
++        Turma turma;
++        turma = this.getTurmaById(id);
++        turma.setNome(turmaDTO.getNomeTurma());
++
++        this.turmaRepository.save(turma);
++        return ResponseEntity.status(HttpStatus.OK).body(turma.getDto());
++    }
++
++    public ResponseEntity<?> removerTurma(Long id) {
++        this.turmaRepository.deleteById(id);
++
++        return ResponseEntity.status(HttpStatus.OK).body("Turma removida!");
++    }
++
++    public ResponseEntity<?> listarTurmas() {
++        List<Turma> turmas = this.turmaRepository.findAll();
++        TurmasDTO listaDeTurmasDTO = new TurmasDTO(turmas);
++
++        return ResponseEntity.status(HttpStatus.OK).body(listaDeTurmasDTO.getDadosTurma()); //organizar uma melhor maneira de retornar os alunos aqui
++    }
++
++    public ResponseEntity<?> consultarTurma(Long id) {
++        Turma turma;
++        turma = this.getTurmaById(id);
++        return ResponseEntity.status(HttpStatus.OK).body(turma.getDto());
++    }
++
++    public ResponseEntity<?> adicionarAlunoEmTurma(Long idTurma, Long idAluno) {
++        Turma turma;
++        Aluno aluno;
++
++        turma = this.getTurmaById(idTurma);
++        aluno = this.alunoService.getAlunoById(idAluno);
++
++        turma.adicionarAluno(aluno);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
++    }
++
++    public ResponseEntity<?> adicionarInstrutorEmTurma(Long idTurma, Long idInstrutor) {
++        Turma turma;
++        Instrutor instrutor;
++
++        turma = this.getTurmaById(idTurma);
++        instrutor = this.instrutorService.getInstrutorById(idInstrutor);
++
++        turma.adicionarInstrutor(instrutor);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
++    }
++
++    public ResponseEntity<?> listarAlunosDeTurma(Long idTurma){
++        Turma turma;
++        turma = this.getTurmaById(idTurma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
++    }
++
++    public ResponseEntity<?> listarInstrutoresDeTurma(Long idTurma){
++        Turma turma;
++        turma = this.getTurmaById(idTurma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
++    }
++
++    public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno) {
++        Turma turma;
++        Aluno aluno;
++
++        turma = this.getTurmaById(idTurma);
++        aluno = this.alunoService.getAlunoById(idAluno);
++
++        turma.removerAluno(aluno);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
++    }
++
++    public ResponseEntity<?> removerInstrutorDeTurma(Long idTurma, Long idInstrutor) {
++        Turma turma;
++        Instrutor instrutor;
++
++        turma = this.getTurmaById(idTurma);
++        instrutor = this.instrutorService.getInstrutorById(idInstrutor);
++
++        turma.removerInstrutor(instrutor);
++        this.turmaRepository.save(turma);
++
++        return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
++    }
++
++    public Turma getTurmaById(Long id){
++        Optional<Turma> turmaOptional = this.turmaRepository.findById(id);
++
++        if (!turmaOptional.isPresent()) {
++            return null;
++        }
++
++        return turmaOptional.get();
++    }
+ }
+Index: aba/src/main/java/com/aba/model/Turma.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.model;\r\n\r\nimport javax.persistence.Entity;\r\nimport javax.persistence.GeneratedValue;\r\nimport javax.persistence.GenerationType;\r\nimport javax.persistence.Id;\r\n\r\n@Entity\r\npublic class Turma {\r\n    \r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/model/Turma.java b/aba/src/main/java/com/aba/model/Turma.java
+--- a/aba/src/main/java/com/aba/model/Turma.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/model/Turma.java	(date 1658657350450)
+@@ -1,14 +1,65 @@
+ package com.aba.model;
+ 
+-import javax.persistence.Entity;
+-import javax.persistence.GeneratedValue;
+-import javax.persistence.GenerationType;
+-import javax.persistence.Id;
++import lombok.*;
+ 
++import javax.persistence.*;
++import java.util.ArrayList;
++import java.util.List;
++import com.aba.dto.TurmaDTO;
++import com.aba.model.Aluno;
++
++@Data
++@Getter
++@Setter
++@AllArgsConstructor
++@NoArgsConstructor
+ @Entity
+ public class Turma {
+     
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
++
++    @ManyToMany
++    List<Instrutor> instrutores;
++
++    @ManyToMany
++    List<Aluno> alunos;
++
++    private String nome;
++
++    //pensar em como as atividades poderiam ser adicionadas por aqui!
++
++    public Turma(String nome) {
++        this.nome = nome;
++        this.instrutores = new ArrayList<>();
++        this.alunos = new ArrayList<>();
++    }
++
++    public Turma(TurmaDTO turmaDTO) {
++        this.nome = turmaDTO.getNomeTurma();
++        this.instrutores = new ArrayList<>();
++        this.alunos = new ArrayList<>();
++    }
++
++    public void adicionarAluno(Aluno aluno) {
++        this.alunos.add(aluno);
++    }
++
++    public void adicionarInstrutor(Instrutor instrutor) {
++        this.instrutores.add(instrutor);
++    }
++
++    public void removerAluno(Aluno aluno) {
++        this.alunos.remove(aluno);
++    }
++
++    public void removerInstrutor(Instrutor instrutor) {
++        this.instrutores.remove(instrutor);
++    }
++
++    public String listarAlunos() { return this.alunos.toString(); }
++    public String listarInstrutores() { return this.instrutores.toString(); }
++    public TurmaDTO getDto(){ return new TurmaDTO(this.nome); }
++
+ }
+Index: aba/src/main/java/com/aba/service/ProfessorServiceImpl.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/service/ProfessorServiceImpl.java b/aba/src/main/java/com/aba/service/ProfessorServiceImpl.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/service/ProfessorServiceImpl.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ /dev/null	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
+@@ -1,8 +0,0 @@
+-package com.aba.service;
+-
+-import org.springframework.stereotype.Service;
+-
+-@Service
+-public class ProfessorServiceImpl {
+-    
+-}
+Index: aba/src/main/java/com/aba/model/Professor.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/model/Professor.java b/aba/src/main/java/com/aba/model/Professor.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/model/Professor.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ /dev/null	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
+@@ -1,14 +0,0 @@
+-package com.aba.model;
+-
+-import javax.persistence.Entity;
+-import javax.persistence.GeneratedValue;
+-import javax.persistence.GenerationType;
+-import javax.persistence.Id;
+-
+-@Entity
+-public class Professor extends Usuario {
+-    
+-    @Id
+-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+-    private Long id;
+-}
+Index: aba/src/main/java/com/aba/interfaces/ProfessorService.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/interfaces/ProfessorService.java b/aba/src/main/java/com/aba/interfaces/ProfessorService.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/interfaces/ProfessorService.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ /dev/null	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
+@@ -1,5 +0,0 @@
+-package com.aba.interfaces;
+-
+-public interface ProfessorService {
+-    
+-}
+Index: aba/src/main/java/com/aba/dto/ProfessorDTO.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/dto/ProfessorDTO.java b/aba/src/main/java/com/aba/dto/ProfessorDTO.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/dto/ProfessorDTO.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ /dev/null	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
+@@ -1,5 +0,0 @@
+-package com.aba.dto;
+-
+-public class ProfessorDTO {
+-    
+-}
+Index: aba/src/main/java/com/aba/repository/ProfessorRepository.java
+===================================================================
+diff --git a/aba/src/main/java/com/aba/repository/ProfessorRepository.java b/aba/src/main/java/com/aba/repository/ProfessorRepository.java
+deleted file mode 100644
+--- a/aba/src/main/java/com/aba/repository/ProfessorRepository.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ /dev/null	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
+@@ -1,11 +0,0 @@
+-package com.aba.repository;
+-
+-import com.aba.model.Professor;
+-
+-import org.springframework.data.jpa.repository.JpaRepository;
+-import org.springframework.stereotype.Repository;
+-
+-@Repository
+-public interface ProfessorRepository extends JpaRepository<Professor, Long>{
+-    
+-}
+Index: aba/src/main/java/com/aba/dto/AlunoDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.dto;\r\n\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Getter;\r\nimport lombok.NoArgsConstructor;\r\nimport lombok.Setter;\r\n\r\n@NoArgsConstructor\r\n@AllArgsConstructor\r\n@Getter\r\n@Setter\r\npublic class AlunoDTO {\r\n    \r\n    String nome;\r\n\r\n    int idade;\r\n\r\n    String turma;\r\n\r\n    String professor;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/dto/AlunoDTO.java b/aba/src/main/java/com/aba/dto/AlunoDTO.java
+--- a/aba/src/main/java/com/aba/dto/AlunoDTO.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/dto/AlunoDTO.java	(date 1658658596688)
+@@ -1,10 +1,13 @@
+ package com.aba.dto;
+ 
++import com.aba.model.Instrutor;
+ import lombok.AllArgsConstructor;
+ import lombok.Getter;
+ import lombok.NoArgsConstructor;
+ import lombok.Setter;
+ 
++import java.util.List;
++
+ @NoArgsConstructor
+ @AllArgsConstructor
+ @Getter
+@@ -15,7 +18,7 @@
+ 
+     int idade;
+ 
+-    String turma;
++    TurmaDTO turmaDTO;
+ 
+-    String professor;
++    InstrutorDTO instrutorDTO;
+ }
+Index: aba/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#spring.jpa.database=POSTGRESQL\n#spring.datasource.url=jdbc:postgresql://localhost:5433/aba\n#spring.datasource.username=postgres\n#spring.datasource.password=secretdb\n\n#spring.jpa.show-sql=true\n#spring.jpa.generate-ddl=true\n#spring.jpa.hibernate.ddl-auto=update\n#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true*/\n\n\n\n# DATASOURCE\nspring.datasource.url=jdbc:h2:mem:testdb\nspring.datasource.driverClassName=org.h2.Driver\nspring.datasource.username=sa\nspring.datasource.password=password\n\n# H2 Console\nspring.h2.console.enabled=true\nspring.h2.console.path=/h2-console\n\n# JPA\nspring.jpa.database-platform=org.hibernate.dialect.H2Dialect\nspring.jpa.hibernate.ddl-auto=update\nspring.jpa.show-sql=true\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/aba/src/main/resources/application.properties b/aba/src/main/resources/application.properties
+--- a/aba/src/main/resources/application.properties	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/resources/application.properties	(date 1658657350450)
+@@ -9,7 +9,6 @@
+ #spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true*/
+ 
+ 
+-
+ # DATASOURCE
+ spring.datasource.url=jdbc:h2:mem:testdb
+ spring.datasource.driverClassName=org.h2.Driver
+Index: aba/src/main/java/com/aba/dto/TurmaDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.dto;\r\n\r\npublic class TurmaDTO {\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/dto/TurmaDTO.java b/aba/src/main/java/com/aba/dto/TurmaDTO.java
+--- a/aba/src/main/java/com/aba/dto/TurmaDTO.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/dto/TurmaDTO.java	(date 1658657350450)
+@@ -1,5 +1,17 @@
+ package com.aba.dto;
+ 
++
++import lombok.AllArgsConstructor;
++import lombok.Getter;
++import lombok.NoArgsConstructor;
++import lombok.Setter;
++
++@Getter
++@Setter
++@AllArgsConstructor
++@NoArgsConstructor
+ public class TurmaDTO {
+-    
++
++    private String nomeTurma;
++
+ }
+Index: aba/src/main/java/com/aba/service/AlunoServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.service;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\nimport org.apache.coyote.Response;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport com.aba.dto.AlunoDTO;\r\nimport com.aba.dto.AlunosDTO;\r\nimport com.aba.interfaces.AlunoService;\r\nimport com.aba.model.Aluno;\r\nimport com.aba.model.Usuario;\r\nimport com.aba.repository.AlunoRepository;\r\nimport com.aba.repository.UsuarioRepository;\r\n\r\n@Service\r\npublic class AlunoServiceImpl implements AlunoService {\r\n    \r\n    @Autowired\r\n    AlunoRepository alunoRepository;\r\n\r\n    @Autowired\r\n    UsuarioRepository usuarioRepository;\r\n\r\n    public ResponseEntity<?> cadastrarAluno(AlunoDTO alunoDTO) {\r\n        Usuario aluno;\r\n        aluno = new Aluno(alunoDTO);\r\n\r\n        alunoRepository.save((Aluno) aluno);\r\n        usuarioRepository.save(aluno);\r\n\r\n        return ResponseEntity.status(HttpStatus.CREATED).body(alunoDTO);\r\n    }\r\n\r\n    public ResponseEntity<?> editarAluno(Long id, AlunoDTO alunoDTO) {\r\n        Aluno aluno;\r\n        aluno = this.getAlunoById(id);\r\n        aluno.editar(alunoDTO);\r\n        this.alunoRepository.save(aluno);\r\n        \r\n        return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());\r\n    }\r\n\r\n    public ResponseEntity<?> removerAluno(Long id) {\r\n        this.usuarioRepository.deleteById(id);\r\n\r\n        return ResponseEntity.status(HttpStatus.OK).body(\"Aluno(a) removido(a)!\");\r\n    }\r\n\r\n    public ResponseEntity<?> listarAlunos() {\r\n        List<Aluno> alunos = this.alunoRepository.findAll();\r\n        AlunosDTO listaDeAlunos = new AlunosDTO(alunos);\r\n        \r\n        return ResponseEntity.status(HttpStatus.OK).body(listaDeAlunos.getDadosAlunos());\r\n    }\r\n\r\n    public ResponseEntity<?> consultarAluno(Long id) {\r\n        Aluno aluno;\r\n        aluno = this.getAlunoById(id);\r\n        return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());\r\n    }\r\n\r\n    public Aluno getAlunoById(Long id) {\r\n        Optional<Aluno> alunoOptional = this.alunoRepository.findById(id);\r\n\r\n        if (!alunoOptional.isPresent()) {\r\n            return null;\r\n        } //criar excecao futuramente\r\n\r\n        return alunoOptional.get();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/service/AlunoServiceImpl.java b/aba/src/main/java/com/aba/service/AlunoServiceImpl.java
+--- a/aba/src/main/java/com/aba/service/AlunoServiceImpl.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/service/AlunoServiceImpl.java	(date 1658657406256)
+@@ -3,7 +3,6 @@
+ import java.util.List;
+ import java.util.Optional;
+ 
+-import org.apache.coyote.Response;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+@@ -19,7 +18,7 @@
+ 
+ @Service
+ public class AlunoServiceImpl implements AlunoService {
+-    
++
+     @Autowired
+     AlunoRepository alunoRepository;
+ 
+@@ -41,7 +40,7 @@
+         aluno = this.getAlunoById(id);
+         aluno.editar(alunoDTO);
+         this.alunoRepository.save(aluno);
+-        
++
+         return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());
+     }
+ 
+@@ -54,7 +53,7 @@
+     public ResponseEntity<?> listarAlunos() {
+         List<Aluno> alunos = this.alunoRepository.findAll();
+         AlunosDTO listaDeAlunos = new AlunosDTO(alunos);
+-        
++
+         return ResponseEntity.status(HttpStatus.OK).body(listaDeAlunos.getDadosAlunos());
+     }
+ 
+Index: aba/src/main/java/com/aba/dto/AlunosDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.dto;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport com.aba.model.Aluno;\r\n\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Getter;\r\nimport lombok.NoArgsConstructor;\r\nimport lombok.Setter;\r\n\r\n@NoArgsConstructor\r\n@Getter\r\n@Setter\r\npublic class AlunosDTO {\r\n    \r\n    private List<AlunoDTO> dadosAlunos;\r\n\r\n    public AlunosDTO(List<Aluno> alunos) {\r\n        this.dadosAlunos = new ArrayList<>();\r\n\r\n        for(Aluno aluno : alunos) {\r\n            this.dadosAlunos.add(aluno.getDto());\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/dto/AlunosDTO.java b/aba/src/main/java/com/aba/dto/AlunosDTO.java
+--- a/aba/src/main/java/com/aba/dto/AlunosDTO.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/dto/AlunosDTO.java	(date 1658657406256)
+@@ -14,7 +14,7 @@
+ @Getter
+ @Setter
+ public class AlunosDTO {
+-    
++
+     private List<AlunoDTO> dadosAlunos;
+ 
+     public AlunosDTO(List<Aluno> alunos) {
+Index: aba/src/main/java/com/aba/config/SwaggerConfiguration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aba.config;\r\n\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.web.servlet.view.InternalResourceViewResolver;\r\n\r\nimport springfox.documentation.builders.PathSelectors;\r\nimport springfox.documentation.builders.RequestHandlerSelectors;\r\nimport springfox.documentation.spi.DocumentationType;\r\nimport springfox.documentation.spring.web.plugins.Docket;\r\nimport springfox.documentation.swagger2.annotations.EnableSwagger2;\r\n\r\n@Configuration\r\n@EnableSwagger2\r\npublic class SwaggerConfiguration {\r\n\r\n    @Bean\r\n    public Docket api() {\r\n        return new Docket(DocumentationType.SWAGGER_2)\r\n        .select()\r\n        .apis(RequestHandlerSelectors.any())\r\n        .paths(PathSelectors.any())\r\n        .build();\r\n    }\r\n\r\n    @Bean\r\n    public InternalResourceViewResolver defaultViewResolver() {\r\n        return new InternalResourceViewResolver();\r\n      }\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/config/SwaggerConfiguration.java b/aba/src/main/java/com/aba/config/SwaggerConfiguration.java
+--- a/aba/src/main/java/com/aba/config/SwaggerConfiguration.java	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/aba/src/main/java/com/aba/config/SwaggerConfiguration.java	(date 1658657350450)
+@@ -27,5 +27,4 @@
+     public InternalResourceViewResolver defaultViewResolver() {
+         return new InternalResourceViewResolver();
+       }
+-    
+ }
+Index: client/package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\n  \"name\": \"client\",\n  \"version\": \"0.0.0\",\n  \"scripts\": {\n    \"ng\": \"ng\",\n    \"start\": \"ng serve\",\n    \"build\": \"ng build\",\n    \"watch\": \"ng build --watch --configuration development\",\n    \"test\": \"ng test\"\n  },\n  \"private\": true,\n  \"dependencies\": {\n    \"@angular/animations\": \"^14.0.1\",\n    \"@angular/cdk\": \"^14.0.1\",\n    \"@angular/common\": \"^14.0.0\",\n    \"@angular/compiler\": \"^14.0.0\",\n    \"@angular/core\": \"^14.0.0\",\n    \"@angular/forms\": \"^14.0.0\",\n    \"@angular/material\": \"^14.0.1\",\n    \"@angular/platform-browser\": \"^14.0.0\",\n    \"@angular/platform-browser-dynamic\": \"^14.0.0\",\n    \"@angular/router\": \"^14.0.0\",\n    \"rxjs\": \"~7.5.0\",\n    \"tslib\": \"^2.3.0\",\n    \"zone.js\": \"~0.11.4\"\n  },\n  \"devDependencies\": {\n    \"@angular-devkit/build-angular\": \"^14.0.1\",\n    \"@angular/cli\": \"~14.0.1\",\n    \"@angular/compiler-cli\": \"^14.0.0\",\n    \"@types/jasmine\": \"~4.0.0\",\n    \"jasmine-core\": \"~4.1.0\",\n    \"karma\": \"~6.3.0\",\n    \"karma-chrome-launcher\": \"~3.1.0\",\n    \"karma-coverage\": \"~2.2.0\",\n    \"karma-jasmine\": \"~5.0.0\",\n    \"karma-jasmine-html-reporter\": \"~1.7.0\",\n    \"typescript\": \"~4.7.2\"\n  }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/package.json b/client/package.json
+--- a/client/package.json	(revision 2684255d57301aabfe13781d410d1d3411dfe0e9)
++++ b/client/package.json	(date 1658657350450)
+@@ -36,5 +36,9 @@
+     "karma-jasmine": "~5.0.0",
+     "karma-jasmine-html-reporter": "~1.7.0",
+     "typescript": "~4.7.2"
+-  }
+-}
+\ No newline at end of file
++  },
++  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.1.",
++  "main": "karma.conf.js",
++  "author": "",
++  "license": "ISC"
++}

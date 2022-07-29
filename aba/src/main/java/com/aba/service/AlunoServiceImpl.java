@@ -3,8 +3,16 @@ package com.aba.service;
 import java.util.List;
 import java.util.Optional;
 
+import aj.org.objectweb.asm.Opcodes;
+import com.aba.excecoes.AlunoInexistenteException;
+import com.aba.interfaces.InstrutorService;
+import com.aba.interfaces.TurmaService;
+import com.aba.model.Turma;
+import com.aba.repository.TurmaRepository;
+import com.aba.util.erros.ErroUsuario;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,9 +34,15 @@ public class AlunoServiceImpl implements AlunoService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    InstrutorService instrutorService;
+
+    @Lazy
+    TurmaService turmaService;
+
     public ResponseEntity<?> cadastrarAluno(AlunoDTO alunoDTO) {
         Usuario aluno;
-        aluno = new Aluno(alunoDTO);
+        aluno = new Aluno(alunoDTO.getNome(), alunoDTO.getIdade(), turmaService.getTurmaByNome(alunoDTO.getTurma()), instrutorService.getInstrutorByEmail(alunoDTO.getInstrutorEmail()));
 
         alunoRepository.save((Aluno) aluno);
         usuarioRepository.save(aluno);
@@ -38,11 +52,15 @@ public class AlunoServiceImpl implements AlunoService {
 
     public ResponseEntity<?> editarAluno(Long id, AlunoDTO alunoDTO) {
         Aluno aluno;
-        aluno = this.getAlunoById(id);
-        aluno.editar(alunoDTO);
+        try {
+            aluno = this.getAlunoById(id);
+        } catch (AlunoInexistenteException e) {
+            return ErroUsuario.alunoInexistente(id);
+        }
+        aluno.editar(alunoDTO.getNome(), alunoDTO.getIdade(), turmaService.getTurmaByNome(alunoDTO.getTurma()), instrutorService.getInstrutorByEmail(alunoDTO.getInstrutorEmail()));
         this.alunoRepository.save(aluno);
         
-        return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());
+        return ResponseEntity.status(HttpStatus.OK).body(aluno.getTotalDto());
     }
 
     public ResponseEntity<?> removerAluno(Long id) {
@@ -60,16 +78,20 @@ public class AlunoServiceImpl implements AlunoService {
 
     public ResponseEntity<?> consultarAluno(Long id) {
         Aluno aluno;
-        aluno = this.getAlunoById(id);
+        try {
+            aluno = this.getAlunoById(id);
+        } catch (AlunoInexistenteException e) {
+            return ErroUsuario.alunoInexistente(id);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(aluno.getDto());
     }
 
-    public Aluno getAlunoById(Long id) {
+    public Aluno getAlunoById(Long id) throws AlunoInexistenteException {
         Optional<Aluno> alunoOptional = this.alunoRepository.findById(id);
 
         if (!alunoOptional.isPresent()) {
-            return null;
-        } //criar excecao futuramente
+            throw new AlunoInexistenteException("O aluno com id mencionado não existe");
+        }
 
         return alunoOptional.get();
     }

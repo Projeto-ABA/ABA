@@ -1,0 +1,46 @@
+
+<mat-card>
+  <div>
+    <mat-card-title>ABA</mat-card-title>
+    <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+    <mat-card-title id="where"><a (click)="home()">Home</a></mat-card-title>
+  </div>
+</mat-card>
+
+<mat-card class="home">
+  <br>
+  <div class="header">
+    <img src="/assets/ABA.png" alt="ABA" class="perfil">
+    <div class="title">
+      <h1>ABA</h1>
+    <h2>Sua assistente de planejamento</h2>
+    </div>
+  </div>
+
+  <h3>O que vamos fazer hoje?</h3>
+
+  <div class="options">
+    <mat-card id="tela">
+      <div class="p2" (click)="addAluno()">
+        <mat-icon id="p2">person</mat-icon>
+        <h4>Adicionar alunos</h4>
+      </div>
+    </mat-card>
+    <mat-card id="tela">
+      <div class="p2" (click)="alunos()">
+        <mat-icon id="p2">supervisor_account</mat-icon>
+        <h4>Acompanhar alunos</h4>
+      </div>
+
+    </mat-card>
+    <mat-card id="tela">
+      <div class="p2" (click)="home()">
+        <mat-icon id="p2">insert_drive_file</mat-icon>
+       <h4 id="relatorio">Gerar relatórios</h4>
+      </div>
+    </mat-card>
+  </div>
+
+
+</mat-card>
+

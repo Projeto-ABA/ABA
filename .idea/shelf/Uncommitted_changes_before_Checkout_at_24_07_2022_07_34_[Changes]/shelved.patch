@@ -1,0 +1,24 @@
+Index: aba/src/main/java/com/aba/repository/ProfessorRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/aba/src/main/java/com/aba/repository/ProfessorRepository.java b/aba/src/main/java/com/aba/repository/InstrutorRepository.java
+rename from aba/src/main/java/com/aba/repository/ProfessorRepository.java
+rename to aba/src/main/java/com/aba/repository/InstrutorRepository.java
+--- a/aba/src/main/java/com/aba/repository/ProfessorRepository.java	
++++ b/aba/src/main/java/com/aba/repository/InstrutorRepository.java	
+@@ -1,11 +1,11 @@
+ package com.aba.repository;
+ 
+-import com.aba.model.Professor;
++import com.aba.model.Instrutor;
+ 
+ import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.stereotype.Repository;
+ 
+ @Repository
+-public interface ProfessorRepository extends JpaRepository<Professor, Long>{
++public interface InstrutorRepository extends JpaRepository<Instrutor, Long>{
+     
+ }

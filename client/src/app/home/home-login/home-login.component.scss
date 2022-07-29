@@ -1,0 +1,65 @@
+.perfil{
+  width: 8.5rem;
+  height: 8.5rem;
+  margin-right: 2rem;
+}
+h1{
+  margin-top: 1%;
+  font-family: 'Sacramento', cursive;
+  font-size: 3rem;
+}
+h2{
+  margin-top: 1%;
+  font-family: 'Bad Script', cursive;
+  font-size: 1.6rem;
+}
+.title{
+  display: block;
+  text-align: center;
+}
+.header{
+  display: flex;
+  justify-content: center;
+}
+h3{
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  font-family: 'Bad Script', cursive;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #026f6e;
+  text-align: center;
+}
+.options{
+  display: flex;
+  justify-content: center;
+}
+#tela{
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: 10rem;
+  width: 10rem;
+  -webkit-box-shadow: -3px 0px 16px 0px rgba(99, 50, 50, 0.84);
+  -moz-box-shadow: -3px 0px 16px 0px rgba(99, 50, 50, 0.84);
+  box-shadow: -3px 0px 16px 0px rgba(99, 50, 50, 0.84);
+}
+h4{
+  margin-top: -1rem;
+  font-family: 'Martel', serif;
+  font-size: 1rem;
+  color: #e72313;
+  text-align: center;
+}
+#p2{
+  margin-top: -0.5rem;
+  color: #026f6e;
+  font-size: 8rem;
+  height: 8rem ;
+  width: 8rem;
+}
+.p2{
+  display: block;
+}
+#relatorio{
+  margin-top: 0.5rem;
+}
