@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeLogoutComponent } from './home/home-logout/home-logout.component';
 import { HomeLoginComponent } from './home/home-login/home-login.component';
 import {MatIconModule} from '@angular/material/icon';
+import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 
 
 
@@ -16,7 +17,8 @@ import {MatIconModule} from '@angular/material/icon';
   declarations: [
     AppComponent,
     HomeLogoutComponent,
-    HomeLoginComponent
+    HomeLoginComponent,
+    EditarAlunoComponent
    ],
   imports: [
     BrowserModule,
