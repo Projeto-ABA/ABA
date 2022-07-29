@@ -79,6 +79,11 @@ const routes: Routes = [
     path: 'editar-aluno',
     loadChildren: () => import('./editar-aluno/editar-aluno.module').then(m => m.EditarAlunoModule)
 
+  },
+  {
+    path: 'editar-turma',
+    loadChildren: () => import('./editar-turma/editar-turma.module').then(m => m.EditarTurmaModule)
+  
   }
 
 ];
