@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CadastraAtividadeRoutingModule } from './cadastra-atividade-routing.module';
 import { CadastraAtividadeComponent } from './cadastra-atividade/cadastra-atividade.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -11,7 +12,10 @@ import { CadastraAtividadeComponent } from './cadastra-atividade/cadastra-ativid
   ],
   imports: [
     CommonModule,
-    CadastraAtividadeRoutingModule
+    CadastraAtividadeRoutingModule,
+    MatFormFieldModule,
+    MatCardModule
+
   ]
 })
 export class CadastraAtividadeModule { }
