@@ -2,6 +2,7 @@ package com.aba.controller;
 
 import com.aba.dto.TurmaDTO;
 import com.aba.dto.TurmasDTO;
+import com.aba.excecoes.AlunoInexistenteException;
 import com.aba.service.TurmaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +61,7 @@ public class TurmaAPIController {
     }
 
     @DeleteMapping("/remover-aluno/{idTurma}/{idAluno}")
-    public ResponseEntity<?> removerAlunoDeTurma(@PathVariable Long idTurma, @PathVariable Long idAluno) {
+    public ResponseEntity<?> removerAlunoDeTurma(@PathVariable Long idTurma, @PathVariable Long idAluno) throws AlunoInexistenteException {
         return this.turmaService.removerAlunoDeTurma(idTurma, idAluno);
     }
 

@@ -4,6 +4,7 @@ import com.aba.dto.InstrutorDTO;
 import lombok.*;
 import javax.persistence.*;
 
+@SuppressWarnings("checkstyle:WhitespaceAround")
 @Data
 @Getter
 @Setter
@@ -18,13 +19,13 @@ public class Instrutor extends Usuario{
     private int idade;
     private String email;
 
-    public Instrutor (String nome, int idade, String email) {
+    public Instrutor(String nome, int idade, String email) {
         super(nome);
         this.idade = idade;
         this.email = email;
     }
 
-    public Instrutor (InstrutorDTO instrutorDTO) {
+    public Instrutor(InstrutorDTO instrutorDTO) {
         super(instrutorDTO.getNome());
         this.idade = instrutorDTO.getIdade();
         this.email = instrutorDTO.getEmail();

@@ -2,6 +2,7 @@ package com.aba.service;
 
 import com.aba.dto.TurmaDTO;
 import com.aba.dto.TurmasDTO;
+import com.aba.excecoes.AlunoInexistenteException;
 import com.aba.interfaces.TurmaService;
 import com.aba.model.Aluno;
 import com.aba.model.Instrutor;
@@ -70,9 +71,15 @@ public class TurmaServiceImpl implements TurmaService {
         Aluno aluno;
 
         turma = this.getTurmaById(idTurma);
-        aluno = this.alunoService.getAlunoById(idAluno);
+        try {
+            aluno = this.alunoService.getAlunoById(idAluno);
+            turma.adicionarAluno(aluno);
+        } catch (AlunoInexistenteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-        turma.adicionarAluno(aluno);
+        
         this.turmaRepository.save(turma);
 
         return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
@@ -105,7 +112,7 @@ public class TurmaServiceImpl implements TurmaService {
         return ResponseEntity.status(HttpStatus.OK).body(turma.listarInstrutores());
     }
 
-    public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno) {
+    public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno) throws AlunoInexistenteException {
         Turma turma;
         Aluno aluno;
 
