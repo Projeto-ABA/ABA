@@ -7,6 +7,7 @@ import com.aba.model.Instrutor;
 import com.aba.model.Usuario;
 import com.aba.repository.InstrutorRepository;
 import com.aba.repository.UsuarioRepository;
+import com.aba.util.Exceptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,7 @@ public class InstrutorServiceImpl implements InstrutorService {
     UsuarioRepository usuarioRepository;
 
     public ResponseEntity<?> cadastrarInstrutor(InstrutorDTO instrutorDTO) {
-        Usuario instrutor;
-        instrutor = new Instrutor(instrutorDTO);
+        Usuario instrutor = new Instrutor(instrutorDTO);
 
         instrutorRepository.save((Instrutor) instrutor);
         usuarioRepository.save(instrutor);
@@ -34,8 +34,12 @@ public class InstrutorServiceImpl implements InstrutorService {
     }
 
     public ResponseEntity<?> editarInstrutor(Long id, InstrutorDTO instrutorDTO) {
-        Instrutor instrutor;
-        instrutor = this.getInstrutorById(id);
+        Instrutor instrutor = this.getInstrutorById(id);
+
+        if(instrutor == null){
+            return Exceptions.erroInstrutorNaoEncontrado(id);
+        }
+
         instrutor.editar(instrutorDTO);
         this.instrutorRepository.save(instrutor);
 
@@ -43,6 +47,12 @@ public class InstrutorServiceImpl implements InstrutorService {
     }
 
     public ResponseEntity<?> removerInstrutor(Long id){
+        Instrutor instrutor = this.getInstrutorById(id);
+
+        if(instrutor == null){
+            return Exceptions.erroInstrutorNaoEncontrado(id);
+        }
+
         this.usuarioRepository.deleteById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body("Instrutor removido(a)!");
@@ -56,8 +66,12 @@ public class InstrutorServiceImpl implements InstrutorService {
     }
 
     public ResponseEntity<?> consultarInstrutor(Long id) {
-        Instrutor instrutor;
-        instrutor = this.getInstrutorById(id);
+        Instrutor instrutor = this.getInstrutorById(id);
+
+        if(instrutor == null){
+            return Exceptions.erroInstrutorNaoEncontrado(id);
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(instrutor.getDto());
     }
 
@@ -76,6 +90,8 @@ public class InstrutorServiceImpl implements InstrutorService {
 
         if(!instrutorOptional.isPresent()) {
             return null;
-        } return instrutorOptional.get();
+        }
+
+        return instrutorOptional.get();
     }
 }
