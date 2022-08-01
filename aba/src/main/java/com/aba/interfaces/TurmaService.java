@@ -19,5 +19,4 @@ public interface TurmaService {
     public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno) throws AlunoInexistenteException;
     public ResponseEntity<?> removerInstrutorDeTurma (Long idTurma, Long idInstrutor);
     public Turma getTurmaByNome(String nome);
-
 }

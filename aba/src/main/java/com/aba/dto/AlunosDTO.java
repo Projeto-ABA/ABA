@@ -15,13 +15,13 @@ import lombok.Setter;
 @Setter
 public class AlunosDTO {
 
-    private List<AlunoTotalInfoDTO> dadosAlunos;
+    private List<AlunoDTOCompleto> dadosAlunos;
 
     public AlunosDTO(List<Aluno> alunos) {
         this.dadosAlunos = new ArrayList<>();
 
         for(Aluno aluno : alunos) {
-            this.dadosAlunos.add(aluno.getTotalDto());
+            this.dadosAlunos.add(aluno.getDtoCompleto());
         }
     }
 }

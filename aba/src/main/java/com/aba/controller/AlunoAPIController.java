@@ -9,7 +9,6 @@ import com.aba.interfaces.AlunoService;
 
 import io.swagger.annotations.Api;
 
-
 @RestController
 @RequestMapping("/api/alunos")
 @Api

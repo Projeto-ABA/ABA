@@ -1,11 +1,9 @@
 package com.aba.dto;
 
 import com.aba.model.Instrutor;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.util.digester.ArrayStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +13,13 @@ import java.util.List;
 @Setter
 public class InstrutoresDTO {
 
-    private List<InstrutorDTO> dadosInstrutores;
+    private List<InstrutorDTOCompleto> dadosInstrutores;
 
     public InstrutoresDTO (List<Instrutor> instrutores) {
         this.dadosInstrutores = new ArrayList<>();
 
         for (Instrutor instrutor : instrutores) {
-            dadosInstrutores.add(instrutor.getDto());
+            dadosInstrutores.add(instrutor.getDtoCompleto());
         }
     }
 }

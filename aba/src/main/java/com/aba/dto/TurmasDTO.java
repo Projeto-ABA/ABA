@@ -14,13 +14,13 @@ import java.util.List;
 @Setter
 public class TurmasDTO {
 
-    private List<TurmaTotalInfoDTO> dadosTurma;
+    private List<TurmaDTOCompleto> dadosTurma;
 
     public TurmasDTO (List<Turma> turmas) {
         this.dadosTurma = new ArrayList<>();
 
         for (Turma turma : turmas) {
-            dadosTurma.add(turma.getDtoTotal());
+            dadosTurma.add(turma.getDtoCompleto());
         }
     }
 

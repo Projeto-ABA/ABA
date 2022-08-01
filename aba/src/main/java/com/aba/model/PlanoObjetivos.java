@@ -1,11 +1,14 @@
 package com.aba.model;
 
 import com.aba.dto.PlanoObjetivosDTO;
-import com.aba.enums.Avaliacao;
+import com.aba.dto.PlanoObjetivosDTOCompleto;
+import com.aba.model.Atividade;
+import com.aba.model.Instrutor;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Getter
@@ -19,35 +22,42 @@ public class PlanoObjetivos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Aluno aluno;
-
     @ManyToOne
-    @JoinColumn(name = "idInstrutor")
     private Instrutor instrutor;
 
     @OneToMany
-    private Map<String, Atividade> atividades = new HashMap<>();
+    private List<Atividade> atividades;
 
     private String descricaoAluno;
 
-    public void addAtividade(Avaliacao avaliacao, Atividade atividade) {
-        this.atividades.put(avaliacao.getDescricao(), atividade);
+    private String prazo; // uma alternativa aqui seria mudar para date
+
+    public PlanoObjetivos(Instrutor instrutor, String descricaoAluno, String prazo) {
+        this.instrutor = instrutor;
+        this.atividades = new ArrayList<>();
+        this.descricaoAluno = descricaoAluno;
+        this.prazo = prazo;
     }
+
+    public void editar(PlanoObjetivosDTO planoObjetivosDTO, Instrutor instrutor) {
+        this.instrutor = instrutor;
+        this.descricaoAluno = planoObjetivosDTO.getDescricaoAluno();
+        this.prazo = planoObjetivosDTO.getPrazo();
+    }
+
+    public void addAtividade(Atividade atividade) {
+        this.atividades.add(atividade);
+    }
+
+    public void removeAtividade(Atividade atividade) { this.atividades.remove(atividade); }
 
     public PlanoObjetivosDTO getDto(){
-        return new PlanoObjetivosDTO(this.aluno.getNome(), this.instrutor.getNome(), toString(), this.descricaoAluno);
+        return new PlanoObjetivosDTO(this.instrutor.getEmail(), this.descricaoAluno, this.prazo);
     }
 
-    public String toString(){
-        if (this.atividades.size() >= 1) {
-            List<String> atividades_formated = new ArrayList<>();
-            for (Map.Entry<String, Atividade> atividade: atividades.entrySet()){
-                String model = "{" + atividade.getKey() + "}" + atividade.getValue().getTitulo();
-                atividades_formated.add(model);
-            }
-            return String.join("\n", atividades_formated);
-        }
-        return "{Sem atividades ainda!}";
+    public PlanoObjetivosDTOCompleto getDtoCompleto(){
+        return new PlanoObjetivosDTOCompleto(this.id, this.instrutor.getEmail(), atividades.toString(), this.descricaoAluno, this.prazo);
     }
 }
+
+

@@ -9,10 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AtividadeDTO {
+public class PlanoObjetivosDTOCompleto {
 
+    private Long id;
     private String emailInstrutor;
-    private String descricao;
-    private String titulo;
-    private String dataRealizacao;
+    private String relacaoAtividades;
+    private String descricaoAluno;
+    private String prazo; // talvez mudar p date depois...
+
 }

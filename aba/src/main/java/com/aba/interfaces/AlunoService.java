@@ -1,5 +1,6 @@
 package com.aba.interfaces;
 
+import com.aba.excecoes.AlunoInexistenteException;
 import org.springframework.http.ResponseEntity;
 
 import com.aba.dto.AlunoDTO;
@@ -14,4 +15,7 @@ public interface AlunoService {
     public ResponseEntity<?> consultarAluno(Long id);
 
     public ResponseEntity<?> listarAlunos();
+
+    public ResponseEntity<?> adicionarPlanoObjetivos(Long id, Long idPlano) throws AlunoInexistenteException;
+    public ResponseEntity<?> removerPlanoObjetivos(Long id, Long idPlano) throws AlunoInexistenteException;
 }

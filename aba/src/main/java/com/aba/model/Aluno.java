@@ -1,23 +1,12 @@
 package com.aba.model;
 
+import com.aba.dto.AlunoDTO;
+import com.aba.dto.AlunoDTOCompleto;
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
-import com.aba.dto.AlunoDTO;
-
-import com.aba.dto.AlunoTotalInfoDTO;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @Getter
@@ -33,19 +22,15 @@ public class Aluno extends Usuario {
 
     private int idade;
 
-    @ManyToOne
-    private Turma turma;
-
     @ManyToMany
-    private List<Atividade> atividades;
-   // private List<PlanoObjetivos> planoObjetivos;
+    private List<PlanoObjetivos> planosDeObjetivo;
 
     @ManyToOne
     private Instrutor instrutor;
 
     private String contato;
 
-    private String genero;
+    private String genero; // isso pode ser um enum
 
     private String cpf;
 
@@ -55,16 +40,11 @@ public class Aluno extends Usuario {
 
     private String parentesco;
 
-    public Aluno(String nome, int idade, Turma turma, Instrutor instrutor) {
-   // public Aluno(String nome, int idade, Instrutor instrutor, String contato,
-                 //String genero, String cpf, String endereco, String responsavel, String parentesco) {
+    public Aluno(String nome, int idade, Instrutor instrutor, String contato, String genero, String cpf, String endereco, String responsavel, String parentesco) {
         super(nome);
-
         this.idade = idade;
-        this.turma = null;
         this.instrutor = instrutor;
-        this.atividades = new ArrayList<>();
-       // this.planoObjetivos = new ArrayList<>();
+        this.planosDeObjetivo = new ArrayList<>();
         this.contato = contato;
         this.genero = genero;
         this.cpf = cpf;
@@ -73,28 +53,33 @@ public class Aluno extends Usuario {
         this.parentesco = parentesco;
     }
 
-   // public void addPlanoObjetivo(PlanoObjetivos planoObjetivos) {
-     //   this.planoObjetivos.add(planoObjetivos);
-   // }
-
-    public void editar(String nome, int idade, Turma turma, Instrutor instrutor) {
-        this.setNome(nome);
-        this.setIdade(idade);
-        this.setInstrutor(instrutor);
-
-        this.nome = nome != null ? nome : this.nome;
+    public void editar(AlunoDTO alunoDTO, Instrutor instrutor) {
+        this.nome = alunoDTO.getNome();
+        this.idade = alunoDTO.getIdade();
+        this.instrutor = instrutor;
+        this.contato = alunoDTO.getContato();
+        this.genero = alunoDTO.getGenero();
+        this.cpf = alunoDTO.getCpf();
+        this.endereco = alunoDTO.getEndereco();
+        this.responsavel = alunoDTO.getResponsavel();
+        this.parentesco = alunoDTO.getParentesco();
     }
 
-    public void novaTurma(Turma turma){
-        this.setTurma(turma);
+    public void addPlanoObjetivo(PlanoObjetivos planoObjetivos) {
+        this.planosDeObjetivo.add(planoObjetivos);
+    }
+    public void removePlanoObjetivo(PlanoObjetivos planoObjetivos) {
+        this.planosDeObjetivo.remove(planoObjetivos);
     }
 
-    public AlunoTotalInfoDTO getTotalDto() {
-        return new AlunoTotalInfoDTO(this.id, this.nome, this.idade, this.turma.getNome(), this.instrutor.getEmail());
+    public AlunoDTO getDto(){
+        return new AlunoDTO(this.nome, this.idade, this.instrutor.getEmail(), this.contato, this.genero, this.cpf,
+                this.endereco, this.responsavel, this.parentesco);
     }
 
-    public AlunoDTO getDto() {
-        return new AlunoDTO(this.nome, this.idade, this.turma.getNome(), this.instrutor.getEmail());
+    public AlunoDTOCompleto getDtoCompleto(){
+        return new AlunoDTOCompleto(this.id, this.nome, this.idade, this.planosDeObjetivo.toString(),
+                this.instrutor.getEmail(), this.contato, this.genero, this.cpf, this.endereco, this.responsavel,
+                this.parentesco);
     }
-
 }

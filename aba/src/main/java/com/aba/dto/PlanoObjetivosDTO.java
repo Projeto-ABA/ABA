@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PlanoObjetivosDTO {
 
-    String nomeAluno;
-    String nomeInstrutor;
-    String atividades;
-    String descricaoAluno;
+    private String emailInstrutor;
+    private String descricaoAluno;
+    private String prazo;
 
 }

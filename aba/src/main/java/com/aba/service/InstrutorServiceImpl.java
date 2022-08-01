@@ -24,6 +24,7 @@ public class InstrutorServiceImpl implements InstrutorService {
     UsuarioRepository usuarioRepository;
 
     public ResponseEntity<?> cadastrarInstrutor(InstrutorDTO instrutorDTO) {
+        // se eu tentar cadastrar um instrutor com o msm email, não vai dar certo.
         Usuario instrutor;
         instrutor = new Instrutor(instrutorDTO);
 
@@ -34,15 +35,18 @@ public class InstrutorServiceImpl implements InstrutorService {
     }
 
     public ResponseEntity<?> editarInstrutor(Long id, InstrutorDTO instrutorDTO) {
+        //exeção se o id não existir
         Instrutor instrutor;
         instrutor = this.getInstrutorById(id);
         instrutor.editar(instrutorDTO);
         this.instrutorRepository.save(instrutor);
 
-        return ResponseEntity.status(HttpStatus.OK).body(instrutor.getDto());
+        return ResponseEntity.status(HttpStatus.OK).body(instrutor.getDtoCompleto());
     }
 
     public ResponseEntity<?> removerInstrutor(Long id){
+        // se eu tentar remover um instrutor com id não existente não deve dar certo.
+
         this.usuarioRepository.deleteById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body("Instrutor removido(a)!");
@@ -56,6 +60,8 @@ public class InstrutorServiceImpl implements InstrutorService {
     }
 
     public ResponseEntity<?> consultarInstrutor(Long id) {
+        // se eu tentar verificar um instrutor com id não existente não deve dar certo
+
         Instrutor instrutor;
         instrutor = this.getInstrutorById(id);
         return ResponseEntity.status(HttpStatus.OK).body(instrutor.getDto());

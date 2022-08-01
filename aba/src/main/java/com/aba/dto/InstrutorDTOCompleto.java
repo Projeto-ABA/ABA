@@ -9,9 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TurmaTotalInfoDTO {
+public class InstrutorDTOCompleto {
 
-    Long id;
-    String nome;
+    private  Long id;
+    private String nome;
+    private int idade;
+    private String email;
 
 }

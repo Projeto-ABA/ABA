@@ -9,10 +9,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AtividadeDTO {
+public class AtividadeDTOCompleto {
 
+    private Long id;
     private String emailInstrutor;
     private String descricao;
     private String titulo;
     private String dataRealizacao;
+    private float nota;
+    private String situacao;
+
 }
