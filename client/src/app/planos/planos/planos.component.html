@@ -2,7 +2,7 @@
     <div>
       <mat-card-title>ABA</mat-card-title>
       <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-      <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home</a></mat-card-title>
+      <mat-card-title id="where"><a href="#" (click)="navega('home')" class="home">Home</a></mat-card-title>
     </div>
 </mat-card>
 
@@ -22,22 +22,24 @@
 
             <div class="links">
 
-              <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
-              <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
-              <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
-              <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
-              <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
-              <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
-              <a (click)="turmas()" class="relatorios">Relatórios</a>
-              <a (click)="perfil()" class="perfil">Meu Perfil</a>
+                <div class="links">
+                    <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
+                    <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
+                    <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
+                    <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
+                    <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
+                    <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
+                    <a (click)="navega('turmas')" class="relatorios">Relatórios</a>
+                    <a (click)="navega('perfil')" class="perfil">Meu Perfil</a>
+                  </div>
 
             </div>
 
             <div class="sair">
               <h4>
-                <a (click)="home()" class="sairbutton">Sair</a>
+                <a (click)="navega('home')" class="sairbutton">Sair</a>
               </h4>
-            </div>
+            </div>  
 
         </mat-card>
     </div>
@@ -61,6 +63,8 @@
                     <textarea #Desc id="Desc" rows="10" cols="50" maxlength="500" ></textarea>
                 </div>
             </div>
+            <button mat-raised-button color="primary">Registrar</button>
+            <button mat-raised-button color="primary">Cancelar</button>
         </mat-card>
     </div>
 
