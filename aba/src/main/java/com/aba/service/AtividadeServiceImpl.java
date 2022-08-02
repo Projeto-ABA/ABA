@@ -1,12 +1,9 @@
 package com.aba.service;
 
 import com.aba.dto.AtividadeDTO;
-import com.aba.dto.AtividadeDTOCompleto;
 import com.aba.dto.AtividadeDTOEditar;
 import com.aba.dto.AtividadesDTO;
-import com.aba.excecoes.AlunoInexistenteException;
 import com.aba.interfaces.AtividadeService;
-import com.aba.model.Aluno;
 import com.aba.model.Atividade;
 import com.aba.repository.AtividadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
