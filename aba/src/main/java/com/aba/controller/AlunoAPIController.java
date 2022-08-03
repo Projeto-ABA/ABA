@@ -23,7 +23,7 @@ public class AlunoAPIController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editarAluno(@PathVariable Long id, @RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<?> editarAluno(@PathVariable Long id, @RequestBody AlunoDTO alunoDTO){
         return this.alunoService.editarAluno(id, alunoDTO);
     }
 

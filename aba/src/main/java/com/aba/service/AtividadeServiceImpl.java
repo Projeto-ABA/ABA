@@ -1,14 +1,13 @@
 package com.aba.service;
 
 import com.aba.dto.AtividadeDTO;
-import com.aba.dto.AtividadeDTOCompleto;
 import com.aba.dto.AtividadeDTOEditar;
 import com.aba.dto.AtividadesDTO;
-import com.aba.excecoes.AlunoInexistenteException;
 import com.aba.interfaces.AtividadeService;
-import com.aba.model.Aluno;
 import com.aba.model.Atividade;
+import com.aba.model.Instrutor;
 import com.aba.repository.AtividadeRepository;
+import com.aba.util.MessageError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +27,12 @@ public class AtividadeServiceImpl implements AtividadeService {
 
     @Override
     public ResponseEntity<?> cadastrarAtividade(AtividadeDTO atividadeDTO) {
-        Atividade atividade;
-        atividade = new Atividade(this.instrutorService.getInstrutorByEmail(atividadeDTO.getEmailInstrutor()),
+        Instrutor instrutor = this.instrutorService.getInstrutorByEmail(atividadeDTO.getEmailInstrutor());
+        if(instrutor == null){
+            return MessageError.erroInstrutorNaoEncontradoByEmail(atividadeDTO.getEmailInstrutor());
+        }
+
+        Atividade atividade = new Atividade(this.instrutorService.getInstrutorByEmail(atividadeDTO.getEmailInstrutor()),
                 atividadeDTO.getDescricao(), atividadeDTO.getTitulo(), atividadeDTO.getDataRealizacao());
 
         this.atividadeRepository.save(atividade);
@@ -37,8 +40,10 @@ public class AtividadeServiceImpl implements AtividadeService {
     }
 
     public ResponseEntity<?> editarAtividade(Long id, AtividadeDTOEditar atividadeDTOEditar) {
-        Atividade atividade;
-        atividade = this.atividadeRepository.getReferenceById(id);
+        Atividade atividade = this.getAtividadeById(id);
+        if(atividade == null){
+            return MessageError.erroAtividadeNaoEncontrada(id);
+        }
 
         atividade.editar(atividadeDTOEditar, this.instrutorService.getInstrutorByEmail(atividadeDTOEditar.getEmailInstrutor()));
         this.atividadeRepository.save(atividade);
@@ -47,6 +52,10 @@ public class AtividadeServiceImpl implements AtividadeService {
     }
 
     public ResponseEntity<?> removerAtividade(Long id) {
+        Atividade atividade = this.getAtividadeById(id);
+        if(atividade == null){
+            return MessageError.erroAtividadeNaoEncontrada(id);
+        }
         this.atividadeRepository.deleteById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body("Atividade removida!");
@@ -54,8 +63,10 @@ public class AtividadeServiceImpl implements AtividadeService {
 
 
     public ResponseEntity<?> consultarAtividade(Long id){
-        Atividade atividade;
-        atividade = this.getAtividadeById(id);
+        Atividade atividade = this.getAtividadeById(id);
+        if(atividade == null){
+            return MessageError.erroAtividadeNaoEncontrada(id);
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(atividade.getDtoCompleto());
     }
@@ -72,19 +83,7 @@ public class AtividadeServiceImpl implements AtividadeService {
 
         if (!atividadeOptional.isPresent()) {
             return null;
-        }
-
-        return atividadeOptional.get();
-    }
-
-    public Atividade getAtividadeByTitulo(String titulo) {
-        Optional<Atividade> atividadeOptional = this.atividadeRepository.findByTitulo(titulo);
-
-        if (!atividadeOptional.isPresent()) {
-            return null;
-        }
-
-        return atividadeOptional.get();
+        }return atividadeOptional.get();
     }
 
 }

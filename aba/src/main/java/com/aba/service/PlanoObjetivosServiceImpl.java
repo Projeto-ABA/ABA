@@ -4,8 +4,10 @@ import com.aba.dto.PlanoObjetivosDTO;
 import com.aba.dto.PlanosObjetivosDTO;
 import com.aba.interfaces.PlanoObjetivosService;
 import com.aba.model.Atividade;
+import com.aba.model.Instrutor;
 import com.aba.model.PlanoObjetivos;
 import com.aba.repository.PlanoObjetivosRepository;
+import com.aba.util.MessageError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +38,10 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
     }
 
     public ResponseEntity<?> editarPlanoObjetivos(Long id, PlanoObjetivosDTO planoObjetivosDTO) {
-        PlanoObjetivos planoObjetivos;
-        planoObjetivos = this.getPlanoObjetivosById(id);
+        PlanoObjetivos planoObjetivos = this.getPlanoObjetivosById(id);
+        if(planoObjetivos == null){
+            return MessageError.erroPlanoNaoEncontrado(id);
+        }
 
         planoObjetivos.editar(planoObjetivosDTO, instrutorService.getInstrutorByEmail(planoObjetivosDTO.getEmailInstrutor()));
         this.planoObjetivosRepository.save(planoObjetivos);
@@ -46,6 +50,10 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
     }
 
     public ResponseEntity<?> removerPlanoObjetivos(Long id) {
+        PlanoObjetivos planoObjetivos = this.getPlanoObjetivosById(id);
+        if(planoObjetivos == null){
+            return MessageError.erroPlanoNaoEncontrado(id);
+        }
         this.planoObjetivosRepository.deleteById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body("Plano de Objetivos removido!");
@@ -53,6 +61,9 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
 
     public ResponseEntity<?> consultarPlanoObjetivos(Long id) {
         PlanoObjetivos planoObjetivos = this.getPlanoObjetivosById(id);
+        if(planoObjetivos == null){
+            return MessageError.erroPlanoNaoEncontrado(id);
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(planoObjetivos.getDtoCompleto());
     }
@@ -65,10 +76,15 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
     }
 
     public ResponseEntity<?> adicionarAtividadeNoPlano(Long idPlano, Long idAtividade) {
-        Atividade atividade;
-        atividade = this.atividadeService.getAtividadeById(idAtividade);
-        PlanoObjetivos planoObjetivos;
-        planoObjetivos = this.getPlanoObjetivosById(idPlano);
+        Atividade atividade = this.atividadeService.getAtividadeById(idAtividade);
+        if(atividade == null){
+            return MessageError.erroAtividadeNaoEncontrada(idAtividade);
+        }
+
+        PlanoObjetivos planoObjetivos = this.getPlanoObjetivosById(idPlano);
+        if(planoObjetivos == null){
+            return MessageError.erroPlanoNaoEncontrado(idPlano);
+        }
 
         planoObjetivos.addAtividade(atividade);
         this.planoObjetivosRepository.save(planoObjetivos);
@@ -77,10 +93,15 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
     }
 
     public ResponseEntity<?> removerAtividadeDoPlano(Long idPlano, Long idAtividade) {
-        Atividade atividade;
-        atividade = this.atividadeService.getAtividadeById(idAtividade);
-        PlanoObjetivos planoObjetivos;
-        planoObjetivos = this.getPlanoObjetivosById(idPlano);
+        Atividade atividade = this.atividadeService.getAtividadeById(idAtividade);
+        if(atividade == null){
+            return MessageError.erroAtividadeNaoEncontrada(idAtividade);
+        }
+
+        PlanoObjetivos planoObjetivos = this.getPlanoObjetivosById(idPlano);
+        if(planoObjetivos == null){
+            return MessageError.erroPlanoNaoEncontrado(idPlano);
+        }
 
         planoObjetivos.removeAtividade(atividade);
 
@@ -92,8 +113,6 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
 
         if (!planoObjetivos.isPresent()) {
             return null;
-        }
-
-        return planoObjetivos.get();
+        }return planoObjetivos.get();
     }
 }

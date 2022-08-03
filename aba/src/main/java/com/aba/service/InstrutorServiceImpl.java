@@ -7,6 +7,7 @@ import com.aba.model.Instrutor;
 import com.aba.model.Usuario;
 import com.aba.repository.InstrutorRepository;
 import com.aba.repository.UsuarioRepository;
+import com.aba.util.MessageError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,21 +24,27 @@ public class InstrutorServiceImpl implements InstrutorService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public ResponseEntity<?> cadastrarInstrutor(InstrutorDTO instrutorDTO) {
-        // se eu tentar cadastrar um instrutor com o msm email, não vai dar certo.
-        Usuario instrutor;
-        instrutor = new Instrutor(instrutorDTO);
 
-        instrutorRepository.save((Instrutor) instrutor);
-        usuarioRepository.save(instrutor);
+    public ResponseEntity<?> cadastrarInstrutor(InstrutorDTO instrutorDTO) {
+        Instrutor instrutor = getInstrutorByEmail(instrutorDTO.getEmail());
+
+        if(instrutor != null){
+            return MessageError.erroEmailInstrutorJaCadastrado(instrutorDTO.getEmail());
+        }
+        
+        Usuario instrutorNew = new Instrutor(instrutorDTO);
+        instrutorRepository.save((Instrutor) instrutorNew);
+        usuarioRepository.save(instrutorNew);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(((Instrutor) instrutor).getDtoCompleto());
     }
 
     public ResponseEntity<?> editarInstrutor(Long id, InstrutorDTO instrutorDTO) {
-        //exeção se o id não existir
-        Instrutor instrutor;
-        instrutor = this.getInstrutorById(id);
+        Instrutor instrutor = this.getInstrutorById(id);
+        if(instrutor == null){
+            return MessageError.erroInstrutorNaoEncontradoById(id);
+        }
+        
         instrutor.editar(instrutorDTO);
         this.instrutorRepository.save(instrutor);
 
@@ -45,7 +52,10 @@ public class InstrutorServiceImpl implements InstrutorService {
     }
 
     public ResponseEntity<?> removerInstrutor(Long id){
-        // se eu tentar remover um instrutor com id não existente não deve dar certo.
+        Instrutor instrutor = this.getInstrutorById(id);
+        if(instrutor == null){
+            return MessageError.erroInstrutorNaoEncontradoById(id);
+        }
 
         this.usuarioRepository.deleteById(id);
 
@@ -60,10 +70,11 @@ public class InstrutorServiceImpl implements InstrutorService {
     }
 
     public ResponseEntity<?> consultarInstrutor(Long id) {
-        // se eu tentar verificar um instrutor com id não existente não deve dar certo
-
-        Instrutor instrutor;
-        instrutor = this.getInstrutorById(id);
+        Instrutor instrutor = this.getInstrutorById(id);
+        if(instrutor == null){
+            return MessageError.erroInstrutorNaoEncontradoById(id);
+        }
+        
         return ResponseEntity.status(HttpStatus.OK).body(instrutor.getDto());
     }
 
@@ -72,12 +83,10 @@ public class InstrutorServiceImpl implements InstrutorService {
 
         if (!instrutorOptional.isPresent()) {
             return null;
-        }
-
-        return instrutorOptional.get();
+        }return instrutorOptional.get();
     }
 
-    public Instrutor getInstrutorByEmail(String email) {
+    public Instrutor getInstrutorByEmail(String email){
         Optional<Instrutor> instrutorOptional = this.instrutorRepository.findByEmail(email);
 
         if(!instrutorOptional.isPresent()) {

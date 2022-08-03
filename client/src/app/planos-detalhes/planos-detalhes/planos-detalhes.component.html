@@ -1,1 +1,73 @@
-<p>planos-detalhes works</p>
+<mat-card>
+    <div>
+      <mat-card-title>ABA</mat-card-title>
+      <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+      <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home</a></mat-card-title>
+    </div>
+</mat-card>
+
+<div class="all">
+
+    <div class="side-menu">
+        <div class="img">
+            <img src="../../assets/ABA.png" alt="">
+        </div>
+
+        <mat-card class="sidecard">
+
+            <div class="titles">
+                <h3 class="titulo1">Olá Fulana</h3>
+                <h3 class="titulo2">O que deseja?</h3>
+            </div>
+
+            <div class="links">
+              <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+              <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+              <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+              <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+              <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+              <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
+              <a (click)="turmas()" class="relatorios">Relatórios</a>
+              <a (click)="perfil()" class="perfil">Meu Perfil</a>
+            </div>
+
+            <div class="sair">
+                <h4>
+                <a (click)="home()" class="sairbutton">Sair</a>
+                </h4>
+            </div>
+
+        </mat-card>
+    </div>
+
+    <div class="centercard">
+        <mat-card class="CardCenter">
+            <mat-card-title class="CardTitulo"><strong> Plano de desenvolvimento de voz </strong></mat-card-title>
+            <mat-card-content>
+                <div class="cardsTopo">
+                    <mat-card class="cardsInfo" id="Nome">CardNome</mat-card>
+                    <mat-card class="cardsInfo" id="AtvRealizadas">CardAtividades realizada</mat-card>
+                    <mat-card class="cardsInfo" id="Tempo">CardTempo Estimado</mat-card>
+                </div>
+                <mat-card-content> 
+                    <h3 class="DescTitulo">Descrição</h3>
+                    <Div class="Desc"><p>Muito texto</p></Div>
+                </mat-card-content>
+                <div class="Buttons">
+                    <button mat-raised-button color="primary" id="btnADD">Adicionar Atividade</button>
+                    <button mat-raised-button color="primary" id="btnEdit">Editar Plano de Objetivo</button>
+                    <button mat-raised-button color="primary" id="btnRela">Gerar Relatório</button>
+                </div>
+                <div class="atividades">
+                    <mat-card class="cardAtividade">
+                        <mat-card-title id="TituloAtividade">Atividade 1</mat-card-title>
+                        <mat-card-content id="DescAtividade">Desc</mat-card-content>
+                    </mat-card>
+                </div>
+
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+
+</div>
