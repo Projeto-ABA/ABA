@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class CadastroTurmasComponent implements OnInit {
 
-  displayedColumns: string[] = ['aluno'];
+  toppings = new FormControl('');
+  toppingList: string[] = ['calvo', 'careca', 'sem telha'];
 
   constructor(
     private router: Router

@@ -94,18 +94,17 @@ a:hover{
 }
 
 .p1{
-  position: relative;
+  position:static;
   display: flex;
 }
 
 .dados{
-
+  padding-top: 2rem;
   font-family: 'Bad Script', cursive;
   color: #026f6e;
+  font-size: 2.5rem;
 }
-label{
-  display: flex;
-}
+
 
 .nome{
   margin-top: 2rem;
@@ -156,7 +155,9 @@ h2{
 }
 
 .dias{
-
+  font-family: 'Martel Bold', serif;
+  font-size: 1.1rem;
+  color: #259b9b;
   padding: 1rem;
   position: relative;
   display: flexbox;
@@ -175,17 +176,36 @@ h2{
 }
 .card11{
   display: table;
-  width: 44rem;
+  width: 22rem;
   height: 15rem;
-  background-color: #b2d8f1;
+  background-color: #ffffff;
 }
 
 .card1{
   display: table;
-  text-align: start;
+  color: #e72313;
+  font-family: 'Martel', serif;
+
+}
+
+.card12{
+  display: table;
+  width: 22rem;
+  height: 15rem;
+  background-color: #ffffff;
+
+}
+
+.card2{
+  display: table;
   color: #e72313;
   font-family: 'Martel', serif;
 }
+
+.adicionar{
+  
+}
+
 
 .botoes{
   justify-content: center;

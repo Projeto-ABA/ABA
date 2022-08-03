@@ -51,12 +51,12 @@
 
     <div class="p1">
       <div class="nome">
-        <label for="dados">Nome</label>
+        <label for="name">Nome</label>
         <input type="text" name="name" id="nome">
       </div>
 
       <div class="turno">
-        <label for="dados">Turno</label>
+        <label for="shift">Turno</label>
         <select name="shift" id="turno"></select>
       </div>
     </div>
@@ -105,18 +105,32 @@
 
       <div class="card1">
 
-        <label for="">Adicione alunos</label>
-        <mat-card class="card11">
-          <br>
-          <table mat-table>
-            <ng-container matColumnDef="aluno">
+        <label for="cartao1">Adicione alunos</label>
+        <mat-card class="card11" name="cartao1">
 
-              <th mat-header-cell *matHeaderCellDef>Aluno</th>
-
-            </ng-container>
-          </table>
+          <mat-form-field appearance="fill">
+            <mat-label>Alunos</mat-label>
+            <mat-select formControl="toppings" multiple class="adicionar">
+              <mat-option *ngFor="let topping of toppingList" value="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </mat-card>
 
+      </div>
+
+      <div class="card2">
+
+        <label for="cartao2">Adicionados</label>
+        <mat-card class="card12" name="cartao2">
+
+          <mat-form-field appearance="fill">
+            <mat-label>Alunos</mat-label>
+            <mat-select formControl="toppings" multiple class="adicionados">
+              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </mat-card>
       </div>
 
     </div>
