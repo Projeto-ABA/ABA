@@ -25,13 +25,14 @@ export class AlunosComponent implements OnInit {
 
   alunos: Aluno[] = [];
 
-  columnsToDisplay = ['nome', 'Idade', 'CID'];
+  columnsToDisplay = ['Nome', 'Idade', 'CID'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Aluno;
 
   ngOnInit(): void {
     this.alunoService.getAlunos().subscribe(alunos => {
       alunos.forEach( aluno => {
+        console.log(aluno)
         this.alunos.push(aluno)
       })
     })

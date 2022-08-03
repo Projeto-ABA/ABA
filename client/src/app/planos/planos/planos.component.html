@@ -39,7 +39,7 @@
               <h4>
                 <a (click)="navega('home')" class="sairbutton">Sair</a>
               </h4>
-            </div>  
+            </div>
 
         </mat-card>
     </div>
@@ -49,24 +49,29 @@
             <mat-card-title class="TitleCardCent">Novo Plano de Desenvolvimento</mat-card-title>
             <div mat-card-content class="input">
                 <form [formGroup]="planosForm">
-                    <mat-form-field >
-                        <label class="titles-inputs">Email</label>
-                        <input matInput formControlName="emailInstrutor" name="emailInstrutor" id="Obj">
-                    </mat-form-field>
+                  <div class="linha1">
+                    <mat-form-field>
+                      <label class="titles-inputs">Nome</label>
+                      <input matInput formControlName="nome" name="nome" id="Obj">
+                  </mat-form-field>
+
                     <mat-form-field >
                         <label class="titles-inputs">Estimativa de conclusão</label>
                         <input type="date" matInput formControlName="prazo" name="prazo" id="Data">
                     </mat-form-field >
-                    <mat-form-field >
+                  </div>
+
+                    <mat-form-field style="padding: 0;">
                         <label class="titles-inputs">Descrição</label>
                         <textarea matInput formControlName="descrição" name="descrição" id="Desc"></textarea>
                     </mat-form-field>
-                    
                 </form>
             </div>
             <mat-card-actions>
-                <button mat-raised-button color="primary" (click)="createPlano()" >Registrar</button>
-                <button mat-raised-button color="primary">Cancelar</button>
+              <div class="botoes">
+                <button (click)="createPlano()" id="cadastro">Registrar</button>
+                <button id="cancelar">Cancelar</button>
+              </div>
             </mat-card-actions>
         </mat-card>
     </div>

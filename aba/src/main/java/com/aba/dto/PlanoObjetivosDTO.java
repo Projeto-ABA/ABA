@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlanoObjetivosDTO {
-
+    private String nome;
     private String emailInstrutor;
     private String descricaoAluno;
     private String prazo;

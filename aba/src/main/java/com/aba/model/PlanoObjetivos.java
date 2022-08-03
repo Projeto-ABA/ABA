@@ -30,9 +30,12 @@ public class PlanoObjetivos {
 
     private String descricaoAluno;
 
+    private String nome;
+
     private String prazo; // uma alternativa aqui seria mudar para date
 
-    public PlanoObjetivos(Instrutor instrutor, String descricaoAluno, String prazo) {
+    public PlanoObjetivos(Instrutor instrutor, String descricaoAluno, String prazo, String nome) {
+        this.nome = nome;
         this.instrutor = instrutor;
         this.atividades = new ArrayList<>();
         this.descricaoAluno = descricaoAluno;
@@ -52,7 +55,7 @@ public class PlanoObjetivos {
     public void removeAtividade(Atividade atividade) { this.atividades.remove(atividade); }
 
     public PlanoObjetivosDTO getDto(){
-        return new PlanoObjetivosDTO(this.instrutor.getEmail(), this.descricaoAluno, this.prazo);
+        return new PlanoObjetivosDTO(this.instrutor.getEmail(), this.descricaoAluno, this.prazo, this.nome);
     }
 
     public PlanoObjetivosDTOCompleto getDtoCompleto(){

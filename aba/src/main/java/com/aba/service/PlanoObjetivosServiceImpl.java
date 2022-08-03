@@ -35,7 +35,7 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
         }
 
         PlanoObjetivos planoObjetivos = new PlanoObjetivos(instrutor, planoObjetivosDTO.getDescricaoAluno(),
-                                        planoObjetivosDTO.getPrazo());
+                                        planoObjetivosDTO.getPrazo(), planoObjetivosDTO.getNome());
 
         this.planoObjetivosRepository.save(planoObjetivos);
         return ResponseEntity.status(HttpStatus.OK).body(planoObjetivos.getDtoCompleto());
