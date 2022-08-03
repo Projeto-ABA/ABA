@@ -10,7 +10,6 @@ import { HomeLoginComponent } from './home/home-login/home-login.component';
 import {MatIconModule} from '@angular/material/icon';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { EditarTurmaComponent } from './editar-turma/editar-turma.component';
-import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -30,7 +29,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     BrowserAnimationsModule,
     MatIconModule,
-    HttpClientModule
 
   ],
   providers: [

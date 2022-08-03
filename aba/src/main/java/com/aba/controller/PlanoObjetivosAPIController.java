@@ -17,12 +17,12 @@ public class PlanoObjetivosAPIController {
     PlanoObjetivosService planoObjetivosService;
 
     @PostMapping("")
-    public ResponseEntity<?> cadastrarPlanoObjetivos(@RequestBody PlanoObjetivosDTO planoObjetivosDTO){
+    public ResponseEntity<?> cadastrarPlanoObjetivos(@RequestBody PlanoObjetivosDTO planoObjetivosDTO) {
         return this.planoObjetivosService.cadastrarPlanoObjetivos(planoObjetivosDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editarPlanoObjetivos(@PathVariable Long id, @RequestBody PlanoObjetivosDTO planoObjetivosDTO){
+    public ResponseEntity<?> editarPlanoObjetivos(@PathVariable Long id, @RequestBody PlanoObjetivosDTO planoObjetivosDTO) {
         return this.planoObjetivosService.editarPlanoObjetivos(id, planoObjetivosDTO);
     }
 

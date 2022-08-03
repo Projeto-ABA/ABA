@@ -22,7 +22,7 @@ img{
     display: block;
     text-align: center;
   }
-
+  
 .titles{
     text-align: center;
     display: block;
@@ -33,14 +33,14 @@ img{
     margin-top: .7rem;
     color: white;
   }
-
+  
   .titulo2{
     font-family: 'Bad Script', cursive;
     font-size: 1.2rem;
     margin-top: 0.03rem;
     color: white;
   }
-
+  
   a{
     display: block;
     font-family: 'Martel', serif;
@@ -57,15 +57,15 @@ img{
     font-family: 'Martel', serif;
     color: #ffbc11;
     }
-
+  
   .sairbutton:hover{
     color: #f0cd76;
   }
-
+  
   .sair{
-
+  
     justify-content: center;
-
+  
   }
   .sidecard{
     background-color: #026f6e;
@@ -105,44 +105,32 @@ img{
 
   .TituloInputs{
     margin-top: 3.5rem;
-    display: flex;
+    display: table;
   }
 
   .input{
-    display: block;
+    justify-content: center;
   }
 
   .titles-inputs{
     text-align: left;
     font-family: 'Martial';
-    font-size: 1.1rem;
+    font-size: 20px;
     color: #E72313;
-    }
-    mat-form-field{
-      display: block;
-    }
-
-  .linha1{
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
   }
 
   #Obj{
-
-    width: 100rem;
-    height: 1rem;
+    width: 30rem;
+    height: 2rem;
     padding: 10px;
     border:1px solid #259B9B;
     border-radius: 15px;
     font-family: 'Martial';
-    position: relative;
-
   }
 
   #Data{
     width: 17rem;
-    height: 1rem;
+    height: 2rem;
     padding: 10px;
     border:1px solid #259B9B;
     border-radius: 15px;
@@ -150,52 +138,18 @@ img{
     font-size: 15px;
     font-family: 'Martial';
   }
-  ::ng-deep .mat-form-field-underline {
-    display: none;
-}
 
   #Desc{
-    width: 500rem;
-    height: 16rem;
+    width: 50rem;
+    height: 15rem;
     border:1px solid #259B9B;
     border-radius: 15px;
-    resize:none;
+    resize: none;
     padding: 10px;
     font-size: 15px;
     text-align: justify;
     font-family: 'Martial';
-
-  }
-  .botoes{
-    justify-content: center;
-    }
-
-  #cadastro{
-    background-color: #026f6e;
-    color: white;
-    border-color: #5adb94;
-    font-family: 'Martel', serif;
-    height: 2.6rem;
-    border-radius: .5rem;
-    width: 8rem;
-    margin-right: 3rem;
   }
 
-  #cadastro:hover{
-    transition-duration: .5s;
-    background-color: #004948;
-  }
 
-  #cancelar{
-    font-family: 'Martel', serif;
-    background-color: #e72313;
-    border-color: #ffbc11;
-    color: white;
-    border-radius: .5rem;
-    height: 2.6rem;
-    width: 8rem;
-  }
-  #cancelar:hover{
-    transition-duration: .5s;
-    background-color: #9b1509;
-  }
+  

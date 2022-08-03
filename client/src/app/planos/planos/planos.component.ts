@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
-import { PlanoObjetivos } from 'src/app/models/PlanoObjetivos';
-import { PlanoObjetivosService } from 'src/app/services/planoObjetivo.service';
 
 @Component({
   selector: 'app-planos',
@@ -10,31 +7,33 @@ import { PlanoObjetivosService } from 'src/app/services/planoObjetivo.service';
   styleUrls: ['./planos.component.scss']
 })
 export class PlanosComponent implements OnInit {
-  planosForm!: FormGroup;
 
-  constructor(
-    private router: Router,
-    private po: PlanoObjetivosService,
-    private fb: FormBuilder
-    ) {}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.planosForm = this.fb.group({
-      emailInstrutor: ['string'],
-      nome: [''],
-      prazo: ['',Validators.required],
-      descrição: ['',Validators.required]
-    })
   }
-
-  createPlano(){
-    console.log(this.planosForm.value)
-    this.po.save(this.planosForm.value).subscribe(result => {})
-
+  home() :void{
+    this.router.navigateByUrl('home');
   }
-
-  navega(caminho:string){
-    this.router.navigateByUrl(caminho);
+  turmas(): void{
+    this.router.navigateByUrl('turmas');
+  }
+  novoAluno(): void{
+    this.router.navigateByUrl('cadastro-alunos');
+  }
+  novaTurma(): void{
+    this.router.navigateByUrl('cadastro-turmas');
+  }
+  alunos(): void{
+    this.router.navigateByUrl('alunos');
+  }
+  planos(): void{
+    this.router.navigateByUrl('listar-planos');
+  }
+  novoPlano(): void{
+    this.router.navigateByUrl('planos');
+  }
+  perfil(): void{
+    this.router.navigateByUrl('perfil');
   }
 }
-
