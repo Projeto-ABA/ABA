@@ -39,7 +39,7 @@ public class AlunoServiceImpl implements AlunoService {
        Usuario aluno;
 
        // o aluno pode tentar encontrar o instrutor e não conseguir
-        aluno = new Aluno(alunoDTO.getNome(), alunoDTO.getIdade(),
+        aluno = new Aluno(alunoDTO.getNome(), alunoDTO.getDataNascimento(), alunoDTO.getCid(),
                 this.instrutorService.getInstrutorByEmail(alunoDTO.getEmailInstrutor()),
                 alunoDTO.getContato(), alunoDTO.getGenero(),
                 alunoDTO.getCpf(), alunoDTO.getEndereco(),

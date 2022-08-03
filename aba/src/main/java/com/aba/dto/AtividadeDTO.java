@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,5 +16,5 @@ public class AtividadeDTO {
     private String emailInstrutor;
     private String descricao;
     private String titulo;
-    private String dataRealizacao;
+    private LocalDate dataRealizacao;
 }

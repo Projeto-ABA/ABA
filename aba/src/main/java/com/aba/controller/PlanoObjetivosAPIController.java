@@ -1,10 +1,8 @@
 package com.aba.controller;
 
 
-import com.aba.dto.AtividadeDTO;
 import com.aba.dto.PlanoObjetivosDTO;
 import com.aba.interfaces.PlanoObjetivosService;
-import com.aba.model.PlanoObjetivos;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

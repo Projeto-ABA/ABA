@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,9 +14,10 @@ import lombok.Setter;
 public class PlanoObjetivosDTOCompleto {
 
     private Long id;
+    private String nomePlano;
     private String emailInstrutor;
     private String relacaoAtividades;
     private String descricaoAluno;
-    private String prazo; // talvez mudar p date depois...
+    private LocalDate estimativa;
 
 }

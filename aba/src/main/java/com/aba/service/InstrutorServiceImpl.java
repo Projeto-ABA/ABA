@@ -31,7 +31,7 @@ public class InstrutorServiceImpl implements InstrutorService {
         instrutorRepository.save((Instrutor) instrutor);
         usuarioRepository.save(instrutor);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(instrutorDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(((Instrutor) instrutor).getDtoCompleto());
     }
 
     public ResponseEntity<?> editarInstrutor(Long id, InstrutorDTO instrutorDTO) {

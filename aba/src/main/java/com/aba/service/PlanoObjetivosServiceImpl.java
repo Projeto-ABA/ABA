@@ -1,6 +1,5 @@
 package com.aba.service;
 
-import com.aba.dto.AtividadeDTO;
 import com.aba.dto.PlanoObjetivosDTO;
 import com.aba.dto.PlanosObjetivosDTO;
 import com.aba.interfaces.PlanoObjetivosService;
@@ -29,8 +28,8 @@ public class PlanoObjetivosServiceImpl implements PlanoObjetivosService{
 
     public ResponseEntity<?> cadastrarPlanoObjetivos(PlanoObjetivosDTO planoObjetivosDTO) {
         PlanoObjetivos planoObjetivos;
-        planoObjetivos = new PlanoObjetivos(this.instrutorService.getInstrutorByEmail(planoObjetivosDTO.getEmailInstrutor()),
-                planoObjetivosDTO.getDescricaoAluno(), planoObjetivosDTO.getPrazo());
+        planoObjetivos = new PlanoObjetivos(planoObjetivosDTO.getNomePlano(), this.instrutorService.getInstrutorByEmail(planoObjetivosDTO.getEmailInstrutor()),
+                planoObjetivosDTO.getDescricaoAluno(), planoObjetivosDTO.getEstimativa());
 
         this.planoObjetivosRepository.save(planoObjetivos);
         return ResponseEntity.status(HttpStatus.OK).body(planoObjetivos.getDtoCompleto());
