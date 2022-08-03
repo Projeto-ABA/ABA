@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Router } from '@angular/router';
-import { Aluno } from '../models/aluno';
-import { AlunoService } from '../services/aluno.service';
 
 @Component({
   selector: 'app-alunos',
@@ -19,26 +17,112 @@ import { AlunoService } from '../services/aluno.service';
 export class AlunosComponent implements OnInit {
 
   constructor(
-    private router: Router,
-    private alunoService : AlunoService
+    private router: Router
   ) { }
 
-  alunos: Aluno[] = [];
-
-  columnsToDisplay = ['Nome', 'Idade', 'CID'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement!: Aluno;
-
   ngOnInit(): void {
-    this.alunoService.getAlunos().subscribe(alunos => {
-      alunos.forEach( aluno => {
-        console.log(aluno)
-        this.alunos.push(aluno)
-      })
-    })
   }
 
-  navega(caminho:string){
-    this.router.navigateByUrl(caminho);
+  home() :void{
+    this.router.navigateByUrl('home');
+  }
+  turmas(): void{
+    this.router.navigateByUrl('turmas');
+  }
+  novoAluno(): void{
+    this.router.navigateByUrl('cadastro-alunos');
+  }
+  novaTurma(): void{
+    this.router.navigateByUrl('cadastro-turmas');
+  }
+  alunos(): void{
+    this.router.navigateByUrl('alunos');
+  }
+  planos(): void{
+    this.router.navigateByUrl('listar-planos');
+  }
+  novoPlano(): void{
+    this.router.navigateByUrl('planos');
+  }
+  perfil(): void{
+    this.router.navigateByUrl('perfil');
+  }
+  dataSource = ELEMENT_DATA;
+  columnsToDisplay = ['Nome', 'Idade', 'CID'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  expandedElement!: Aluno | null;
 }
+
+export interface Aluno {
+  Nome: string;
+  position: number;
+  Idade: number;
+  CID: string;
+
 }
+
+const ELEMENT_DATA: Aluno[] = [
+  {
+    position: 1,
+    Nome: 'Hydrogen',
+    Idade: 1.0079,
+    CID: 'H'
+  },
+  {
+    position: 2,
+    Nome: 'Helium',
+    Idade: 4.0026,
+    CID: 'He'
+  },
+  {
+    position: 3,
+    Nome: 'Lithium',
+    Idade: 6.941,
+    CID: 'Li'
+  },
+  {
+    position: 4,
+    Nome: 'Beryllium',
+    Idade: 9.0122,
+    CID: 'Be'
+  },
+  {
+    position: 5,
+    Nome: 'Boron',
+    Idade: 10.811,
+    CID: 'B'
+  },
+  {
+    position: 6,
+    Nome: 'Carbon',
+    Idade: 12.0107,
+    CID: 'C',
+
+  },
+  {
+    position: 7,
+    Nome: 'Nitrogen',
+    Idade: 14.0067,
+    CID: 'N'
+  },
+  {
+    position: 8,
+    Nome: 'Oxygen',
+    Idade: 15.9994,
+    CID: 'O'
+  },
+  {
+    position: 9,
+    Nome: 'Fluorine',
+    Idade: 18.9984,
+    CID: 'F'
+  },
+  {
+    position: 10,
+    Nome: 'Neon',
+    Idade: 20.1797,
+    CID: 'Ne'
+  },
+];
+
+

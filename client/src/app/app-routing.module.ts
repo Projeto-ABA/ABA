@@ -83,7 +83,7 @@ const routes: Routes = [
   {
     path: 'editar-turma',
     loadChildren: () => import('./editar-turma/editar-turma.module').then(m => m.EditarTurmaModule)
-
+  
   }
 
 ];

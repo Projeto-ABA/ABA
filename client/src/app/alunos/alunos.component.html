@@ -1,45 +1,43 @@
 <mat-card>
-<div>
-  <mat-card-title>ABA</mat-card-title>
-  <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-  <mat-card-title id="where"><a href="#" (click)="navega('home')" class="home">Home</a></mat-card-title>
-</div>
+  <div>
+    <mat-card-title>ABA</mat-card-title>
+    <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
+    <mat-card-title id="where"><a (click)="home()" class="home">Home</a></mat-card-title>
+  </div>
 </mat-card>
 
 <div class="all">
 
 <div class="side-menu">
-    <div class="img">
-        <img src="../../assets/ABA.png" alt="">
+  <div id="aba">
+    <img src="../../assets/ABA.png" alt="">
+  </div>
+
+  <mat-card class="sidecard">
+
+    <div class="titles">
+       <h3 class="titulo1">Olá Fulana</h3>
+      <h3 class="titulo2">
+        O que deseja?
+      </h3>
     </div>
 
-    <mat-card class="sidecard">
+    <div class="links">
+      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
+      <a (click)="turmas()" class="relatorios">Relatórios</a>
+      <a (click)="perfil()" class="perfil">Meu Perfil</a>
+    </div>
 
-        <div class="titles">
-            <h3 class="titulo1">Olá Fulana</h3>
-            <h3 class="titulo2">O que deseja?</h3>
-        </div>
-
-        <div class="links">
-
-            <div class="links">
-                <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
-                <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
-                <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
-                <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
-                <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
-                <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
-                <a (click)="navega('turmas')" class="relatorios">Relatórios</a>
-                <a (click)="navega('perfil')" class="perfil">Meu Perfil</a>
-              </div>
-
-        </div>
-
-        <div class="sair">
-          <h4>
-            <a (click)="navega('home')" class="sairbutton">Sair</a>
-          </h4>
-        </div>
+    <div class="sair">
+        <h4>
+        <a (click)="home()" class="sairbutton">Sair</a>
+        </h4>
+    </div>
 
   </mat-card>
 </div>
@@ -51,7 +49,7 @@
     <h1 class="dados">Meus Alunos</h1>
 
     <table mat-table
-       [dataSource]="alunos" multiTemplateDataRows
+       [dataSource]="dataSource" multiTemplateDataRows
        class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef id="column"> {{column}} </th>

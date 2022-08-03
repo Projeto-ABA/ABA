@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlanosDetalhesRoutingModule } from './planos-detalhes-routing.module';
 import { PlanosDetalhesComponent } from './planos-detalhes/planos-detalhes.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -12,9 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
-    PlanosDetalhesRoutingModule,
-    MatCardModule,
-    MatButtonModule
+    PlanosDetalhesRoutingModule
   ]
 })
 export class PlanosDetalhesModule { }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-turmas',
@@ -8,32 +7,9 @@ import { Router } from '@angular/router';
 })
 export class PlanosDetalhesComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-  home() :void{
-    this.router.navigateByUrl('home');
-  }
-  turmas(): void{
-    this.router.navigateByUrl('turmas');
-  }
-  novoAluno(): void{
-    this.router.navigateByUrl('cadastro-alunos');
-  }
-  novaTurma(): void{
-    this.router.navigateByUrl('cadastro-turmas');
-  }
-  alunos(): void{
-    this.router.navigateByUrl('alunos');
-  }
-  planos(): void{
-    this.router.navigateByUrl('listar-planos');
-  }
-  novoPlano(): void{
-    this.router.navigateByUrl('planos');
-  }
-  perfil(): void{
-    this.router.navigateByUrl('perfil');
-  }
+
 }

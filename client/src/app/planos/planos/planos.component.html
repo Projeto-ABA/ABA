@@ -2,7 +2,7 @@
     <div>
       <mat-card-title>ABA</mat-card-title>
       <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-      <mat-card-title id="where"><a href="#" (click)="navega('home')" class="home">Home</a></mat-card-title>
+      <mat-card-title id="where"><a href="#" onclick="home()" class="home">Home</a></mat-card-title>
     </div>
 </mat-card>
 
@@ -22,22 +22,20 @@
 
             <div class="links">
 
-                <div class="links">
-                    <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
-                    <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
-                    <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
-                    <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
-                    <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
-                    <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
-                    <a (click)="navega('turmas')" class="relatorios">Relatórios</a>
-                    <a (click)="navega('perfil')" class="perfil">Meu Perfil</a>
-                  </div>
+              <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
+              <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
+              <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
+              <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
+              <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
+              <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
+              <a (click)="turmas()" class="relatorios">Relatórios</a>
+              <a (click)="perfil()" class="perfil">Meu Perfil</a>
 
             </div>
 
             <div class="sair">
               <h4>
-                <a (click)="navega('home')" class="sairbutton">Sair</a>
+                <a (click)="home()" class="sairbutton">Sair</a>
               </h4>
             </div>
 
@@ -47,32 +45,22 @@
     <div class="centercard">
         <mat-card class="CardCenter">
             <mat-card-title class="TitleCardCent">Novo Plano de Desenvolvimento</mat-card-title>
-            <div mat-card-content class="input">
-                <form [formGroup]="planosForm">
-                  <div class="linha1">
-                    <mat-form-field>
-                      <label class="titles-inputs">Nome</label>
-                      <input matInput formControlName="nome" name="nome" id="Obj">
-                  </mat-form-field>
-
-                    <mat-form-field >
-                        <label class="titles-inputs">Estimativa de conclusão</label>
-                        <input type="date" matInput formControlName="prazo" name="prazo" id="Data">
-                    </mat-form-field >
-                  </div>
-
-                    <mat-form-field style="padding: 0;">
-                        <label class="titles-inputs">Descrição</label>
-                        <textarea matInput formControlName="descrição" name="descrição" id="Desc"></textarea>
-                    </mat-form-field>
-                </form>
+            <div class="input">
+                <div class="TituloInputs">
+                    <h3 class="titles-inputs">Objetivo</h3>
+                    <input type="text" id="Obj">
+                </div>
+                <div class="TituloInputs">
+                    <h3 class="titles-inputs">Estimativa de conclusão</h3>
+                    <input type="date" id="Data">
+                </div>
             </div>
-            <mat-card-actions>
-              <div class="botoes">
-                <button (click)="createPlano()" id="cadastro">Registrar</button>
-                <button id="cancelar">Cancelar</button>
-              </div>
-            </mat-card-actions>
+            <div class="input">
+                <div class="TituloInputs">
+                    <h3 class="titles-inputs">Descrição</h3>
+                    <textarea #Desc id="Desc" rows="10" cols="50" maxlength="500" ></textarea>
+                </div>
+            </div>
         </mat-card>
     </div>
 
