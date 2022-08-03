@@ -1,6 +1,6 @@
 export class PlanoObjetivos{
-    nome!: string;
+    descricaoAluno!: string;
     emailInstrutor!: string;
-    descrição!: string;
     prazo!: string;
+    nome!: string;
 }

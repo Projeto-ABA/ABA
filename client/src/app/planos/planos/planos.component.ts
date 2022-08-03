@@ -20,17 +20,17 @@ export class PlanosComponent implements OnInit {
 
   ngOnInit(): void {
     this.planosForm = this.fb.group({
-      emailInstrutor: ['string'],
-      nome: [''],
+      descricaoAluno: ['',Validators.required],
+      emailInstrutor: ['teste.exemplo'],
       prazo: ['',Validators.required],
-      descrição: ['',Validators.required]
+      nome:['']     
     })
   }
 
   createPlano(){
     console.log(this.planosForm.value)
     this.po.save(this.planosForm.value).subscribe(result => {})
-
+    this.planosForm.reset(); 
   }
 
   navega(caminho:string){
