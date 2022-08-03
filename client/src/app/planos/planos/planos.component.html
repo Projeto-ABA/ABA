@@ -47,24 +47,27 @@
     <div class="centercard">
         <mat-card class="CardCenter">
             <mat-card-title class="TitleCardCent">Novo Plano de Desenvolvimento</mat-card-title>
-            <div class="input">
-                <div class="TituloInputs">
-                    <h3 class="titles-inputs">Objetivo</h3>
-                    <input type="text" id="Obj">
-                </div>
-                <div class="TituloInputs">
-                    <h3 class="titles-inputs">Estimativa de conclusão</h3>
-                    <input type="date" id="Data">
-                </div>
+            <div mat-card-content class="input">
+                <form [formGroup]="planosForm">
+                    <mat-form-field >
+                        <label class="titles-inputs">Email</label>
+                        <input matInput formControlName="emailInstrutor" name="emailInstrutor" id="Obj">
+                    </mat-form-field>
+                    <mat-form-field >
+                        <label class="titles-inputs">Estimativa de conclusão</label>
+                        <input type="date" matInput formControlName="prazo" name="prazo" id="Data">
+                    </mat-form-field >
+                    <mat-form-field >
+                        <label class="titles-inputs">Descrição</label>
+                        <textarea matInput formControlName="descrição" name="descrição" id="Desc"></textarea>
+                    </mat-form-field>
+                    
+                </form>
             </div>
-            <div class="input">
-                <div class="TituloInputs">
-                    <h3 class="titles-inputs">Descrição</h3>
-                    <textarea #Desc id="Desc" rows="10" cols="50" maxlength="500" ></textarea>
-                </div>
-            </div>
-            <button mat-raised-button color="primary">Registrar</button>
-            <button mat-raised-button color="primary">Cancelar</button>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="createPlano()" >Registrar</button>
+                <button mat-raised-button color="primary">Cancelar</button>
+            </mat-card-actions>
         </mat-card>
     </div>
 

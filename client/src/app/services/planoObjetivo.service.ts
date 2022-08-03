@@ -9,7 +9,7 @@ import { CrudService } from "./crud.service";
 export class PlanoObjetivosService extends CrudService<PlanoObjetivos,number>{
 
     constructor(protected override _http: HttpClient){
-        super(_http, '/api/planoObjetivos');
+        super(_http, '/api/planoObjetivos/');
     }
 
 }
