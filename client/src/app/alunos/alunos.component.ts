@@ -25,7 +25,7 @@ export class AlunosComponent implements OnInit {
 
   alunos: Aluno[] = [];
 
-  columnsToDisplay = ['Nome', 'Idade', 'CID'];
+  columnsToDisplay = ['nome', 'idade', 'cid'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Aluno;
 

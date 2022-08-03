@@ -7,17 +7,15 @@ import { CrudService } from './crud.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AlunoService {
+export class AlunoService extends CrudService<Aluno, number>{
 
-  private readonly API = 'api/alunos'
 
-  constructor(
-    private httpClient : HttpClient
-  ){
-
+  constructor(protected override _http: HttpClient){
+    super(_http, 'api/alunos')
   }
-  getAlunos() : Observable<Aluno[]> {
-    return this.httpClient.get<Aluno[]>(this.API + '/listar');
+
+  public getAlunos() : Observable<Aluno[]> {
+    return this._http.get<Aluno[]>(this._base + '/listar');
   }
 
 }

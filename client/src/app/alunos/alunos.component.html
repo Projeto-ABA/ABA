@@ -54,8 +54,10 @@
        [dataSource]="alunos" multiTemplateDataRows
        class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <tr *ngFor="let aluno of alunos">
     <th mat-header-cell *matHeaderCellDef id="column"> {{column}} </th>
-    <td mat-cell *matCellDef="let element"  id="element"> {{element[column]}} </td>
+    <td mat-cell *matCellDef="let aluno"  id="element"> {{aluno[column]}} </td>
+  </tr>
   </ng-container>
   <ng-container matColumnDef="expand">
     <th mat-header-cell *matHeaderCellDef id="column">Ações</th>

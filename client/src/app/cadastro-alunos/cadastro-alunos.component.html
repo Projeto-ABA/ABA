@@ -25,20 +25,20 @@
 
     <div class="links">
 
-      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
-      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
-      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
-      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
-      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
-      <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
-      <a (click)="turmas()" class="relatorios">Relatórios</a>
-      <a (click)="perfil()" class="perfil">Meu Perfil</a>
+      <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
+      <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
+      <a (click)="navega('alunos')" class="relatorios">Relatórios</a>
+      <a (click)="navega('perfil')" class="perfil">Meu Perfil</a>
 
     </div>
 
     <div class="sair">
       <h4>
-        <a (click)="home()" class="sairbutton">Sair</a>
+        <a (click)="navega('home')" class="sairbutton">Sair</a>
       </h4>
     </div>
 
@@ -50,12 +50,12 @@
   <mat-card class="cartao2">
 
     <h1 class="dados">Novo Aluno</h1>
-
+    <form [formGroup]="alunoForm">
     <div class="parte1">
 
       <div class="nome">
         <label for="dados" id="nome">Nome</label>
-        <input type="text" id="name">
+        <input type="text" id="name" matInput formControlName="nome">
       </div>
 
     </div>
@@ -64,12 +64,12 @@
 
       <div class="nascimento">
         <label for="dados" id="data">Data de Nascimento</label>
-        <input type="date" id="date">
+        <input type="date" id="date" matInput formControlName="nascimento">
       </div>
 
       <div class="genero">
         <label for="dados" id="gen">Gênero</label>
-        <select name="gender" id="genero">
+        <select name="gender" id="genero" matInput formControlName="genero">
           <option value="masculino">Masculino</option>
           <option value="feminino">Feminino</option>
         </select>
@@ -77,12 +77,12 @@
       <div class="cid">
 
         <label for="dados">CID</label>
-        <input type="text" name="cid" id="cid">
+        <input type="text" name="cid" id="cid" matInput formControlName="cid">
       </div>
 
       <div class="cpf">
         <label for="dados" id="CPF">CPF</label>
-        <input type="text" id="cpf">
+        <input type="text" id="cpf" matInput formControlName="cpf">
       </div>
 
     </div>
@@ -92,51 +92,44 @@
       <div class="endereco">
 
         <label for="dados" id="address">Endereço</label>
-        <input type="text" name="address" id="endereco">
+        <input type="text" name="address" id="endereco" matInput formControlName="endereco">
       </div>
 
       <div class="contato" >
 
         <label for="dados" id="contato"> Contato</label>
-        <input type="text" id="contact">
+        <input type="text" id="contact" matInput formControlName="contato">
 
       </div>
 
-
     </div>
-
-
-
     <div class="parte4">
 
       <div class="responsavel">
         <label for="dados" id="responsible">Responsável</label>
-        <input type="text" id="responsavel">
+        <input type="text" id="responsavel" matInput formControlName="responsavel">
       </div>
 
       <div class="capeta">
         <div class="parentesco">
           <label for="dados" id="parentesco">Parentesco</label>
-          <select name="relative" id="relative"></select>
+          <select name="relative" id="relative" matInput formControlName="parentesco"></select>
         </div>
       </div>
 
     </div>
-
-    <div class="parte5">
-
-    </div>
+  </form>
 
     <div class="botoes">
 
       <div class="registrar">
 
-        <button id="registrar">Registrar</button>
+        <button id="registrar" (click)="createAluno()">Registrar</button>
 
       </div>
 
       <div class="cancelar">
-        <button id="cancelar">Cancelar</button>
+        <button id="cancelar" (click)="navega('alunos')">Cancelar</button>
       </div>
     </div>
 
