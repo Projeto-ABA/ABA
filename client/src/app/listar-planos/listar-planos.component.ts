@@ -9,7 +9,8 @@ import { PlanoObjetivosService } from '../services/planoObjetivo.service';
   styleUrls: ['./listar-planos.component.scss']
 })
 export class ListarPlanosComponent implements OnInit {
-  planos!: PlanoObjetivos[];
+  planos: PlanoObjetivos[] = [];
+  ColunasTitulos = ['nomePlano', 'prazo']
   constructor(
     private router: Router,
     private planosService: PlanoObjetivosService
@@ -25,7 +26,11 @@ export class ListarPlanosComponent implements OnInit {
   }
 
   getPlanos(){
-    this.planosService.getAll().subscribe(data => {
-      console.log(data)})
+    this.planosService.getAll().subscribe(planos => {
+      planos.forEach(plano => {
+        console.log(plano)
+        this.planos.push(plano)
+      })
+    })
   }
 }

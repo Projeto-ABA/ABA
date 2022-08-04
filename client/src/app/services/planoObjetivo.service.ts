@@ -13,7 +13,7 @@ export class PlanoObjetivosService extends CrudService<PlanoObjetivos,number>{
         super(_http, '/api/planoObjetivos');
     }
 
-    public getAll():Observable<PlanoObjetivos>{
-        return this._http.get<PlanoObjetivos>('/api/planoObjetivos/listar')
+    public getAll():Observable<PlanoObjetivos[]>{
+        return this._http.get<PlanoObjetivos[]>('/api/planoObjetivos/listar')
     }
 }
