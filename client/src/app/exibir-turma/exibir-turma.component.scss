@@ -1,0 +1,236 @@
+//Side menu início
+#foto{
+  border-radius: 50rem;
+}
+
+.all{
+display: flex;
+text-align: center;
+}
+img{
+  width: 13rem;
+  height: 13rem;
+}
+
+#aba{
+  display: inline-grid;
+  align-items: center;
+}
+
+.side-menu{
+  margin-top: 1rem;
+  margin-left: 0rem;
+  display: block;
+  text-align: center;
+}
+
+h1{
+  font-family: 'Bad Script', cursive;
+  color: #026f6e;
+  font-size: 2.3rem;
+}
+
+div{
+  text-align: center;
+}
+
+.links{
+  height: auto;
+  display: block;
+  text-align: center;
+}
+
+.titles{
+  text-align: center;
+  display: block;
+}
+.titulo1{
+  font-family: 'Sacramento', cursive;
+  font-size: 2rem;
+  margin-top: .7rem;
+  color: white;
+}
+
+.titulo2{
+  font-family: 'Bad Script', cursive;
+  font-size: 1.2rem;
+  margin-top: 0.03rem;
+  color: white;
+}
+
+a{
+  display: block;
+  font-family: 'Martel', serif;
+  color: #24c0eb;
+  text-decoration: none;
+  margin-top: 0.9rem;
+  font-size: .9rem;
+}
+a:hover{
+  color: #84def7;
+}
+.home{
+  color: #e72313;
+}
+.home:hover{
+  color:#af6f69;
+}
+.sairbutton{
+  font-family: 'Martel', serif;
+  color: #ffbc11;
+  }
+
+.sairbutton:hover{
+  color: #f0cd76;
+}
+
+.sair{
+
+  justify-content: center;
+
+}
+
+.sidecard{
+  background-color: #026f6e;
+  -webkit-box-shadow: -3px 0px 16px 0px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow:    -3px 0px 16px 0px rgba(0, 0, 0, 0.45);
+  box-shadow:         -3px 0px 16px 0px rgba(0, 0, 0, 0.45);
+  width: 12rem;
+}
+//Side menu fim
+
+.centercard{
+
+  display:flexbox;
+}
+
+.cartao2{
+  margin-left: -1rem;
+  padding-top: 3rem;
+  width: 60rem;
+  justify-content: space-between;
+
+}
+
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+
+#seta{
+  border: none;
+  background-color: white;
+  color: #e72313;}
+
+  #column{
+    text-align: center;
+    font-family: 'Martel', serif;
+    font-size: 1rem;
+    color: #000511;
+  }
+
+  #element{
+    text-align: center;
+    font-family: 'Martel', serif;
+    font-size: 1rem;
+    color: #e72313;
+  }
+
+  #contato{
+    background-color: #24c0eb;
+    color: white;
+    border-color: #24c0eb;
+    font-family: 'Martel', serif;
+    height: 2.6rem;
+    border-radius: .5rem;
+    width: 6rem;
+    margin-left: 8rem;
+  }
+
+  #contato:hover{
+    transition-duration: .5s;
+    background-color: #14bbbb;
+  }
+
+  #laudo{
+    font-family: 'Martel', serif;
+    background-color: #e72313;
+    border-color: #ffbc11;
+    color: white;
+    border-radius: .5rem;
+    height: 2.6rem;
+    width: 6rem;
+    margin-left: 5rem;
+  }
+  #laudo:hover{
+    transition-duration: .5s;
+    background-color: #ff4a3a;
+  }
+
+  #planos{
+    font-family: 'Martel', serif;
+    background-color: #770493;
+    border-color: #d121fd;
+    color: white;
+    border-radius: .5rem;
+    height: 2.6rem;
+    width: 6rem;
+    margin-left: 5rem;
+  }
+  #planos:hover{
+    transition-duration: .5s;
+    background-color: #d121fd;
+  }
+
+  .editar{
+    display: flex;
+    justify-content: center;
+    margin-left: -2.9rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
+  #editar{
+    font-family: 'Martel', serif;
+    background-color: #ff1964;
+    border-color: #ff4483;
+    color: white;
+    border-radius: .5rem;
+    height: 2.6rem;
+    width: 6rem;
+    margin-left: 5rem;
+  }
+  #editar:hover{
+    transition-duration: .5s;
+    background-color: #ff4483;
+  }
