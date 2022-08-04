@@ -50,18 +50,18 @@
             <div mat-card-content class="input">
                 <form [formGroup]="planosForm">
                   <div class="linha1">
-                    <mat-form-field>
-                      <label class="titles-inputs">Nome</label>
+                    <div id="nome">
+                      <label class="titles-inputs" id="labelNome">Nome</label>
                       <input matInput formControlName="nome" name="nome" id="Obj">
-                    </mat-form-field>
 
-                    <mat-form-field >
+                    </div>
+                    <div id="data">
                         <label class="titles-inputs">Estimativa de conclusão</label>
                         <input matInput type="date" formControlName="prazo" name="prazo" id="Data">
-                    </mat-form-field >
+                      </div>
                   </div>
 
-                    <mat-form-field style="padding: 0;">
+                    <mat-form-field>
                         <label class="titles-inputs">Descrição</label>
                         <textarea matInput formControlName="descricaoAluno" name="descricaoAluno" id="Desc" ></textarea>
                     </mat-form-field>

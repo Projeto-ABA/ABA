@@ -2,7 +2,7 @@
   <div>
     <mat-card-title>ABA</mat-card-title>
     <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-    <mat-card-title id="where"><a (click)="home()" class="home">Home</a></mat-card-title>
+    <mat-card-title id="where"><a (click)="navega('home')" class="home">Home</a></mat-card-title>
   </div>
 </mat-card>
 
@@ -23,19 +23,19 @@
     </div>
 
     <div class="links">
-      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
-      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
-      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
-      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
-      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
-      <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
-      <a (click)="turmas()" class="relatorios">Relatórios</a>
-      <a (click)="perfil()" class="perfil">Meu Perfil</a>
+      <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
+      <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
+      <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
+      <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
+      <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
+      <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
+      <a (click)="navega('turmas')" class="relatorios">Relatórios</a>
+      <a (click)="navega('perfil')" class="perfil">Meu Perfil</a>
     </div>
 
     <div class="sair">
         <h4>
-        <a (click)="home()" class="sairbutton">Sair</a>
+        <a (click)="navega('home')" class="sairbutton">Sair</a>
         </h4>
     </div>
 
@@ -49,25 +49,17 @@
     <h1 class="dados">Minhas Turmas</h1>
 
     <table mat-table
-       [dataSource]="dataSource" multiTemplateDataRows
+       [dataSource]="turmas" multiTemplateDataRows
        class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-    <th mat-header-cell *matHeaderCellDef id="column"> {{column}} </th>
+    <tr >
+    <th mat-header-cell *matHeaderCellDef id="column"> {{coluna(column)}} </th>
     <td mat-cell *matCellDef="let element"  id="element" (click)="goTo(element)"> {{element[column]}} </td>
+  </tr>
   </ng-container>
   <ng-container matColumnDef="expand">
     <th mat-header-cell *matHeaderCellDef id="column"></th>
     <td mat-cell *matCellDef="let element"></td>
-  </ng-container>
-
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-      <div class="example-element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-
-      </div>
-    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>

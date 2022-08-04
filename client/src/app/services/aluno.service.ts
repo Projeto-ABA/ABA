@@ -14,7 +14,7 @@ export class AlunoService extends CrudService<Aluno, number>{
     super(_http, 'api/alunos')
   }
 
-  public getAlunos() : Observable<Aluno[]> {
+  getAlunos() : Observable<Aluno[]> {
     return this._http.get<Aluno[]>(this._base + '/listar');
   }
 

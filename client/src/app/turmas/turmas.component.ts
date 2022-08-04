@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Router } from '@angular/router';
-
+import {Turma} from "../models/turma"
+import {TurmaService} from "../services/turma.service"
 
 @Component({
   selector: 'app-turmas',
@@ -18,113 +19,37 @@ import { Router } from '@angular/router';
 export class TurmasComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private turmaService : TurmaService
   ) { }
+ turmas: Turma[] = [];
+
+ coluna(c : string) :String {
+  let retorno = '';
+  if (c == 'nome'){
+    retorno = 'Nome'
+  }
+  if (c == 'turno'){
+    retorno = 'Turno'
+  }
+  if(c == 'diasDaSemana'){
+    retorno = 'Dias'
+  }
+  return retorno;
+ }
 
   ngOnInit(): void {
   }
 
-  home() :void{
-    this.router.navigateByUrl('home');
-  }
-  turmas(): void{
-    this.router.navigateByUrl('turmas');
-  }
-  novoAluno(): void{
-    this.router.navigateByUrl('cadastro-alunos');
-  }
-  novaTurma(): void{
-    this.router.navigateByUrl('cadastro-turmas');
-  }
-  alunos(): void{
-    this.router.navigateByUrl('alunos');
-  }
-  planos(): void{
-    this.router.navigateByUrl('listar-planos');
-  }
-  novoPlano(): void{
-    this.router.navigateByUrl('planos');
-  }
-  perfil(): void{
-    this.router.navigateByUrl('perfil');
-  }
+  navega(caminho:string){
+    this.router.navigateByUrl(caminho);
+}
+
   goTo(item: any): void{
     console.log(item)
   }
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['Nome', 'Turno', 'Dias'];
+
+  columnsToDisplay = ['nome', 'turno', 'diasDaSemana'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement!: Aluno | null;
+  expandedElement!: Turma;
 }
-
-export interface Aluno {
-  Nome: string;
-  position: number;
-  Turno: string;
-  Dias: string;
-
-}
-
-const ELEMENT_DATA: Aluno[] = [
-  {
-    position: 1,
-    Nome: 'Hydrogen',
-    Turno: 'Manhã',
-    Dias: 'Seg-Sex'
-  },
-  {
-    position: 2,
-    Nome: 'Helium',
-    Turno: 'Tarde',
-    Dias: 'Ter-Qui'
-  },
-  {
-    position: 3,
-    Nome: 'Lithium',
-    Turno: 'Manhã',
-    Dias: 'Qua-Sex'
-  },
-  {
-    position: 4,
-    Nome: 'Beryllium',
-    Turno:'Tarde',
-    Dias: 'Segunda'
-  },
-  {
-    position: 5,
-    Nome: 'Boron',
-    Turno:'Manhã',
-    Dias: 'Quarta'
-  },
-  {
-    position: 6,
-    Nome: 'Carbon',
-    Turno: 'Tarde',
-    Dias: 'Seg-Ter-Qua',
-
-  },
-  {
-    position: 7,
-    Nome: 'Nitrogen',
-    Turno: 'Manhã',
-    Dias: 'Todos os dias'
-  },
-  {
-    position: 8,
-    Nome: 'Oxygen',
-    Turno: 'Tarde',
-    Dias: 'Terça'
-  },
-  {
-    position: 9,
-    Nome: 'Fluorine',
-    Turno: 'Manhã',
-    Dias: 'Quinta'
-  },
-  {
-    position: 10,
-    Nome: 'Neon',
-    Turno: 'Tarde',
-    Dias: 'Sexta'
-  },
-];

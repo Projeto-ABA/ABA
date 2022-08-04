@@ -25,6 +25,20 @@ export class AlunosComponent implements OnInit {
 
   alunos: Aluno[] = [];
 
+ coluna(c : string) :String {
+  let retorno = '';
+  if (c == 'nome'){
+    retorno = 'Nome'
+  }
+  if (c == 'idade'){
+    retorno = 'Idade'
+  }
+  if(c == 'cid'){
+    retorno = 'CID'
+  }
+  return retorno;
+ }
+
   columnsToDisplay = ['nome', 'idade', 'cid'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Aluno;

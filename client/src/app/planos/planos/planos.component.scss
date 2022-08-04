@@ -117,6 +117,7 @@ img{
     font-family: 'Martial';
     font-size: 1.1rem;
     color: #E72313;
+    margin-bottom: 0.5rem;
     }
     mat-form-field{
       display: block;
@@ -126,22 +127,34 @@ img{
     display: flexbox;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
   }
 
   #Obj{
 
-    width: 100rem;
+    width: 64rem;
     height: 1rem;
     padding: 10px;
     border:1px solid #259B9B;
     border-radius: 15px;
     font-family: 'Martial';
     position: relative;
+    margin-right: 3rem;
+    margin-left: 1rem;
 
   }
+  #nome{
+    display: grid;
+}
+  #data{
+    display: grid;
+  }
 
+#labelNome{
+  margin-left: -63.5rem;
+}
   #Data{
-    width: 17rem;
+    width: 12rem;
     height: 1rem;
     padding: 10px;
     border:1px solid #259B9B;
@@ -155,6 +168,7 @@ img{
 }
 
   #Desc{
+    margin-top: 1rem;
     width: 500rem;
     height: 16rem;
     border:1px solid #259B9B;
