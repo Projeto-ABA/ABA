@@ -1,7 +1,9 @@
 package com.aba.controller;
 
 import com.aba.dto.AtividadeDTO;
+import com.aba.dto.AtividadeDTOCompleto;
 import com.aba.dto.AtividadeDTOEditar;
+import com.aba.excecoes.AlunoInexistenteException;
 import com.aba.interfaces.AtividadeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,12 @@ public class AtividadeAPIController {
     AtividadeService atividadeService;
 
     @PostMapping("")
-    public ResponseEntity<?> cadastrarAtividade(@RequestBody AtividadeDTO atividadeDTO){
+    public ResponseEntity<?> cadastrarAtividade(@RequestBody AtividadeDTO atividadeDTO) {
         return this.atividadeService.cadastrarAtividade(atividadeDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editarAtividade(@PathVariable Long id, @RequestBody AtividadeDTOEditar atividadeDTOEditar){
+    public ResponseEntity<?> editarAtividade(@PathVariable Long id, @RequestBody AtividadeDTOEditar atividadeDTOEditar) {
         return this.atividadeService.editarAtividade(id, atividadeDTOEditar);
     }
 

@@ -5,8 +5,10 @@ import com.aba.dto.PlanoObjetivosDTOCompleto;
 import com.aba.model.Atividade;
 import com.aba.model.Instrutor;
 import lombok.*;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class PlanoObjetivos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nomePlano;
+
     @ManyToOne
     private Instrutor instrutor;
 
@@ -30,22 +34,21 @@ public class PlanoObjetivos {
 
     private String descricaoAluno;
 
-    private String nome;
+    private LocalDate estimativa;
 
-    private String prazo; // uma alternativa aqui seria mudar para date
-
-    public PlanoObjetivos(Instrutor instrutor, String descricaoAluno, String prazo, String nome) {
-        this.nome = nome;
+    public PlanoObjetivos(String nomePlano, Instrutor instrutor, String descricaoAluno, LocalDate estimativa) {
+        this.nomePlano = nomePlano;
         this.instrutor = instrutor;
         this.atividades = new ArrayList<>();
         this.descricaoAluno = descricaoAluno;
-        this.prazo = prazo;
+        this.estimativa = estimativa;
     }
 
     public void editar(PlanoObjetivosDTO planoObjetivosDTO, Instrutor instrutor) {
+        this.nomePlano = planoObjetivosDTO.getNomePlano();
         this.instrutor = instrutor;
         this.descricaoAluno = planoObjetivosDTO.getDescricaoAluno();
-        this.prazo = planoObjetivosDTO.getPrazo();
+        this.estimativa = planoObjetivosDTO.getEstimativa();
     }
 
     public void addAtividade(Atividade atividade) {
@@ -55,11 +58,11 @@ public class PlanoObjetivos {
     public void removeAtividade(Atividade atividade) { this.atividades.remove(atividade); }
 
     public PlanoObjetivosDTO getDto(){
-        return new PlanoObjetivosDTO(this.instrutor.getEmail(), this.descricaoAluno, this.prazo, this.nome);
+        return new PlanoObjetivosDTO(this.nomePlano, this.instrutor.getEmail(), this.descricaoAluno, this.estimativa);
     }
 
     public PlanoObjetivosDTOCompleto getDtoCompleto(){
-        return new PlanoObjetivosDTOCompleto(this.id, this.instrutor.getEmail(), atividades.toString(), this.descricaoAluno, this.prazo);
+        return new PlanoObjetivosDTOCompleto(this.id, this.nomePlano, this.instrutor.getEmail(), atividades.toString(), this.descricaoAluno, this.estimativa);
     }
 }
 
