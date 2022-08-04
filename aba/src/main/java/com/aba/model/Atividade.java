@@ -6,7 +6,6 @@ import com.aba.dto.AtividadeDTOEditar;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @Getter
@@ -27,13 +26,13 @@ public class Atividade {
 
     private String titulo;
 
-    private LocalDate dataRealizacao;
+    private String dataRealizacao;
 
     private float nota = -1; // caso a nota ainda não tenha sido corrigida, ela será "-1"
 
     private String situacao = "NÃO AVALIADA";
 
-    public Atividade(Instrutor instrutor, String descricao, String titulo, LocalDate dataRealizacao) {
+    public Atividade(Instrutor instrutor, String descricao, String titulo, String dataRealizacao) {
         this.instrutor = instrutor;
         this.descricao = descricao;
         this.titulo = titulo;
