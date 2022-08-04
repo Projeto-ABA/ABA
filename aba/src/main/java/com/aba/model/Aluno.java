@@ -5,7 +5,11 @@ import com.aba.dto.AlunoDTOCompleto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -20,7 +24,10 @@ public class Aluno extends Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDate dataNascimento;
     private int idade;
+
+    private String cid;
 
     @ManyToMany
     private List<PlanoObjetivos> planosDeObjetivo;
@@ -40,9 +47,11 @@ public class Aluno extends Usuario {
 
     private String parentesco;
 
-    public Aluno(String nome, int idade, Instrutor instrutor, String contato, String genero, String cpf, String endereco, String responsavel, String parentesco) {
+    public Aluno(String nome, LocalDate dataNascimento, String cid, Instrutor instrutor, String contato, String genero, String cpf, String endereco, String responsavel, String parentesco) {
         super(nome);
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
+        this.idade = this.calcularIdade(dataNascimento);
+        this.cid = cid;
         this.instrutor = instrutor;
         this.planosDeObjetivo = new ArrayList<>();
         this.contato = contato;
@@ -55,7 +64,8 @@ public class Aluno extends Usuario {
 
     public void editar(AlunoDTO alunoDTO, Instrutor instrutor) {
         this.nome = alunoDTO.getNome();
-        this.idade = alunoDTO.getIdade();
+        this.dataNascimento = alunoDTO.getDataNascimento();
+        this.idade = this.calcularIdade(alunoDTO.getDataNascimento());
         this.instrutor = instrutor;
         this.contato = alunoDTO.getContato();
         this.genero = alunoDTO.getGenero();
@@ -73,7 +83,7 @@ public class Aluno extends Usuario {
     }
 
     public AlunoDTO getDto(){
-        return new AlunoDTO(this.nome, this.idade, this.instrutor.getEmail(), this.contato, this.genero, this.cpf,
+        return new AlunoDTO(this.nome, this.dataNascimento, this.cid, this.instrutor.getEmail(), this.contato, this.genero, this.cpf,
                 this.endereco, this.responsavel, this.parentesco);
     }
 
@@ -81,5 +91,12 @@ public class Aluno extends Usuario {
         return new AlunoDTOCompleto(this.id, this.nome, this.idade, this.planosDeObjetivo.toString(),
                 this.instrutor.getEmail(), this.contato, this.genero, this.cpf, this.endereco, this.responsavel,
                 this.parentesco);
+    }
+
+    private int calcularIdade(LocalDate dataNascimento) {
+        final LocalDate dataAtual = LocalDate.now();
+        final Period periodo = Period.between(dataNascimento, dataAtual);
+
+        return periodo.getYears();
     }
 }

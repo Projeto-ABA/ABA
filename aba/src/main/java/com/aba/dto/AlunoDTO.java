@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,7 +15,8 @@ import lombok.Setter;
 public class AlunoDTO {
 
     private String nome;
-    private int idade;
+    private LocalDate dataNascimento;
+    private String cid;
     private String emailInstrutor;
     private String contato;
     private String genero;
