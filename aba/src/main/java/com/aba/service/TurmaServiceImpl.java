@@ -106,7 +106,7 @@ public class TurmaServiceImpl implements TurmaService {
         return ResponseEntity.status(HttpStatus.OK).body("Aluno(a) adicionado(a) com sucesso!");
     }
 
-    /**
+
     public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno){
         Turma turma = this.getTurmaById(idTurma);
 
@@ -123,9 +123,8 @@ public class TurmaServiceImpl implements TurmaService {
         turma.removerAluno(aluno);
         this.turmaRepository.save(turma);
 
-        return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
+        return ResponseEntity.status(HttpStatus.OK).body("Aluno(a) removido(a) com sucesso!");
     }
-
 
      public ResponseEntity<?> listarAlunosDeTurma(Long idTurma){
          Turma turma = this.getTurmaById(idTurma);
@@ -136,7 +135,6 @@ public class TurmaServiceImpl implements TurmaService {
 
          return ResponseEntity.status(HttpStatus.OK).body(turma.listarAlunos());
      }
-     **/
 
     public Turma getTurmaById(Long id){
         Optional<Turma> turmaOptional = this.turmaRepository.findById(id);

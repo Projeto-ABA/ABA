@@ -13,6 +13,6 @@ public interface TurmaService {
     public ResponseEntity<?> consultarTurma(Long id);
     public ResponseEntity<?> listarTurmas();
     public ResponseEntity<?> adicionarAlunoEmTurma(Long idTurma, Long idAluno);
-    //public ResponseEntity<?> listarAlunosDeTurma(Long idTurma);
-    //public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno);
+    public ResponseEntity<?> listarAlunosDeTurma(Long idTurma);
+    public ResponseEntity<?> removerAlunoDeTurma(Long idTurma, Long idAluno);
 }

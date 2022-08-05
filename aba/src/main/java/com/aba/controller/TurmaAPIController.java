@@ -43,7 +43,7 @@ public class TurmaAPIController {
     public ResponseEntity<?> adicionarAlunoEmTurma(@PathVariable Long idTurma, @PathVariable Long idAluno) {
         return this.turmaService.adicionarAlunoEmTurma(idTurma, idAluno);
     }
-/**
+
     @GetMapping("/listar-alunos/{id}")
     public ResponseEntity<?> listarAlunosDeTurma(@PathVariable Long id){
         return this.turmaService.listarAlunosDeTurma(id);
@@ -54,5 +54,4 @@ public class TurmaAPIController {
         return this.turmaService.removerAlunoDeTurma(idTurma, idAluno);
     }
 
- **/
 }

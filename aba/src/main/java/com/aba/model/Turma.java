@@ -1,8 +1,10 @@
 package com.aba.model;
+import com.aba.dto.AlunoDTOCompleto;
 import com.aba.dto.TurmaDTO;
 import com.aba.dto.TurmaDTOCompleto;
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -46,18 +48,24 @@ public class Turma {
         this.alunos.add(aluno);
     }
 
+    public Object listarAlunos() {
+        List<AlunoDTOCompleto> dadosAlunos = new ArrayList<>();;
+
+        for(Aluno aluno : alunos) {
+            dadosAlunos.add(aluno.getDtoCompleto());
+        }
+        return dadosAlunos;
+    }
+
+    public void removerAluno(Aluno aluno) {
+        this.alunos.remove(aluno);
+    }
+
     public TurmaDTO getDto(){
         return new TurmaDTO(this.nomeTurma, this.turno, this.diasDaSemana, this.instrutor.getEmail());
     }
 
     public TurmaDTOCompleto getDtoCompleto(){
-       String aux = "";
-
-        if (this.instrutor == null) {
-            return new TurmaDTOCompleto(this.id, this.nomeTurma, "", alunos.toString(),
-                    this.turno, this.diasDaSemana);
-        }
-
         return new TurmaDTOCompleto(this.id, this.nomeTurma, this.instrutor.getEmail(), alunos.toString(),
                 this.turno, this.diasDaSemana);
     }
