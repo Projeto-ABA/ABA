@@ -1,3 +1,4 @@
+import { getLocaleDateFormat } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlanoObjetivos } from '../models/PlanoObjetivos';
@@ -10,7 +11,8 @@ import { PlanoObjetivosService } from '../services/planoObjetivo.service';
 })
 export class ListarPlanosComponent implements OnInit {
   planos: PlanoObjetivos[] = [];
-  ColunasTitulos = ['nomePlano', 'prazo']
+  teste!: Date;
+  ColunasTitulos = ['nomePlano','estimativa']
   constructor(
     private router: Router,
     private planosService: PlanoObjetivosService
@@ -24,6 +26,19 @@ export class ListarPlanosComponent implements OnInit {
   navega(caminho:string){
     this.router.navigateByUrl(caminho);
   }
+
+  coluna(c : string) :String {
+    let retorno = '';
+    if (c == 'nomePlano'){
+      retorno = 'Nome'
+    }
+    if(c == 'estimativa'){
+      retorno = 'Status'
+    }
+    return retorno;
+   }
+
+   
 
   getPlanos(){
     this.planosService.getAll().subscribe(planos => {

@@ -8,82 +8,83 @@
     </div>
     <mat-card-title>ABA</mat-card-title>
 
+    <form [formGroup]="professorForm">
+      <div class="parte1">
 
-    <div class="parte1">
+        <div class="nome">
+          <h3>Nome</h3>
+          <input matInput formControlName="nome" name="nome" type="text" id="name">
+        </div>
 
-      <div class="nome">
-        <h3>Nome</h3>
-        <input type="text" id="name">
+        <div class="cpf">
+          <h3>CPF</h3>
+          <input matInput formControlName="cpf" name="cpf" type="text" name="cpf" id="cpf">
+        </div>
+
+        <div class="telefone">
+          <h3>Telefone</h3>
+          <input matInput formControlName="telefone" name="telefone" type="text" name="tel" id="telefone">
+        </div>
       </div>
 
-      <div class="cpf">
-        <h3>CPF</h3>
-        <input type="text" name="cpf" id="cpf">
+      <div class="parte2">
+
+        <div class="sobrenome">
+          <h3>Sobrenome</h3>
+          <input matInput formControlName="sobrenome" name="sobrenome" type="text" name="surname" id="sobrenome">
+        </div>
       </div>
 
-      <div class="telefone">
-        <h3>Telefone</h3>
-        <input type="text" name="tel" id="telefone">
-      </div>
-    </div>
+      <div class="parte3">
 
-    <div class="parte2">
+        <div class="instituicao">
+          <h3>Instituição</h3>
+          <input matInput formControlName="instituicao" name="instituicao" type="text" name="institution" id="instituicao">
+        </div>
 
-      <div class="sobrenome">
-        <h3>Sobrenome</h3>
-        <input type="text" name="surname" id="sobrenome">
-      </div>
-    </div>
-
-    <div class="parte3">
-
-      <div class="instituicao">
-        <h3>Instituição</h3>
-        <input type="text" name="institution" id="instituicao">
+        <div class="nascimento">
+          <h3>Data de Nascimento</h3>
+          <input matInput formControlName="dataNasc" name="dataNasc" type="date" name="birthdate" id="nascimento">
+        </div>
       </div>
 
-      <div class="nascimento">
-        <h3>Data de Nascimento</h3>
-        <input type="date" name="birthdate" id="nascimento">
-      </div>
-    </div>
+      <div class="parte4">
 
-    <div class="parte4">
+        <div class="email">
+          <h3>Email</h3>
+          <input matInput formControlName="email" name="email" type="text" name="email" id="email">
+        </div>
 
-      <div class="email">
-        <h3>Email</h3>
-        <input type="text" name="email" id="email">
-      </div>
-
-      <div class="confirmemail">
-        <h3>Confirme seu email</h3>
-        <input type="text" name="confemail" id="confirmemail">
-      </div>
-    </div>
-
-    <div class="parte5">
-
-      <div class="senha">
-        <h3>Senha</h3>
-        <input type="password" name="password" id="senha">
+        <div class="confirmemail">
+          <h3>Confirme seu email</h3>
+          <input type="text" name="confemail" id="confirmemail">
+        </div>
       </div>
 
-      <div class="confirmsenha">
-        <h3>Confirme sua senha</h3>
-        <input type="password" name="confpassword" id="confirmsenha">
+      <div class="parte5">
+
+        <div class="senha">
+          <h3>Senha</h3>
+          <input type="password" name="password" id="senha">
+        </div>
+
+        <div class="confirmsenha">
+          <h3>Confirme sua senha</h3>
+          <input type="password" name="confpassword" id="confirmsenha">
+        </div>
       </div>
-    </div>
+    </form>
 
     <div class="botoes">
 
       <div class="cadastro">
 
-        <button id="cadastro" (click)="login()">Cadastro</button>
+        <button id="cadastro" (click)="cadastra()">Cadastro</button>
 
       </div>
 
       <div class="cancelar">
-        <button id="cancelar" (click)="login()">Cancelar</button>
+        <button id="cancelar" (click)="home()">Cancelar</button>
       </div>
     </div>
 

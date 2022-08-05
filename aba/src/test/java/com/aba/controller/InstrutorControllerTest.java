@@ -52,10 +52,6 @@ public class InstrutorControllerTest {
 
     private Instrutor instrutor;
 
-    @BeforeEach
-    public void setUp() {
-        this.instrutor = new Instrutor(1l, 30, "instrutor@gmail");
-    }
 
     @Test
     public void testPostInstrutor() throws Exception {

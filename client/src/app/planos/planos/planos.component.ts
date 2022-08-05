@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
-import { PlanoObjetivos } from 'src/app/models/PlanoObjetivos';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PlanoObjetivosService } from 'src/app/services/planoObjetivo.service';
 
 @Component({
@@ -21,9 +20,9 @@ export class PlanosComponent implements OnInit {
   ngOnInit(): void {
     this.planosForm = this.fb.group({
       descricaoAluno: ['',Validators.required],
-      emailInstrutor: ['teste.exemplo'],
-      prazo: ['',Validators.required],
-      nome:['']
+      emailInstrutor: ['fabio.almendro@gmail.com'],
+      estimativa: ['',Validators.required],
+      nomePlano:['',Validators.required]
     })
   }
 
