@@ -1,8 +1,10 @@
 package com.aba.model;
+import com.aba.dto.AlunoDTOCompleto;
 import com.aba.dto.TurmaDTO;
 import com.aba.dto.TurmaDTOCompleto;
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,21 +30,17 @@ public class Turma {
 
     String diasDaSemana;
 
-    public Turma(String nomeTurma, String turno, String diasDaSemana){
+    public Turma(String nomeTurma, String turno, String diasDaSemana, Instrutor instrutor){
         this.nomeTurma = nomeTurma;
         this.turno = turno;
         this.diasDaSemana = diasDaSemana;
-
-        instrutor.setEmail("");
+        this.instrutor = instrutor;
     }
 
-    public Turma(TurmaDTO turmaDTO) {
+    public void editar(TurmaDTO turmaDTO, Instrutor instrutor) {
         this.nomeTurma = turmaDTO.getNomeTurma();
         this.turno = turmaDTO.getTurno();
         this.diasDaSemana = turmaDTO.getDiasDaSemana();
-    }
-
-    public void addInstrutor(Instrutor instrutor) {
         this.instrutor = instrutor;
     }
 
@@ -50,19 +48,26 @@ public class Turma {
         this.alunos.add(aluno);
     }
 
+    public Object listarAlunos() {
+        List<AlunoDTOCompleto> dadosAlunos = new ArrayList<>();;
+
+        for(Aluno aluno : alunos) {
+            dadosAlunos.add(aluno.getDtoCompleto());
+        }
+        return dadosAlunos;
+    }
+
+    public void removerAluno(Aluno aluno) {
+        this.alunos.remove(aluno);
+    }
+
     public TurmaDTO getDto(){
-        return new TurmaDTO(this.nomeTurma, this.turno, this.diasDaSemana);
+        return new TurmaDTO(this.nomeTurma, this.turno, this.diasDaSemana, this.instrutor.getEmail());
     }
 
     public TurmaDTOCompleto getDtoCompleto(){
-       String aux = "";
-
-        if (this.instrutor == null) {
-            return new TurmaDTOCompleto(this.id, this.nomeTurma, "", alunos.toString(),
-                    this.turno, this.diasDaSemana);
-        }
-
         return new TurmaDTOCompleto(this.id, this.nomeTurma, this.instrutor.getEmail(), alunos.toString(),
                 this.turno, this.diasDaSemana);
     }
+
 }
