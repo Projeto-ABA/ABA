@@ -23,14 +23,14 @@ export class PlanosComponent implements OnInit {
       descricaoAluno: ['',Validators.required],
       emailInstrutor: ['teste.exemplo'],
       prazo: ['',Validators.required],
-      nome:['']     
+      nome:['']
     })
   }
 
   createPlano(){
     console.log(this.planosForm.value)
     this.po.save(this.planosForm.value).subscribe(result => {})
-    this.planosForm.reset(); 
+    this.planosForm.reset();
   }
 
   navega(caminho:string){

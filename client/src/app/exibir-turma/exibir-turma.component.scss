@@ -175,7 +175,7 @@ tr.example-element-row:not(.example-expanded-row):active {
     height: 2.6rem;
     border-radius: .5rem;
     width: 6rem;
-    margin-left: 13rem;
+    margin-left: 8rem;
   }
 
   #contato:hover{
@@ -213,6 +213,13 @@ tr.example-element-row:not(.example-expanded-row):active {
     background-color: #d121fd;
   }
 
+  .editar{
+    display: flex;
+    justify-content: center;
+    margin-left: -2.9rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
   #editar{
     font-family: 'Martel', serif;
     background-color: #ff1964;
