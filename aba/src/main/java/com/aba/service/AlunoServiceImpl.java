@@ -91,10 +91,15 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     public ResponseEntity<?> adicionarPlanoObjetivos(Long id, Long idPlano){
-        Aluno aluno;
-        aluno = getAlunoById(id);
-        PlanoObjetivos planoObjetivos;
-        planoObjetivos = this.planoObjetivosService.getPlanoObjetivosById(idPlano);
+        Aluno aluno = getAlunoById(id);
+        if(aluno == null){
+            return MessageError.erroAlunoNaoEncontrado(id);
+        }
+
+        PlanoObjetivos planoObjetivos = this.planoObjetivosService.getPlanoObjetivosById(idPlano);
+        if(planoObjetivos == null){
+            return MessageError.erroPlanoNaoEncontrado(idPlano);
+        }
 
         aluno.addPlanoObjetivo(planoObjetivos);
         this.alunoRepository.save(aluno);
@@ -103,10 +108,15 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     public ResponseEntity<?> removerPlanoObjetivos(Long id, Long idPlano){
-        Aluno aluno;
-        aluno = getAlunoById(id);
-        PlanoObjetivos planoObjetivos;
-        planoObjetivos = this.planoObjetivosService.getPlanoObjetivosById(idPlano);
+        Aluno aluno = getAlunoById(id);
+        if(aluno == null){
+            return MessageError.erroAlunoNaoEncontrado(id);
+        }
+
+        PlanoObjetivos planoObjetivos = this.planoObjetivosService.getPlanoObjetivosById(idPlano);
+        if(planoObjetivos == null){
+            return MessageError.erroPlanoNaoEncontrado(idPlano);
+        }
 
         aluno.removePlanoObjetivo(planoObjetivos);
         this.alunoRepository.save(aluno);
