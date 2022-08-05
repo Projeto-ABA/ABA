@@ -11,7 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { EditarTurmaComponent } from './editar-turma/editar-turma.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 

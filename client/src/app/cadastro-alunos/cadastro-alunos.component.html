@@ -106,14 +106,22 @@
     <div class="parte4">
 
       <div class="responsavel">
-        <label for="dados" id="responsible">Responsável</label>
+        <label for="dados" id="responsible">Nome do Responsável</label>
         <input type="text" id="responsavel" matInput formControlName="responsavel">
       </div>
 
       <div class="capeta">
         <div class="parentesco">
           <label for="dados" id="parentesco">Parentesco</label>
-          <select name="relative" id="relative" matInput formControlName="parentesco"></select>
+          <select name="relative" id="relative" matInput formControlName="parentesco">
+            <option value="mae">Mãe</option>
+            <option value="pai">Pai</option>
+            <option value="avoFem">Avó</option>
+            <option value="avoMas">Avô</option>
+            <option value="tia">Tia</option>
+            <option value="tio">Tio</option>
+            <option value="outro">Outro</option>
+          </select>
         </div>
       </div>
 
