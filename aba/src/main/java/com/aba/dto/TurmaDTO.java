@@ -11,5 +11,6 @@ public class TurmaDTO {
     private String nomeTurma;
     private String turno;
     private String diasDaSemana;
+    private String emailInstrutor;
 
 }
