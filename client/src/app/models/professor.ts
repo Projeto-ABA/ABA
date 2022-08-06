@@ -1,9 +1,12 @@
 import { Turma } from "./turma";
 
 export interface Professor {
-  id : number;
-  nome : number;
-  idade : number;
-  email : number;
-  turmas : Turma[];
+  id:number;
+  nome : string;
+  sobrenome: string;
+  cpf: string;
+  dataNasc : Date;
+  email : string;
+  telefone: string;
+  instituição: string;
 }

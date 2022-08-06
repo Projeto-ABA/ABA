@@ -12,6 +12,7 @@ import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { EditarTurmaComponent } from './editar-turma/editar-turma.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ExibirTurmaComponent } from './exibir-turma/exibir-turma.component';
+import { LocalDateTimePipe } from './pipe/local-date-time.pipe';
 
 
 
@@ -22,7 +23,8 @@ import { ExibirTurmaComponent } from './exibir-turma/exibir-turma.component';
     HomeLogoutComponent,
     HomeLoginComponent,
     EditarAlunoComponent,
-    EditarTurmaComponent
+    EditarTurmaComponent,
+    LocalDateTimePipe
    ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { ExibirTurmaComponent } from './exibir-turma/exibir-turma.component';
 
   ],
   providers: [
-    ],
+    LocalDateTimePipe
+      ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
