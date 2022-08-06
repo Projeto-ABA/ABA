@@ -92,4 +92,14 @@ public class InstrutorServiceImpl implements InstrutorService {
             return null;
         } return instrutorOptional.get();
     }
+
+    @Override
+    public boolean instrutorExistById(Long id) {
+        return instrutorRepository.existsById(id);
+    }
+
+    @Override
+    public boolean instrutorExistByEmail(String email) {
+        return instrutorRepository.findByEmail(email).isPresent();
+    }
 }

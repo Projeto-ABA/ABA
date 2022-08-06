@@ -29,10 +29,16 @@ public class TurmaServiceImpl implements TurmaService {
     InstrutorServiceImpl instrutorService;
 
     public ResponseEntity<?> cadastrarTurma(TurmaDTO turmaDTO) {
-        Instrutor instrutor = this.instrutorService.getInstrutorByEmail(turmaDTO.getEmailInstrutor());
-        if(instrutor == null){
+
+        if (diasDaSemanaPatternVerification(turmaDTO.getDiasDaSemana())) {
+            // segue pattern de dias da semana. ex: seg,qua,sex
+        }
+
+        if(instrutorService.instrutorExistByEmail(turmaDTO.getEmailInstrutor())) {
             return MessageError.erroInstrutorNaoEncontradoByEmail(turmaDTO.getEmailInstrutor());
         }
+
+        Instrutor instrutor = this.instrutorService.getInstrutorByEmail(turmaDTO.getEmailInstrutor());
 
         Turma turma = new Turma(turmaDTO.getNomeTurma(), turmaDTO.getTurno(), turmaDTO.getDiasDaSemana(), instrutor);
         this.turmaRepository.save(turma);
@@ -142,6 +148,10 @@ public class TurmaServiceImpl implements TurmaService {
         if (!turmaOptional.isPresent()) {
             return null;
         }return turmaOptional.get();
+    }
+
+    private boolean diasDaSemanaPatternVerification(String diasDaSemana) {
+        return true;
     }
 
 }

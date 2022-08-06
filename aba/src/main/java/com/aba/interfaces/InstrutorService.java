@@ -18,4 +18,8 @@ public interface InstrutorService {
     public Instrutor getInstrutorById(Long id);
 
     public Instrutor getInstrutorByEmail(String email);
+
+    public boolean instrutorExistById(Long id);
+
+    public boolean instrutorExistByEmail(String email);
 }

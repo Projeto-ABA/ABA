@@ -19,6 +19,12 @@ public class MessageError {
 
     static final String TURMA_NAO_CADASTRADA = "A turma com id %d não está cadastrada no sistema";
 
+    static final String CAMPO_VAZIO = "O campo %d está vazio";
+
+    static final String CAMPO_MUITO_LONGO = "O campo %d está muito longo, tente novamente usando %s caracteres ou menos";
+
+    static final String CAMPO_NULO = "O campo %d está nulo";
+
     public static ResponseEntity<?> erroAlunoNaoEncontrado(long id){
         return new ResponseEntity<CustomErrorType>(new CustomErrorType(String.format(MessageError.ALUNO_NAO_CADASTRADO, id)),
                 HttpStatus.NOT_FOUND);
@@ -52,6 +58,21 @@ public class MessageError {
     public static ResponseEntity<?> erroTurmaNaoEncontrada(long id){
         return new ResponseEntity<CustomErrorType>(new CustomErrorType(String.format(MessageError.TURMA_NAO_CADASTRADA, id)),
                 HttpStatus.NOT_FOUND);
+    }
+
+    public static ResponseEntity<?> erroCampoVazio(String campo){
+        return new ResponseEntity<CustomErrorType>(new CustomErrorType(String.format(MessageError.CAMPO_VAZIO, campo)),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    public static ResponseEntity<?> erroCampoMuitoLongo(String campo, int limiteDeCaracteres){
+        return new ResponseEntity<CustomErrorType>(new CustomErrorType(String.format(MessageError.CAMPO_MUITO_LONGO, campo, limiteDeCaracteres)),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    public static ResponseEntity<?> erroCampoNulo(String campo){
+        return new ResponseEntity<CustomErrorType>(new CustomErrorType(String.format(MessageError.CAMPO_NULO, campo)),
+                HttpStatus.BAD_REQUEST);
     }
 
 }
