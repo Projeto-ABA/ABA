@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Router } from '@angular/router';
-import {Turma} from "../models/turma"
+
 import {TurmaService} from "../services/turma.service"
+import { Turma } from '../models/turma';
 
 @Component({
   selector: 'app-turmas',
@@ -22,11 +23,11 @@ export class TurmasComponent implements OnInit {
     private router: Router,
     private turmaService : TurmaService
   ) { }
- turmas: Turma[] = [];
+ turmas!: Turma[];
 
  coluna(c : string) :String {
   let retorno = '';
-  if (c == 'nome'){
+  if (c == 'nomeTurma'){
     retorno = 'Nome'
   }
   if (c == 'turno'){
@@ -39,6 +40,9 @@ export class TurmasComponent implements OnInit {
  }
 
   ngOnInit(): void {
+    this.turmaService.getTurmas().subscribe(turmas => {
+      this.turmas = turmas
+    })
   }
 
   navega(caminho:string){
@@ -49,7 +53,5 @@ export class TurmasComponent implements OnInit {
     console.log(item)
   }
 
-  columnsToDisplay = ['nome', 'turno', 'diasDaSemana'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement!: Turma;
+  columnsToDisplay = ['nomeTurma', 'turno', 'diasDaSemana'];
 }

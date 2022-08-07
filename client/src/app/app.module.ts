@@ -11,8 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { EditarTurmaComponent } from './editar-turma/editar-turma.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ExibirTurmaComponent } from './exibir-turma/exibir-turma.component';
-import { LocalDateTimePipe } from './pipe/local-date-time.pipe';
+
 
 
 
@@ -23,8 +22,7 @@ import { LocalDateTimePipe } from './pipe/local-date-time.pipe';
     HomeLogoutComponent,
     HomeLoginComponent,
     EditarAlunoComponent,
-    EditarTurmaComponent,
-    LocalDateTimePipe
+    EditarTurmaComponent
    ],
   imports: [
     BrowserModule,
@@ -37,7 +35,6 @@ import { LocalDateTimePipe } from './pipe/local-date-time.pipe';
 
   ],
   providers: [
-    LocalDateTimePipe
       ],
   bootstrap: [AppComponent]
 })

@@ -2,45 +2,47 @@
   <div>
     <mat-card-title>ABA</mat-card-title>
     <mat-card-title id="subtitle">Sua assistente de planejamento</mat-card-title>
-    <mat-card-title id="where"><a (click)="home()" class="home">Home</a></mat-card-title>
+    <mat-card-title id="where"><a href="#" (click)="navega('home')" class="home">Home</a></mat-card-title>
   </div>
 </mat-card>
 
 <div class="all">
 
-<div class="side-menu">
-  <div>
-    <img src="../../assets/ABA.png" alt="">
+  <div class="side-menu">
+      <div class="img">
+          <img src="../../assets/ABA.png" alt="">
+      </div>
+
+      <mat-card class="sidecard">
+
+          <div class="titles">
+              <h3 class="titulo1">Olá Fulana</h3>
+              <h3 class="titulo2">O que deseja?</h3>
+          </div>
+
+          <div class="links">
+
+              <div class="links">
+                  <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
+                  <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
+                  <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
+                  <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
+                  <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
+                  <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
+                  <a (click)="navega('turmas')" class="relatorios">Relatórios</a>
+                  <a (click)="navega('perfil')" class="perfil">Meu Perfil</a>
+                </div>
+
+          </div>
+
+          <div class="sair">
+            <h4>
+              <a (click)="navega('home')" class="sairbutton">Sair</a>
+            </h4>
+          </div>
+
+      </mat-card>
   </div>
-
-  <mat-card class="sidecard">
-
-    <div class="titles">
-       <h3 class="titulo1">Olá Fulana</h3>
-      <h3 class="titulo2">
-        O que deseja?
-      </h3>
-    </div>
-
-    <div class="links">
-      <a (click)="turmas()" class="minhas-turmas">Minhas Turmas</a>
-      <a (click)="novaTurma()" class="criar-turmas">Criar Turmas</a>
-      <a (click)="alunos()" class="meus-alunos"> Meus Alunos</a>
-      <a (click)="novoAluno()" class="cadastrar-aluno">Cadastrar Aluno</a>
-      <a (click)="planos()" class="planos-vigentes">Planos de Objetivos</a>
-      <a (click)="novoPlano()" class="planos-vigentes">Novo Plano</a>
-      <a (click)="turmas()" class="relatorios">Relatórios</a>
-      <a (click)="perfil()" class="perfil">Meu Perfil</a>
-    </div>
-
-    <div class="sair">
-      <h4>
-        <a (click)="home()" class="sairbutton">Sair</a>
-      </h4>
-    </div>
-
-  </mat-card>
-</div>
 
 
 <div class="centercard">
@@ -112,13 +114,11 @@
 
         <label for="cartao1">Adicione alunos</label>
         <mat-card class="card11" name="cartao1">
-
-          <mat-form-field appearance="fill">
-            <mat-label>Alunos</mat-label>
-            <mat-select formControl="toppings" multiple class="adicionar">
-              <mat-option *ngFor="let topping of toppingList" value="topping">{{topping}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <mat-selection-list #LA>
+            <mat-list-option *ngFor="let aluno of listaAlunos">
+              {{aluno.nome}}
+            </mat-list-option>
+          </mat-selection-list>
         </mat-card>
 
       </div>
@@ -127,14 +127,11 @@
 
         <label for="cartao2">Adicionados</label>
         <mat-card class="card12" name="cartao2">
-
-          <mat-form-field appearance="fill">
-            <mat-label>Alunos</mat-label>
-            <mat-select formControl="toppings" multiple class="adicionados">
-              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
+          <mat-selection-list #AA>
+            <mat-list-option *ngFor="let alunoAceito of alunosAceitos" >
+              {{alunoAceito.nome}}
+            </mat-list-option>
+          </mat-selection-list>
         </mat-card>
       </div>
 

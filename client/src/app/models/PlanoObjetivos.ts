@@ -1,6 +1,6 @@
 export class PlanoObjetivos{
     descricaoAluno!: string;
     emailInstrutor!: string;
-    estimativa!: Date;
+    estimativa!: Array<number>;
     nomePlano!: string;
 }

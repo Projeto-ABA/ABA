@@ -1,9 +1,10 @@
 export interface Aluno {
-  id : number;
   nome : string;
-  idade : number;
   contato : string;
   genero : string;
+  cid: string;
+  dataNascimento:string;
+  emailInstrutor:string;
   cpf : string;
   endereco : string;
   responsavel  : string;

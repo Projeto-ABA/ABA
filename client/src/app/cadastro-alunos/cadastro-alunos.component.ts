@@ -22,8 +22,8 @@ export class CadastroAlunosComponent implements OnInit {
   ngOnInit(): void {
     this.alunoForm = this.fb.group({
       nome: ['',Validators.required],
-      emailInstrutor: ['teste.exemplo'],
-      nascimento: ['',Validators.required],
+      emailInstrutor: ['string'],
+      dataNascimento: ['',Validators.required],
       genero: ['',Validators.required],
       cid: ['',Validators.required],
       cpf: ['',Validators.required],
@@ -34,9 +34,8 @@ export class CadastroAlunosComponent implements OnInit {
     })
   }
   createAluno() : void{
-    this.alunoService.save(this.alunoForm.value).subscribe(result => {
-      console.log(result)
-    });
+    console.log(this.alunoForm.value)
+    this.alunoService.save(this.alunoForm.value).subscribe(result => {});
     this.alunoForm.reset();
   }
 

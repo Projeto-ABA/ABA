@@ -20,7 +20,7 @@ export class PlanosComponent implements OnInit {
   ngOnInit(): void {
     this.planosForm = this.fb.group({
       descricaoAluno: ['',Validators.required],
-      emailInstrutor: ['fabio.almendro@gmail.com'],
+      emailInstrutor: ['string'],
       estimativa: ['',Validators.required],
       nomePlano:['',Validators.required]
     })
