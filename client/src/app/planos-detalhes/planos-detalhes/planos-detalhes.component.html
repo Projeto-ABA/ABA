@@ -40,14 +40,14 @@
 
     <div class="centercard">
         <mat-card class="CardCenter">
-            <mat-card-title class="CardTitulo"><strong> Plano de desenvolvimento de voz </strong></mat-card-title>
+            <mat-card-title class="CardTitulo"><strong> {{plano.nomePlano}} </strong></mat-card-title>
             <mat-card-content>
                 <div class="cardsTopo">
-                    <mat-card class="cardsInfo" id="Nome">{{plano.emailInstrutor}}</mat-card>
-                    <mat-card class="cardsInfo" id="AtvRealizadas">CardAtividades realizada</mat-card>
+                    <mat-card class="cardsInfo" id="Nome">Aluno</mat-card>
+                    <mat-card class="cardsInfo" id="AtvRealizadas">Atividades realizada</mat-card>
                     <mat-card class="cardsInfo" id="Tempo">Tempo Estimado: {{formata(plano.estimativa)}}</mat-card>
                 </div>
-                <mat-card-content> 
+                <mat-card-content>
                     <h3 class="DescTitulo">Descrição</h3>
                     <Div class="Desc"><p>{{plano.descricaoAluno}}</p></Div>
                 </mat-card-content>

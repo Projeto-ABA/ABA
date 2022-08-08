@@ -13,9 +13,9 @@ export class CadastraAtividadeComponent implements OnInit {
   IdPlano!: number;
   constructor(
     private router: Router,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private atividadeServ: AtividadeService,
-    private fb: FormBuilder    
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class CadastraAtividadeComponent implements OnInit {
       this.IdPlano = +objeto['id'];
     })
 
-    
+
     this.atividadeForm = this.fb.group({
       titulo: ['',Validators.required],
       descricao: ['',Validators.required],
@@ -36,7 +36,7 @@ export class CadastraAtividadeComponent implements OnInit {
   dataAtual(): string{
     let retorno = ''
     let data = new Date().toLocaleDateString("pt-br").split("/")
-    retorno = data[2]+ "-" + data[1] + "-" + data[0] 
+    retorno = data[2]+ "-" + data[1] + "-" + data[0]
     return retorno
   }
 
@@ -46,7 +46,7 @@ export class CadastraAtividadeComponent implements OnInit {
     this.route.params.subscribe((Id:any)=> {
       this.IdPlano = +Id['id']
     })
-    this.router.navigateByUrl('')
+    this.router.navigateByUrl('listar-planos')
   }
 
   retorna(){
@@ -56,4 +56,5 @@ export class CadastraAtividadeComponent implements OnInit {
   navega(caminho: string){
     this.router.navigateByUrl(caminho)
   }
+
 }
