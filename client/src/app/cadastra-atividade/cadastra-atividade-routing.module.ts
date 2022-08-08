@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CadastraAtividadeComponent } from './cadastra-atividade/cadastra-atividade.component';
 
 const routes: Routes = [
-  {path: '', component: CadastraAtividadeComponent}
+  {path: ':id', component: CadastraAtividadeComponent},
+  {path: ':idPlano/:idAtividade', component: CadastraAtividadeComponent}
 ];
 
 @NgModule({

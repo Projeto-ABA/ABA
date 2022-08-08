@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Atividade } from 'src/app/models/atividade';
+import { PlanoObjetivos } from 'src/app/models/PlanoObjetivos';
+import { AtividadeService } from 'src/app/services/atividade.service';
+import { PlanoObjetivosService } from 'src/app/services/planoObjetivo.service';
 
 @Component({
   selector: 'app-turmas',
@@ -7,33 +11,49 @@ import { Router } from '@angular/router';
   styleUrls: ['./planos-detalhes.component.scss']
 })
 export class PlanosDetalhesComponent implements OnInit {
+  plano!: PlanoObjetivos;
+  instrutor!: string;
+  idPlano!: number;
+  listaAtiv!: Atividade[];
 
-  constructor(private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private planoServ: PlanoObjetivosService,
+    private atividadeServ: AtividadeService
+  ) { }
 
   ngOnInit(): void {
+    
+    this.route.params.subscribe((objeto:any) => {
+      this.idPlano = +objeto['id'];
+    })
+    console.log(this.idPlano)
+    this.planoServ.findOne(this.idPlano).subscribe(dado => {
+      this.plano = dado;
+    })
+
+    this.listaAtividade();
+    
   }
-  home() :void{
-    this.router.navigateByUrl('home');
+
+  navega(caminho:string){
+    this.router.navigateByUrl(caminho);
   }
-  turmas(): void{
-    this.router.navigateByUrl('turmas');
+
+  navegaAtividade(){
+    this.router.navigateByUrl('cadastra-atividade/' + this.idPlano)
   }
-  novoAluno(): void{
-    this.router.navigateByUrl('cadastro-alunos');
+
+  formata(data: Array<number>) : string{
+    let retorno = data[2] + "/"+ data[1] + "/" + data[0]
+    return retorno
   }
-  novaTurma(): void{
-    this.router.navigateByUrl('cadastro-turmas');
-  }
-  alunos(): void{
-    this.router.navigateByUrl('alunos');
-  }
-  planos(): void{
-    this.router.navigateByUrl('listar-planos');
-  }
-  novoPlano(): void{
-    this.router.navigateByUrl('planos');
-  }
-  perfil(): void{
-    this.router.navigateByUrl('perfil');
+
+  listaAtividade() {
+    this.atividadeServ.getAtividade().subscribe(atividades => {
+      this.listaAtiv = atividades
+      console.log(this.listaAtiv)
+    })
   }
 }

@@ -21,18 +21,12 @@
           </div>
 
           <div class="links">
-
-              <div class="links">
-                  <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
-                  <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
-                  <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
-                  <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
-                  <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
-                  <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
-                  <a (click)="navega('turmas')" class="relatorios">Relatórios</a>
-                  <a (click)="navega('perfil')" class="perfil">Meu Perfil</a>
-                </div>
-
+            <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
+            <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
+            <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
+            <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
+            <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
+            <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
           </div>
 
           <div class="sair">
@@ -50,63 +44,32 @@
   <mat-card class="cartao2">
 
     <h1 class="dados">Nova Turma</h1>
-
-    <div class="p1">
-      <div class="nome">
-        <label for="name">Nome</label>
-        <input type="text" name="name" id="nome">
+    <form [formGroup]="turmaForm">
+      <div class="p1">
+        <div class="nome">
+          <label for="name">Nome</label>
+          <input matInput formControlName="nomeTurma" name="nomeTurma"  type="text" name="name" id="nome">
+        </div>
+  
+        <div class="turno">
+          <label for="shift">Turno</label>
+          <select matInput formControlName="turno" name=""turno id="turno" matInput>
+            <option value="manhã">Manhã</option>
+            <option value="tarde">Tarde</option>
+            <option value="noite">Noite</option>
+            <option value="integral">Integral</option>
+          </select>
+        </div>
       </div>
-
-      <div class="turno">
-        <label for="shift">Turno</label>
-        <select name="shift" id="turno" matInput>
-          <option value="manha">Manhã</option>
-          <option value="tarde">Tarde</option>
-          <option value="noite">Noite</option>
-          <option value="integral">Integral</option>
-        </select>
+  
+      <div class="p2">
+        <div class="dias">
+          <label class="diaSemana">Dias da semana</label>
+          <input matInput formControlName="diasDaSemana" name="diasDaSemana" placeholder="Ex: seg-sex" type="text" id="dia">
+        </div>
       </div>
-    </div>
-
-    <div class="title">
-      <h2>Dias da Semana</h2>
-    </div>
-
-    <div class="p2">
-
-      <div class="dias">
-        <div class="segunda">
-          <input type="checkbox" name="monday" id="dia">
-          Segunda
-        </div>
-
-        <div class="terca">
-          <input type="checkbox" name="tuesday" id="dia">
-          Terça
-        </div>
-
-        <div class="quarta">
-          <input type="checkbox" name="wednesday" id="dia">
-          Quarta
-        </div>
-
-        <div class="quinta">
-          <input type="checkbox" name="thursday" id="dia">
-          Quinta
-        </div>
-
-        <div class="sexta">
-          <input type="checkbox" name="friday" id="dia">
-          Sexta
-        </div>
-
-        <div class="sabado">
-          <input type="checkbox" name="saturday" id="dia">
-          Sábado
-        </div>
-
-      </div>
-    </div>
+    </form>
+    
 
     <div class="p3">
 
@@ -140,7 +103,7 @@
 
       <div class="registrar">
 
-        <button id="registrar">Registrar</button>
+        <button id="registrar" (click)="cadastraTurma()">Registrar</button>
 
       </div>
 

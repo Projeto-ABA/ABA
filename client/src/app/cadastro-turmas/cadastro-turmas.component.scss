@@ -138,10 +138,7 @@ a:hover{
   display: flexbox;
 }
 
-.title{
-  display: flexbox;
-  color: #e72313;
-}
+
 
 
 h2{
@@ -154,18 +151,29 @@ h2{
   display: table;
 }
 
+.DiaSemana{
+  color: #e72313;
+}
+
 .dias{
   font-family: 'Martel Bold', serif;
   font-size: 1.1rem;
-  color: #259b9b;
-  padding: 1rem;
+  color: #e72313;
+  padding-top: 4%;
+  margin-left: 20px;
+  text-align: left;
+
   position: relative;
   display: flexbox;
+  flex-direction: column;
 }
 
+
+
 #dia{
-  position:static;
-  width: 3rem;
+  display: flexbox;
+  flex-direction: column;
+  width: 12rem;
   height: 1.3rem;
 }
 

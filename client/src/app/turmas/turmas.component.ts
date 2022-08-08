@@ -36,6 +36,9 @@ export class TurmasComponent implements OnInit {
   if(c == 'diasDaSemana'){
     retorno = 'Dias'
   }
+  if(c == 'detalhes'){
+    retorno = 'Detalhes'
+  }
   return retorno;
  }
 
@@ -53,5 +56,5 @@ export class TurmasComponent implements OnInit {
     console.log(item)
   }
 
-  columnsToDisplay = ['nomeTurma', 'turno', 'diasDaSemana'];
+  columnsToDisplay = ['nomeTurma', 'turnos', 'diasDaSemana','detalhes'];
 }

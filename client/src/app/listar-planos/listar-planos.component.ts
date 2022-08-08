@@ -11,7 +11,7 @@ import { PlanoObjetivosService } from '../services/planoObjetivo.service';
 })
 export class ListarPlanosComponent implements OnInit {
   planos!: PlanoObjetivos[];
-  ColunasTitulos = ['nomePlano','estimativa'];
+  ColunasTitulos = ['nomePlano','estimativa','options'];
   Data = new Date();
   countAtual = 0;
   countRealizado = 0;
@@ -59,7 +59,12 @@ export class ListarPlanosComponent implements OnInit {
 
   getPlanos(){
     this.planosService.getAll().subscribe(planos => {
+      console.log(planos)
       this.planos = planos;
     })
+  }
+
+  planosDetalhes(planoId: string){
+    this.router.navigateByUrl('planos-detalhes/' + planoId); 
   }
 }

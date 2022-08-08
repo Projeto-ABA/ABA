@@ -5,6 +5,9 @@ import { ListarPlanosComponent } from './listar-planos.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider'
 import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { MatTableModule } from '@angular/material/table';
     ListarPlanosRoutingModule,
     MatCardModule,
     MatDividerModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class ListarPlanosModule { }

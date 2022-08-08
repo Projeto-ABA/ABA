@@ -21,17 +21,13 @@
             </div>
             
             <div class="links">
-            
-                <a href="turmas" class="minhas-turmas">Minhas Turmas</a>
-                <a href="cadastro-turmas" class="criar-turmas">Criar Turmas</a>
-                <a href="alunos" class="meus-alunos"> Meus Alunos</a>
-                <a href="cadastro-alunos" class="cadastrar-aluno">Cadastrar Aluno</a>
-                <a href="listar-planos" class="planos-vigentes">Planos Vigentes</a>
-                <a href="listar-planos" class="planos-finalizados">Planos Finalizados</a>
-                <a href="" class="relatorios">Relatórios</a>
-                <a href="perfil" class="perfil">Meu Perfil</a>
-        
-            </div>
+                <a (click)="navega('turmas')" class="minhas-turmas">Minhas Turmas</a>
+                <a (click)="navega('cadastro-turmas')" class="criar-turmas">Criar Turmas</a>
+                <a (click)="navega('alunos')" class="meus-alunos"> Meus Alunos</a>
+                <a (click)="navega('cadastro-alunos')" class="cadastrar-aluno">Cadastrar Aluno</a>
+                <a (click)="navega('listar-planos')" class="planos-vigentes">Planos de Objetivos</a>
+                <a (click)="navega('planos')" class="planos-vigentes">Novo Plano</a>
+              </div>
             
             <div class="sair">
                 <h4>
@@ -45,22 +41,30 @@
     <div class="centercard">
         <mat-card class="CardCenter">
             <mat-card-title class="TitleCardCent">Nova atividade</mat-card-title>
-            <div class="input">
-                <div class="TituloInputs">
-                    <h3 class="titles-inputs">Nome Atividade</h3>
-                    <input type="text" id="Obj">
+            <form [formGroup]="atividadeForm">
+                <div class="input">
+                    <div class="TituloInputs">
+                        <h3 class="titles-inputs">Nome Atividade</h3>
+                        <input matInput formControlName="titulo" name="titulo" type="text" id="Obj">
+                    </div>
+                    <div class="TituloInputs">
+                        <h3 class="titles-inputs">Estimativa de realização</h3>
+                        <input matInput formControlName="dataRealização" name="dataRealização" type="date" id="Data">
+                    </div>
                 </div>
-                <div class="TituloInputs">
-                    <h3 class="titles-inputs">Estimativa de realização</h3>
-                    <input type="date" id="Data">
+                <div class="input">
+                    <div class="TituloInputs">
+                        <h3 class="titles-inputs">Descrição</h3>
+                        <textarea  matInput formControlName="descricao" name="descricao" id="Desc" rows="10" cols="50" maxlength="500" #Desc></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="input">
-                <div class="TituloInputs">
-                    <h3 class="titles-inputs">Descrição</h3>
-                    <textarea #Desc id="Desc" rows="10" cols="50" maxlength="500" ></textarea>
+            </form>
+            <mat-card-actions>
+                <div class="botoes">
+                  <button mat-raised-button (click)="cadastraAtiv()" id="cadastro">Registrar</button>
+                  <button mat-raised-button (click)="retorna()" id="cancelar">Cancelar</button>
                 </div>
-            </div>
+              </mat-card-actions>
         </mat-card>
     </div>
   

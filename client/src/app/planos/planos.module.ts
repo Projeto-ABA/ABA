@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 
+
 @NgModule({
   declarations: [
     PlanosComponent,
@@ -26,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule,      
+    MatButtonModule,  
   ]
 })
 export class PlanosModule { }
